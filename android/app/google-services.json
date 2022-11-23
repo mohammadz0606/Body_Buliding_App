@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "121651393592",
+    "project_id": "body-building-295c3",
+    "storage_bucket": "body-building-295c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121651393592:android:9af8f008b8dbc89a41a2cd",
+        "android_client_info": {
+          "package_name": "com.example.body_building"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "121651393592-eansehs38khaatnq1gdeao6rnnibss41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtJ5hC6H0Ibo10QkGX9kbNTX33aOjDfAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "121651393592-eansehs38khaatnq1gdeao6rnnibss41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

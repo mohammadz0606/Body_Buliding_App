@@ -1,0 +1,56 @@
+import 'package:body_building/constant/constant_style.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
+import 'firebase_options.dart';
+import 'screens/auth/login_screen.dart';
+import 'screens/auth/signup_screen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  );
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: MyColors.thridColor,
+    ),
+  );
+  runApp(const BodyBulidingApp());
+}
+
+class BodyBulidingApp extends StatelessWidget {
+  const BodyBulidingApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: MyColors.thridColor,
+        primaryColor: MyColors.firstColor,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: MyColors.thridColor,
+            statusBarBrightness: Brightness.light,
+            statusBarIconBrightness: Brightness.light,
+          ),
+        ),
+      ),
+      //home: const LoginScreen(),
+      initialRoute: LoginScreen.route,
+      routes: {
+        LoginScreen.route: (context) => const LoginScreen(),
+        SignupScreen.route: (context) => const SignupScreen(),
+      },
+    );
+  }
+}

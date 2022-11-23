@@ -1,0 +1,8 @@
+import 'package:flutter/material.dart';
+
+class MyColors {
+  static const Color firstColor = Color(0xff00afff);
+  static const Color secondColor = Color(0xff232441);
+  static const Color thridColor = Color(0xff252638);
+  static const Color titleFieldsColor = Color(0xff707070);
+}
