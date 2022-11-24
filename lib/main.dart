@@ -20,7 +20,7 @@ void main() async {
   );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: MyColors.thridColor,
+      statusBarColor: Colors.transparent,
     ),
   );
   runApp(const BodyBulidingApp());
@@ -40,7 +40,7 @@ class BodyBulidingApp extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: MyColors.thridColor,
+            statusBarColor: Colors.transparent,
             statusBarBrightness: Brightness.light,
             statusBarIconBrightness: Brightness.light,
           ),

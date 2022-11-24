@@ -54,7 +54,6 @@ class BulidBacgroundImage extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   text: "body\t",
-                  // set font famile bebas (Bashar)
                   style: GoogleFonts.bebasNeue(
                     fontSize: 30,
                     letterSpacing: 5,
