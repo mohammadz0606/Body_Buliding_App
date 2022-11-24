@@ -11,7 +11,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
+
   SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
@@ -46,7 +46,6 @@ class BodyBulidingApp extends StatelessWidget {
           ),
         ),
       ),
-      //home: const LoginScreen(),
       initialRoute: LoginScreen.route,
       routes: {
         LoginScreen.route: (context) => const LoginScreen(),
