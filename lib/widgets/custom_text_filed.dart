@@ -8,12 +8,16 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
   final IconData prefixIcon;
+  final TextEditingController controller;
+  final String? Function(String? value) validator;
   bool? obscureText;
   CustomTextField({
     Key? key,
     required this.hintText,
     required this.keyboardType,
     required this.prefixIcon,
+    required this.controller,
+    required this.validator,
     this.obscureText,
   }) : super(key: key);
 
@@ -23,6 +27,8 @@ class CustomTextField extends StatelessWidget {
       style: const TextStyle(
         color: Colors.white,
       ),
+      validator: validator,
+      controller: controller,
       cursorColor: Colors.white,
       obscureText: obscureText == null ? false : obscureText!,
       keyboardType: keyboardType,

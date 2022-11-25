@@ -8,81 +8,108 @@ import '../../widgets/title_fields.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
   static const String route = "login_screen";
-
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BulidBacgroundImage(
-              size: size,
-              title: "Sign in",
-              suptitle: "Train and live new experience of\nexercising at home",
-              image: "assets/login_image.jpg",
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 15,
-                horizontal: 20,
+      body: Form(
+        key: _key,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BulidBacgroundImage(
+                size: size,
+                title: "Sign in",
+                suptitle:
+                    "Train and live new experience of\nexercising at home",
+                image: "assets/login_image.jpg",
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const TitleFields(text: "Email"),
-                  CustomTextField(
-                    prefixIcon: Icons.email_outlined,
-                    hintText: "Enter your email",
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const SizedBox(height: 15),
-                  const TitleFields(text: "Password"),
-                  CustomTextField(
-                    obscureText: true,
-                    prefixIcon: Icons.lock_outline,
-                    hintText: "Enter your password",
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                  SizedBox(height: size.height * 0.039),
-                  Center(
-                    child: CustomButton(
-                      onTap: () {},
-                      text: "Login",
-                      size: size,
-                      boxDecoration: BoxDecoration(
-                        color: MyColors.firstColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12.5),
-                  Center(
-                    child: CustomButton(
-                      onTap: () {
-                        Navigator.of(context).pushNamed(SignupScreen.route);
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 15,
+                  horizontal: 20,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const TitleFields(text: "Email"),
+                    CustomTextField(
+                      validator: (String? text) {
+                        if (text!.isEmpty) {
+                          return "you must not empty";
+                        }
+                        if (!text.contains("@")) {
+                          return "The email is incorrect";
+                        }
+                        return null;
                       },
-                      text: "Sign Up",
-                      size: size,
-                      boxDecoration: BoxDecoration(
-                        color: MyColors.thridColor,
-                        border: Border.all(
-                          width: 2,
+                      controller: _emailController,
+                      prefixIcon: Icons.email_outlined,
+                      hintText: "Enter your email",
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(height: 15),
+                    const TitleFields(text: "Password"),
+                    CustomTextField(
+                      controller: _passwordController,
+                      validator: (String? text) {
+                        if (text!.isEmpty) {
+                          return "you must not empty";
+                        }
+                        if (text.length < 7) {
+                          return "password must be more 7 char";
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                      prefixIcon: Icons.lock_outline,
+                      hintText: "Enter your password",
+                      keyboardType: TextInputType.visiblePassword,
+                    ),
+                    SizedBox(height: size.height * 0.039),
+                    Center(
+                      child: CustomButton(
+                        onTap: () {},
+                        text: "Login",
+                        size: size,
+                        boxDecoration: BoxDecoration(
                           color: MyColors.firstColor,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 12.5),
+                    Center(
+                      child: CustomButton(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(SignupScreen.route);
+                          FocusScope.of(context).unfocus();
+                        },
+                        text: "Sign Up",
+                        size: size,
+                        boxDecoration: BoxDecoration(
+                          color: MyColors.thridColor,
+                          border: Border.all(
+                            width: 2,
+                            color: MyColors.firstColor,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
