@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:body_building/constant/constant_widget.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:body_building/widgets/background_image_widget.dart';
@@ -110,7 +112,7 @@ class SignupScreen extends StatelessWidget {
                     Consumer<AppProvider>(
                       builder: (
                         BuildContext context,
-                        AppProvider value,
+                        AppProvider model,
                         Widget? child,
                       ) {
                         return Center(
@@ -118,27 +120,24 @@ class SignupScreen extends StatelessWidget {
                             onTap: () {
                               if (_key.currentState!.validate()) {
                                 FocusScope.of(context).unfocus();
-                                value.signupApp(
-                                  email: _emailController.text.trim(),
-                                  password: _passwordController.text.trim(),
-                                  name: _nameController.text.trim(),
-                                );
-                                if (value.status == Status.Error) {
+                               if(model.status == Status.Initi){
+                                 model.signupApp(
+                                   email: _emailController.text.trim(),
+                                   password: _passwordController.text.trim(),
+                                   name: _nameController.text.trim(),
+                                 );
+                               }
+
+                                if (model.status == Status.Wait) {
                                   ConstantWidget.massage(
-                                    context: context,
-                                    text: value.errorMassage,
-                                  );
-                                } else if (value.status == Status.Succeeded) {
-                                  ConstantWidget.massage(
-                                    context: context,
-                                    text: "Success register in app",
-                                  );
+                                      context: context, text: 'Waiting');
+                                }
+                                if (model.status == Status.Succeeded) {
+                                  log('succs');
                                   Navigator.of(context).pop();
-                                } else if (value.status == Status.Wait) {
+                                } else if(model.status == Status.Error){
                                   ConstantWidget.massage(
-                                    context: context,
-                                    text: "Waiting regester...",
-                                  );
+                                      context: context, text: model.errorMassage);
                                 }
                               }
                             },
