@@ -115,21 +115,23 @@ class SignupScreen extends StatelessWidget {
                         AppProvider model,
                         Widget? child,
                       ) {
-                        if(model.statusNum == 0){
+                        if (model.statusNum == 2) {
+                          Navigator.of(context).pop();
+                        }
+
+                        if (model.statusNum == 0) {
                           return Center(
                             child: CustomButton(
                               onTap: () {
                                 if (_key.currentState!.validate()) {
                                   FocusScope.of(context).unfocus();
-                                  if(model.statusNum == 0){
+                                  if (model.statusNum == 0) {
                                     model.signupApp(
                                       email: _emailController.text.trim(),
                                       password: _passwordController.text.trim(),
                                       name: _nameController.text.trim(),
                                     );
                                   }
-
-
                                 }
                               },
                               text: "Register",
@@ -145,50 +147,21 @@ class SignupScreen extends StatelessWidget {
                           return Center(
                             child: CircularProgressIndicator(),
                           );
-                        }
-                        if (model.statusNum == 2) {
-                          Navigator.of(context).pop();
-                           return  Center(
-                            child: CustomButton(
-                              onTap: () {
-                                if (_key.currentState!.validate()) {
-                                  FocusScope.of(context).unfocus();
-                                  if(model.statusNum == 0){
-                                    model.signupApp(
-                                      email: _emailController.text.trim(),
-                                      password: _passwordController.text.trim(),
-                                      name: _nameController.text.trim(),
-                                    );
-                                  }
-
-
-                                }
-                              },
-                              text: "Register",
-                              size: size,
-                              boxDecoration: BoxDecoration(
-                                color: MyColors.firstColor,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          );
-                        } else{
+                        } else {
                           ConstantWidget.massage(
                               context: context, text: "error!");
-                          return  Center(
+                          return Center(
                             child: CustomButton(
                               onTap: () {
                                 if (_key.currentState!.validate()) {
                                   FocusScope.of(context).unfocus();
-                                  if(model.statusNum == 0){
+                                  if (model.statusNum == 0) {
                                     model.signupApp(
                                       email: _emailController.text.trim(),
                                       password: _passwordController.text.trim(),
                                       name: _nameController.text.trim(),
                                     );
                                   }
-
-
                                 }
                               },
                               text: "Register",
@@ -199,10 +172,7 @@ class SignupScreen extends StatelessWidget {
                               ),
                             ),
                           );
-
                         }
-
-
                       },
                     ),
                     Row(
