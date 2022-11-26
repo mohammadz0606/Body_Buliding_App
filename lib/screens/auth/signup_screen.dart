@@ -144,7 +144,7 @@ class SignupScreen extends StatelessWidget {
                           );
                         }
                         if (model.statusNum == 1) {
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
                         } else {

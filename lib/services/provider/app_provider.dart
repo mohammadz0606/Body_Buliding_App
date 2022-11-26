@@ -41,7 +41,7 @@ class AppProvider extends ChangeNotifier {
 
     } catch (e) {
       _errorMassage = e.toString();
-      status = Status.Error;
+      //status = Status.Error;
       notifyListeners();
     }
   }
