@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:body_building/constant/constant_widget.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:body_building/widgets/background_image_widget.dart';
@@ -9,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/constant_style.dart';
-import '../../constant/status.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_button.dart';
 import '../../widgets/custom_text_filed.dart';
@@ -115,64 +112,30 @@ class SignupScreen extends StatelessWidget {
                         AppProvider model,
                         Widget? child,
                       ) {
-                        if (model.statusNum == 2) {
-                          Navigator.of(context).pop();
-                        }
-
-                        if (model.statusNum == 0) {
-                          return Center(
-                            child: CustomButton(
-                              onTap: () {
-                                if (_key.currentState!.validate()) {
-                                  FocusScope.of(context).unfocus();
-                                  if (model.statusNum == 0) {
-                                    model.signupApp(
-                                      email: _emailController.text.trim(),
-                                      password: _passwordController.text.trim(),
-                                      name: _nameController.text.trim(),
-                                    );
-                                  }
-                                }
-                              },
-                              text: "Register",
-                              size: size,
-                              boxDecoration: BoxDecoration(
-                                color: MyColors.firstColor,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          );
-                        }
-                        if (model.statusNum == 1) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else {
-                          ConstantWidget.massage(
-                              context: context, text: "error!");
-                          return Center(
-                            child: CustomButton(
-                              onTap: () {
-                                if (_key.currentState!.validate()) {
-                                  FocusScope.of(context).unfocus();
-                                  if (model.statusNum == 0) {
-                                    model.signupApp(
-                                      email: _emailController.text.trim(),
-                                      password: _passwordController.text.trim(),
-                                      name: _nameController.text.trim(),
-                                    );
-                                  }
-                                }
-                              },
-                              text: "Register",
-                              size: size,
-                              boxDecoration: BoxDecoration(
-                                color: MyColors.firstColor,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          );
-                        }
+                        return model.isLoading
+                            ? ConstantWidget.circularProgressIndicator()
+                            : Center(
+                                child: CustomButton(
+                                  onTap: () {
+                                    if (_key.currentState!.validate()) {
+                                      FocusScope.of(context).unfocus();
+                                      model.signupApp(
+                                        email: _emailController.text.trim(),
+                                        password:
+                                            _passwordController.text.trim(),
+                                        name: _nameController.text.trim(),
+                                        context: context,
+                                      );
+                                    }
+                                  },
+                                  text: "Register",
+                                  size: size,
+                                  boxDecoration: BoxDecoration(
+                                    color: MyColors.firstColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              );
                       },
                     ),
                     Row(
