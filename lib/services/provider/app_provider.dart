@@ -27,7 +27,7 @@ class AppProvider extends ChangeNotifier {
       status = Status.Succeeded;
       notifyListeners();
       log("Done");
-
+////
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         _errorMassage = 'The password provided is too weak.';
