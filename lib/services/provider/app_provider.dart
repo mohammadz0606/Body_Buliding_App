@@ -23,7 +23,7 @@ class AppProvider extends ChangeNotifier {
       _auth = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
-      );
+      );//
       status = Status.Succeeded;
       notifyListeners();
       log("Done");
