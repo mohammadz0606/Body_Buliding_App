@@ -120,7 +120,7 @@ class SignupScreen extends StatelessWidget {
                             onTap: () {
                               if (_key.currentState!.validate()) {
                                 FocusScope.of(context).unfocus();
-                               if(model.status == Status.Initi){
+                               if(model.statusNum == 0){
                                  model.signupApp(
                                    email: _emailController.text.trim(),
                                    password: _passwordController.text.trim(),
@@ -128,14 +128,14 @@ class SignupScreen extends StatelessWidget {
                                  );
                                }
 
-                                if (model.status == Status.Wait) {
+                                if (model.statusNum == 1) {
                                   ConstantWidget.massage(
                                       context: context, text: 'Waiting');
                                 }
-                                if (model.status == Status.Succeeded) {
+                                if (model.statusNum == 2) {
                                   log('succs');
                                   Navigator.of(context).pop();
-                                } else if(model.status == Status.Error){
+                                } else if(model.statusNum == 3){
                                   ConstantWidget.massage(
                                       context: context, text: model.errorMassage);
                                 }

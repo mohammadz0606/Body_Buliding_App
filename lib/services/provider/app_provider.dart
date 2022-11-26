@@ -8,10 +8,15 @@ import '../../constant/status.dart';
 //bashar  basharqasrawi118@gmail.com    bashar123543
 class AppProvider extends ChangeNotifier {
   Status status = Status.Initi;
+
+  // Status get status => _status;
+  late UserCredential _auth;
  // Status get status => _status;
   final AuthData _authData = AuthData();
   String _errorMassage = "";
+
   String get errorMassage => _errorMassage;
+  int statusNum = 0;
 
   void signupApp({
     required String email,
@@ -29,6 +34,5 @@ class AppProvider extends ChangeNotifier {
       status = Status.Error;
       notifyListeners();
     }
-
   }
 }
