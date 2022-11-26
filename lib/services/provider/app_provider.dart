@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:body_building/services/call_data/auth_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ import '../../constant/status.dart';
 class AppProvider extends ChangeNotifier {
   Status status = Status.Initi;
  // Status get status => _status;
-  late UserCredential _auth;
+  final AuthData _authData = AuthData();
   String _errorMassage = "";
   String get errorMassage => _errorMassage;
 
@@ -17,25 +18,17 @@ class AppProvider extends ChangeNotifier {
     required String password,
     required String name,
   }) async {
-    status = Status.Wait;
-    notifyListeners();
-    try {
-      _auth = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );//
+    try{
+      status = Status.Wait;
+      notifyListeners();
+      await _authData.signupApp(email: email, password: password, name: name);
       status = Status.Succeeded;
       notifyListeners();
-      log("Done");
-////
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        _errorMassage = 'The password provided is too weak.';
-      } else if (e.code == 'email-already-in-use') {
-        _errorMassage = 'The account already exists for that email.';
-      }
+    }catch(e){
+      _errorMassage = e.toString();
       status = Status.Error;
       notifyListeners();
     }
+
   }
 }
