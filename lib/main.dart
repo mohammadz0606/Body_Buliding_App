@@ -1,4 +1,7 @@
-import 'package:body_building/constant/constant_style.dart';import 'dart:io';
+import 'package:body_building/constant/constant_style.dart';
+//
+// //
+// //
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +10,7 @@ import 'firebase_options.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
 import 'services/provider/app_provider.dart';
-//
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
