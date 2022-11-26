@@ -5,13 +5,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../constant/status.dart';
+
 //bashar  basharqasrawi118@gmail.com    bashar123543
 class AppProvider extends ChangeNotifier {
   Status status = Status.Initi;
 
   // Status get status => _status;
   late UserCredential _auth;
- // Status get status => _status;
+
+  // Status get status => _status;
   final AuthData _authData = AuthData();
   String _errorMassage = "";
 
@@ -23,13 +25,21 @@ class AppProvider extends ChangeNotifier {
     required String password,
     required String name,
   }) async {
-    try{
-      status = Status.Wait;
+    try {
+      statusNum = 1;
       notifyListeners();
+      log('4');
+
       await _authData.signupApp(email: email, password: password, name: name);
-      status = Status.Succeeded;
+      log('1');
+
+      statusNum = 2;
+      log('2');
+
       notifyListeners();
-    }catch(e){
+      log('3');
+
+    } catch (e) {
       _errorMassage = e.toString();
       status = Status.Error;
       notifyListeners();

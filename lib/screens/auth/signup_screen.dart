@@ -115,40 +115,94 @@ class SignupScreen extends StatelessWidget {
                         AppProvider model,
                         Widget? child,
                       ) {
-                        return Center(
-                          child: CustomButton(
-                            onTap: () {
-                              if (_key.currentState!.validate()) {
-                                FocusScope.of(context).unfocus();
-                               if(model.statusNum == 0){
-                                 model.signupApp(
-                                   email: _emailController.text.trim(),
-                                   password: _passwordController.text.trim(),
-                                   name: _nameController.text.trim(),
-                                 );
-                               }
+                        if(model.statusNum == 0){
+                          return Center(
+                            child: CustomButton(
+                              onTap: () {
+                                if (_key.currentState!.validate()) {
+                                  FocusScope.of(context).unfocus();
+                                  if(model.statusNum == 0){
+                                    model.signupApp(
+                                      email: _emailController.text.trim(),
+                                      password: _passwordController.text.trim(),
+                                      name: _nameController.text.trim(),
+                                    );
+                                  }
 
-                                if (model.statusNum == 1) {
-                                  ConstantWidget.massage(
-                                      context: context, text: 'Waiting');
+
                                 }
-                                if (model.statusNum == 2) {
-                                  log('succs');
-                                  Navigator.of(context).pop();
-                                } else if(model.statusNum == 3){
-                                  ConstantWidget.massage(
-                                      context: context, text: model.errorMassage);
-                                }
-                              }
-                            },
-                            text: "Register",
-                            size: size,
-                            boxDecoration: BoxDecoration(
-                              color: MyColors.firstColor,
-                              borderRadius: BorderRadius.circular(10),
+                              },
+                              text: "Register",
+                              size: size,
+                              boxDecoration: BoxDecoration(
+                                color: MyColors.firstColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        }
+                        if (model.statusNum == 1) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if (model.statusNum == 2) {
+                          Navigator.of(context).pop();
+                           return  Center(
+                            child: CustomButton(
+                              onTap: () {
+                                if (_key.currentState!.validate()) {
+                                  FocusScope.of(context).unfocus();
+                                  if(model.statusNum == 0){
+                                    model.signupApp(
+                                      email: _emailController.text.trim(),
+                                      password: _passwordController.text.trim(),
+                                      name: _nameController.text.trim(),
+                                    );
+                                  }
+
+
+                                }
+                              },
+                              text: "Register",
+                              size: size,
+                              boxDecoration: BoxDecoration(
+                                color: MyColors.firstColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          );
+                        } else{
+                          ConstantWidget.massage(
+                              context: context, text: "error!");
+                          return  Center(
+                            child: CustomButton(
+                              onTap: () {
+                                if (_key.currentState!.validate()) {
+                                  FocusScope.of(context).unfocus();
+                                  if(model.statusNum == 0){
+                                    model.signupApp(
+                                      email: _emailController.text.trim(),
+                                      password: _passwordController.text.trim(),
+                                      name: _nameController.text.trim(),
+                                    );
+                                  }
+
+
+                                }
+                              },
+                              text: "Register",
+                              size: size,
+                              boxDecoration: BoxDecoration(
+                                color: MyColors.firstColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          );
+
+                        }
+
+
                       },
                     ),
                     Row(
