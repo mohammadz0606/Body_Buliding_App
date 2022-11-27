@@ -26,7 +26,6 @@ class AppProvider extends ChangeNotifier {
       Navigator.of(context).pop();
       notifyListeners();
     } catch (e) {
-
       isLoading = false;
       ConstantWidget.massage(context: context, text: e.toString());
       notifyListeners();
