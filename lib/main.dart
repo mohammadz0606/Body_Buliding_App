@@ -1,4 +1,5 @@
 import 'package:body_building/constant/constant_style.dart';
+import 'package:body_building/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -42,6 +43,7 @@ class BodyBulidingApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             elevation: 0,
+            iconTheme: IconThemeData(color: Colors.white),
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
               statusBarBrightness: Brightness.light,
@@ -53,6 +55,7 @@ class BodyBulidingApp extends StatelessWidget {
         routes: {
           LoginScreen.route: (context) => LoginScreen(),
           SignupScreen.route: (context) => SignupScreen(),
+          HomeScreen.route:(context) => const HomeScreen(),
         },
       ),
     );

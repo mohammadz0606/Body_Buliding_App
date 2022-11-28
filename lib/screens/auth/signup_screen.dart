@@ -56,6 +56,9 @@ class SignupScreen extends StatelessWidget {
                         if (text.length > 16) {
                           return "name must be lees 16 char";
                         }
+                        if(text.length <3){
+                          return "is not name";
+                        }
                         return null;
                       },
                       prefixIcon: Icons.person_outline,
