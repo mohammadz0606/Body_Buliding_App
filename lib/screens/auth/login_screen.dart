@@ -1,4 +1,5 @@
 import 'package:body_building/constant/constant_style.dart';
+import 'package:body_building/constant/constant_widget.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -84,23 +85,25 @@ class LoginScreen extends StatelessWidget {
                         AppProvider model,
                         Widget? child,
                       ) {
-                        return Center(
-                          child: CustomButton(
-                            onTap: () {
-                              model.signInApp(
-                                context: context,
-                                email: _emailController.text.trim(),
-                                password: _passwordController.text.trim(),
+                        return model.isLoading
+                            ? ConstantWidget.circularProgressIndicator()
+                            : Center(
+                                child: CustomButton(
+                                  onTap: () {
+                                    model.signInApp(
+                                      context: context,
+                                      email: _emailController.text.trim(),
+                                      password: _passwordController.text.trim(),
+                                    );
+                                  },
+                                  text: "Login",
+                                  size: size,
+                                  boxDecoration: BoxDecoration(
+                                    color: MyColors.firstColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
                               );
-                            },
-                            text: "Login",
-                            size: size,
-                            boxDecoration: BoxDecoration(
-                              color: MyColors.firstColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        );
                       },
                     ),
                     const SizedBox(height: 12.5),

@@ -1,6 +1,10 @@
 import 'dart:developer';
 
+import '/profile_screen.dart';
+import '/screens/calculate_screen.dart';
 import '/screens/home_screen.dart';
+
+import '/screens/nav_screen.dart';
 
 import '../models/user_model.dart';
 import '/constant/constant_widget.dart';
@@ -15,6 +19,15 @@ class AppProvider extends ChangeNotifier {
   UserModel? get userModel => _userModel;
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  int _selectedIndex = 0;
+  int get selectedIndex => _selectedIndex;
+
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const CalculateScreen(),
+    const ProfileScreen(),
+  ];
+  List<Widget> get screens => _screens;
 
   void signupApp({
     required BuildContext context,
@@ -59,8 +72,9 @@ class AppProvider extends ChangeNotifier {
         password: password,
       );
       _isLoading = false;
+      notifyListeners();
       ConstantWidget.massage(context: context, text: "Welcome App 🏋🏽");
-      Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+      Navigator.of(context).pushReplacementNamed(NavScreen.route);
       notifyListeners();
     } catch (e) {
       _isLoading = false;
@@ -77,15 +91,16 @@ class AppProvider extends ChangeNotifier {
 
   void getDataForeFireStore() async {
     try {
-      _isLoading = true;
-      notifyListeners();
       _userModel = UserModel.fromMap(await _authData.getDataForeFireStore());
-      _isLoading = false;
       notifyListeners();
     } catch (e) {
-      _isLoading = false;
       log(e.toString());
       notifyListeners();
     }
+  }
+
+  void onTabChange(int index){
+    _selectedIndex = index;
+    notifyListeners();
   }
 }

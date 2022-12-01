@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../models/user_model.dart';
 
 class AuthData {
-  late UserCredential _auth;
+  UserCredential? _auth;
 
   Future<UserCredential> signupApp({
     required String email,
@@ -59,12 +59,12 @@ class AuthData {
       bio: "write your bio......",
       image:
           "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
-      id: _auth.user!.uid,
+      id: _auth?.user!.uid,
     );
     try {
       await FirebaseFirestore.instance
           .collection("users")
-          .doc(_auth.user!.uid)
+          .doc(_auth?.user!.uid)
           .set(
             userModel.toMap(),
           );
@@ -75,9 +75,9 @@ class AuthData {
 
   Future<DocumentSnapshot> getDataForeFireStore() async {
     try {
-      return await FirebaseFirestore.instance
+      return  await FirebaseFirestore.instance
           .collection("users")
-          .doc(_auth.user!.uid)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .get();
     } catch (e) {
       throw Exception(e.toString());
