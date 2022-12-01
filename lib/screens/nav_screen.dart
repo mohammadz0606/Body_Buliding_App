@@ -24,7 +24,6 @@ class _NavScreenState extends State<NavScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(
-
       builder: (
         BuildContext context,
         AppProvider model,
@@ -70,8 +69,7 @@ class _NavScreenState extends State<NavScreen> {
                   icon: Icons.person,
                   text: 'My Profile',
                 ),
-
-              ]
+              ],
           ),
         );
       },
