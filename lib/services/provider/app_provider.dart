@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import '/profile_screen.dart';
+import '../../screens/profile_screen.dart';
 import '/screens/calculate_screen.dart';
 import '/screens/home_screen.dart';
 
