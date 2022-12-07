@@ -130,8 +130,8 @@ class _CalculateScreenState extends State<CalculateScreen> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   FloatingActionButton(
-                                    backgroundColor: Color(0x353956FF),
-                                    child: Icon(
+                                    backgroundColor: const Color(0x353956FF),
+                                    child: const Icon(
                                       Icons.add,
                                       color: Colors.grey,
                                     ),
@@ -142,7 +142,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
                                     },
                                   ),
                                   FloatingActionButton(
-                                    backgroundColor: Color(0x353956FF),
+                                    backgroundColor: const Color(0x353956FF),
                                     child: Text(
                                       '-',
                                       style: TextStyle(
@@ -190,8 +190,8 @@ class _CalculateScreenState extends State<CalculateScreen> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   FloatingActionButton(
-                                    backgroundColor: Color(0x353956FF),
-                                    child: Icon(
+                                    backgroundColor: const Color(0x353956FF),
+                                    child: const Icon(
                                       Icons.add,
                                       color: Colors.grey,
                                     ),
@@ -202,7 +202,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
                                     },
                                   ),
                                   FloatingActionButton(
-                                    backgroundColor: Color(0x353956FF),
+                                    backgroundColor: const Color(0x353956FF),
                                     child: Text(
                                       '-',
                                       style: TextStyle(
@@ -230,22 +230,30 @@ class _CalculateScreenState extends State<CalculateScreen> {
                         genderMethode(size, 'muscular'.toUpperCase(),
                             Icons.sports_gymnastics_sharp)
                       ],
-                    ),SizedBox(height: 25,)
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    )
                   ],
                 ),
               )),
-          Positioned(bottom:0,left:size.width/4,child: ElevatedButton(style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.red),
-          ),
-            onPressed: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'CALCULATE',
-                style: TextStyle(fontSize: size.width * 0.07),
+          Positioned(
+            bottom: 0,
+            left: size.width / 4,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.red),
+              ),
+              onPressed: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'CALCULATE',
+                  style: TextStyle(fontSize: size.width * 0.07),
+                ),
               ),
             ),
-          ),)
+          )
         ],
       ),
     );
