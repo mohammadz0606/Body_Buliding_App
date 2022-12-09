@@ -22,6 +22,7 @@ dependencies:
   carousel_slider: ^4.1.1
   dots_indicator: ^2.1.0
   cached_network_image: ^3.2.3
+  url_launcher: ^6.1.7
 
 dev_dependencies:
   flutter_test:
@@ -36,6 +37,7 @@ flutter:
   assets:
     - assets/
     - assets/carousel_images/
+    - assets/social_icons/
 
 
   # fonts:

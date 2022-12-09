@@ -22,9 +22,9 @@ class _CalculateScreenState extends State<CalculateScreen> {
         children: [
           Container(
               padding: const EdgeInsets.all(20),
-
               alignment: Alignment.center,
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

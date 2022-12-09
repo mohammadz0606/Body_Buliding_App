@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../screens/profile_screen.dart';
 import '../models/trainers_model.dart';
 import '/screens/calculate_screen.dart';
@@ -17,18 +19,23 @@ import 'package:flutter/material.dart';
 class AppProvider extends ChangeNotifier {
   final Database _database = Database();
   UserModel? _userModel;
+
   UserModel? get userModel => _userModel;
 
   bool _isLoading = false;
+
   bool get isLoading => _isLoading;
 
   int _selectedIndex = 0;
+
   int get selectedIndex => _selectedIndex;
 
   int _currentIndex = 0;
+
   int get currentIndex => _currentIndex;
 
   List<TrainersModel> _trainers = [];
+
   List<TrainersModel> get trainers => _trainers;
 
   final List<Widget> _screens = [
@@ -120,11 +127,82 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getTrainers()async{
-    try{
+  void getTrainers() async {
+    try {
       _trainers = await _database.getTrainers();
       notifyListeners();
-    }catch(e){
+    } catch (e) {
+      notifyListeners();
+    }
+  }
+
+  Future<void> openWhatsAppChat({
+    required String phone,
+    required BuildContext context,
+  }) async {
+    if (await canLaunchUrl(Uri.parse("whatsapp://send?phone=$phone"))) {
+      if (phone == "no") {
+        ConstantWidget.massage(
+          context: context,
+          text: "Unavailable at the moment 😢",
+        );
+        notifyListeners();
+      } else {
+        await launchUrl(
+          Uri.parse("whatsapp://send?phone=$phone"),
+        );
+        notifyListeners();
+      }
+    }else {
+      ConstantWidget.massage(
+        context: context,
+        text: "Unavailable at the moment 😢",
+      );
+      notifyListeners();
+    }
+  }
+
+  Future<void> openInstagram({
+    required String instagram,
+    required BuildContext context,
+  }) async {
+    if (await canLaunchUrl(Uri.parse(instagram))) {
+      await launchUrl(
+        Uri.parse(instagram),
+      );
+      notifyListeners();
+    } else {
+      ConstantWidget.massage(
+        context: context,
+        text: "Unavailable at the moment 😢",
+      );
+      notifyListeners();
+    }
+  }
+
+  Future<void> openTiktok({
+    required String tiktok,
+    required BuildContext context,
+  }) async{
+    if (await canLaunchUrl(Uri.parse(tiktok))) {
+      if(tiktok == "no"){
+        ConstantWidget.massage(
+          context: context,
+          text: "Unavailable at the moment 😢",
+        );
+        notifyListeners();
+      }else{
+        await launchUrl(
+          Uri.parse(tiktok),
+        );
+        notifyListeners();
+      }
+
+    } else {
+      ConstantWidget.massage(
+        context: context,
+        text: "Unavailable at the moment 😢",
+      );
       notifyListeners();
     }
   }
