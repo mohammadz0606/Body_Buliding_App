@@ -18,6 +18,7 @@ class _NavScreenState extends State<NavScreen> {
   @override
   void initState() {
     Provider.of<AppProvider>(context,listen: false).getDataForeFireStore();
+    Provider.of<AppProvider>(context,listen: false).getTrainers();
     super.initState();
   }
 
@@ -30,7 +31,7 @@ class _NavScreenState extends State<NavScreen> {
         Widget? child,
       ) {
         return Scaffold(
-          appBar:model.selectedIndex == 2? AppBar(
+          appBar: AppBar(
             actions: [
               IconButton(
                 onPressed: () {
@@ -41,7 +42,7 @@ class _NavScreenState extends State<NavScreen> {
               ),
               const SizedBox(width: 6),
             ],
-          ) : null,
+          ),
           body: model.userModel == null
               ? ConstantWidget.circularProgressIndicator()
               : model.screens[model.selectedIndex],
@@ -66,8 +67,8 @@ class _NavScreenState extends State<NavScreen> {
                   text: 'Calculate',
                 ),
                 GButton(
-                  icon: Icons.person,
-                  text: 'My Profile',
+                  icon: Icons.fitness_center,
+                  text: 'Exercises',
                 ),
               ],
           ),

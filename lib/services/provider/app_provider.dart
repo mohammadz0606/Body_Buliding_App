@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import '../../screens/profile_screen.dart';
+import '../models/trainers_model.dart';
 import '/screens/calculate_screen.dart';
 import '/screens/home_screen.dart';
 
@@ -9,24 +10,33 @@ import '/screens/nav_screen.dart';
 import '../models/user_model.dart';
 import '/constant/constant_widget.dart';
 
-import '/services/call_data/auth_data.dart';
+import '/services/call_data/database.dart';
 
 import 'package:flutter/material.dart';
 
 class AppProvider extends ChangeNotifier {
-  final AuthData _authData = AuthData();
+  final Database _database = Database();
   UserModel? _userModel;
   UserModel? get userModel => _userModel;
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
 
+  int _currentIndex = 0;
+  int get currentIndex => _currentIndex;
+
+  List<TrainersModel> _trainers = [];
+  List<TrainersModel> get trainers => _trainers;
+
   final List<Widget> _screens = [
-    const HomeScreen(),
+    HomeScreen(),
     const CalculateScreen(),
     const ProfileScreen(),
   ];
+
   List<Widget> get screens => _screens;
 
   void signupApp({
@@ -38,12 +48,12 @@ class AppProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       notifyListeners();
-      await _authData.signupApp(
+      await _database.signupApp(
         email: email,
         password: password,
         name: name,
       );
-      await _authData.setDataForeFireStore(
+      await _database.setDataForeFireStore(
         email: email,
         password: password,
         name: name,
@@ -67,7 +77,7 @@ class AppProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       notifyListeners();
-      await _authData.signInApp(
+      await _database.signInApp(
         email: email,
         password: password,
       );
@@ -84,23 +94,38 @@ class AppProvider extends ChangeNotifier {
   }
 
   void signOut() async {
-    await _authData.signOut();
+    await _database.signOut();
     _userModel = null;
     notifyListeners();
   }
 
   void getDataForeFireStore() async {
     try {
-      _userModel = UserModel.fromMap(await _authData.getDataForeFireStore());
+      _userModel = UserModel.fromMap(await _database.getDataForeFireStore());
       notifyListeners();
     } catch (e) {
-      log(e.toString());
       notifyListeners();
     }
   }
 
-  void onTabChange(int index){
+  void onTabChange(int index) {
     _selectedIndex = index;
     notifyListeners();
+  }
+
+  void onPageChanged({
+    required int index,
+  }) {
+    _currentIndex = index;
+    notifyListeners();
+  }
+
+  void getTrainers()async{
+    try{
+      _trainers = await _database.getTrainers();
+      notifyListeners();
+    }catch(e){
+      notifyListeners();
+    }
   }
 }

@@ -1,9 +1,10 @@
+import 'package:body_building/services/models/trainers_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/user_model.dart';
 
-class AuthData {
+class Database {
   UserCredential? _auth;
 
   Future<UserCredential> signupApp({
@@ -75,12 +76,33 @@ class AuthData {
 
   Future<DocumentSnapshot> getDataForeFireStore() async {
     try {
-      return  await FirebaseFirestore.instance
+      return await FirebaseFirestore.instance
           .collection("users")
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(
+            FirebaseAuth.instance.currentUser!.uid,
+          )
           .get();
     } catch (e) {
       throw Exception(e.toString());
     }
   }
+
+  Future<List<TrainersModel>> getTrainers() async {
+    List<TrainersModel> trainer = [];
+    try{
+      QuerySnapshot querySnapshot =
+      await FirebaseFirestore.instance.collection("trainersCol").get();
+      for (int i = 0; i < querySnapshot.docs.length; i++) {
+        trainer.add(
+          TrainersModel.fromMap(
+            querySnapshot.docs[i],
+          ),
+        );
+      }
+      return trainer;
+    }catch(e){
+      throw Exception(e.toString());
+    }
+  }
 }
+

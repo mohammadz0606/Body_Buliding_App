@@ -17,22 +17,12 @@ class _CalculateScreenState extends State<CalculateScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BMI CALCULATOR'),
-        backgroundColor: MyColors.primaryColor,
-        centerTitle: true,
-        elevation: 50,
-      ),
-      /*
-
-      */
       body: Stack(
         children: [
           Container(
               padding: const EdgeInsets.all(20),
-              color: MyColors.primaryColor,
+
               alignment: Alignment.center,
               child: SingleChildScrollView(
                 child: Column(
