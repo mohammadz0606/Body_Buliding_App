@@ -12,9 +12,6 @@ class CalculateScreen extends StatefulWidget {
 }
 
 class _CalculateScreenState extends State<CalculateScreen> {
-  double sliderVal = 0;
-  int age = 0;
-  int weight = 150;
 
   @override
   Widget build(BuildContext context) {
@@ -31,218 +28,152 @@ class _CalculateScreenState extends State<CalculateScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          genderMethode(size, 'MALE', Icons.male),
-                          genderMethode(size, 'FEMALE', Icons.female)
-                        ],
-                      ),
+                      Consumer<AppProvider>(builder: (context, model, child) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            genderMethode(size, 'MALE', Icons.male, true,
+                                model.maleColor),
+                            genderMethode(size, 'FEMALE', Icons.female, false,
+                                model.femaleColor)
+                          ],
+                        );
+                      }),
+                      Container(
+                          alignment: Alignment.center,
+                          color: MyColors.secondaryColor,
+                          margin: EdgeInsets.all(size.width * 0.04),
+                          width: double.infinity,
+                          height: size.height * 0.25,
+                          child: Consumer<AppProvider>(
+                            builder: (context, model, child) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        0,
+                                        size.height * 0.01,
+                                        0,
+                                        size.height * 0.03),
+                                    child: Text(
+                                      'HEIGHT',
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: size.width * 0.05),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        model.height.round().toString(),
+                                        style: TextStyle(
+                                            fontSize: size.width * 0.1,
+                                            color: Colors.white),
+                                      ),
+                                      Text(
+                                        ' cm',
+                                        style: TextStyle(
+                                            fontSize: size.width * 0.07,
+                                            color: Colors.grey),
+                                      )
+                                    ],
+                                  ),
+                                  Slider(
+                                      thumbColor: Colors.red,
+                                      inactiveColor: Colors.grey,
+                                      activeColor: Colors.white,
+                                      divisions: 250,
+                                      max: 300,
+                                      min: 50,
+                                      value: model.height,
+                                      onChanged: (val) {
+                                        model.setHeight(val);
+                                      }),
+                                ],
+                              );
+                            },
+                          )),
                       Container(
                         alignment: Alignment.center,
                         color: MyColors.secondaryColor,
                         margin: EdgeInsets.all(size.width * 0.04),
                         width: double.infinity,
-                        height: size.height * 0.25,
+                        height: size.height * 0.3,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(
-                                  0, size.height * 0.01, 0, size.height * 0.03),
-                              child: Text(
-                                'HEIGHT',
+
+                              Text(
+                                'WEIGHT',
                                 style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: size.width * 0.05),
+                                    fontSize: size.width * 0.050,
+                                    color: Colors.grey),
                               ),
+
+                            Text(
+        model.weight.toStringAsFixed(1)
+            .toString(),
+                              style: TextStyle(
+                                  fontSize: size.width * 0.13,
+                                  color: Colors.white),
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text(
-                                  sliderVal.round().toString(),
-                                  style: TextStyle(
-                                      fontSize: size.width * 0.1,
-                                      color: Colors.white),
+                                Column(
+                                  children: [
+                                    buildWeightButton(0.1, '+0.1', 45),
+                                    buildWeightButton(5, '+5', 45),
+                                  ],
                                 ),
-                                Text(
-                                  ' cm',
-                                  style: TextStyle(
-                                      fontSize: size.width * 0.07,
-                                      color: Colors.grey),
-                                )
+                                buildWeightButton(1, '+1', 65),
+                                SizedBox(
+                                  width: 50,
+                                ),
+                                buildWeightButton(-1, '-1', 65),
+                                Column(
+                                  children: [
+                                    buildWeightButton(-0.1, '-0.1', 45),
+                                    buildWeightButton(-5, '-5', 45),
+                                  ],
+                                ),
                               ],
-                            ),
-                            Slider(
-                                thumbColor: Colors.red,
-                                inactiveColor: Colors.grey,
-                                activeColor: Colors.white,
-                                divisions: 300,
-                                max: 300,
-                                min: 0,
-                                value: sliderVal,
-                                onChanged: (val) {
-                                  setState(() {
-                                    sliderVal = val;
-                                  });
-                                }),
+                            )
                           ],
                         ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            margin: EdgeInsets.all(size.width * 0.01),
-                            width: size.width * 0.4,
-                            height: size.height * 0.25,
-                            alignment: Alignment.center,
-                            color: MyColors.secondaryColor,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                      0, 0, 0, size.height * 0.02),
-                                  child: Text(
-                                    'WEIGHT',
-                                    style: TextStyle(
-                                        fontSize: size.width * 0.050,
-                                        color: Colors.grey),
-                                  ),
-                                ),
-                                Text(
-                                  weight.toString(),
-                                  style: TextStyle(
-                                      fontSize: size.width * 0.13,
-                                      color: Colors.white),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    FloatingActionButton(
-                                      backgroundColor: const Color(0x353956FF),
-                                      child: const Icon(
-                                        Icons.add,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          weight += 1;
-                                        });
-                                      },
-                                    ),
-                                    FloatingActionButton(
-                                      backgroundColor: const Color(0x353956FF),
-                                      child: Text(
-                                        '-',
-                                        style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: size.width * 0.1),
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          weight -= 1;
-                                        });
-                                      },
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.all(size.width * 0.01),
-                            width: size.width * 0.4,
-                            height: size.height * 0.25,
-                            alignment: Alignment.center,
-                            color: MyColors.secondaryColor,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                      0, 0, 0, size.height * 0.02),
-                                  child: Text(
-                                    'AGE',
-                                    style: TextStyle(
-                                        fontSize: size.width * 0.050,
-                                        color: Colors.grey),
-                                  ),
-                                ),
-                                Text(
-                                  age.toString(),
-                                  style: TextStyle(
-                                      fontSize: size.width * 0.13,
-                                      color: Colors.white),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    FloatingActionButton(
-                                      backgroundColor: const Color(0x353956FF),
-                                      child: const Icon(
-                                        Icons.add,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          age += 1;
-                                        });
-                                      },
-                                    ),
-                                    FloatingActionButton(
-                                      backgroundColor: const Color(0x353956FF),
-                                      child: Text(
-                                        '-',
-                                        style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: size.width * 0.1),
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          age -= 1;
-                                        });
-                                      },
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          genderMethode(size, 'drying of fat'.toUpperCase(),
-                              Icons.sports_gymnastics_sharp),
-                          genderMethode(size, 'muscular'.toUpperCase(),
-                              Icons.sports_gymnastics_sharp)
+                          typeMethode(size, 'drying of fat'.toUpperCase(),
+                              Icons.sports_gymnastics_sharp,model.dryingOfFatColor,false),
+                          typeMethode(size, 'muscular'.toUpperCase(),
+                              Icons.sports_gymnastics_sharp,model.muscularColor,true)
                         ],
                       ),
                       const SizedBox(
-                        height: 25,
+                        height: 35,
                       )
                     ],
                   ),
                 )),
             Positioned(
               bottom: 0,
-              left: size.width / 4,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.red),
-                ),
-                onPressed: () {},
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'CALCULATE',
-                    style: TextStyle(fontSize: size.width * 0.07),
+              left: 0,
+              child: SizedBox(width: size.width,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                  ),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'CALCULATE',
+                      style: TextStyle(fontSize: size.width * 0.07),
+                    ),
                   ),
                 ),
               ),
@@ -253,15 +184,30 @@ class _CalculateScreenState extends State<CalculateScreen> {
     ));
   }
 
-  InkWell genderMethode(
+  SizedBox buildWeightButton(double inc, String text, double size) {
+    return SizedBox(
+      width: size,
+      child: FloatingActionButton(
+        backgroundColor: const Color(0x353956FF),
+        child: Text(text),
+        onPressed: () {
+          Provider.of<AppProvider>(context,listen: false).setWeight(inc);
+        },
+      ),
+    );
+  }
+
+  InkWell typeMethode(
     Size size,
     String title,
     IconData icon,
+      Color color,
+      bool isMuscular
   ) {
     return InkWell(
       onTap: () {
-        print(title);
-      },
+Provider.of<AppProvider>(context,listen: false).setType(isMuscular);
+},
       child: Container(
         margin: EdgeInsets.all(size.width * 0.01),
         width: size.width * 0.4,
@@ -276,16 +222,50 @@ class _CalculateScreenState extends State<CalculateScreen> {
               child: Icon(
                 icon,
                 size: size.width * 0.28,
-                color: Colors.grey,
+                color: color,
               ),
             ),
             Text(
               title,
-              style: TextStyle(fontSize: size.width * 0.05, color: Colors.grey),
+              style: TextStyle(fontSize: size.width * 0.05, color:color),
             )
           ],
         ),
       ),
     );
+  }
+
+  InkWell genderMethode(
+      Size size, String title, IconData icon, bool isMale, Color color) {
+    return InkWell(onTap: () {
+      Provider.of<AppProvider>(context, listen: false).setGender(isMale);
+    }, child: Consumer<AppProvider>(
+      builder: (context, model, child) {
+        return Container(
+          margin: EdgeInsets.all(size.width * 0.01),
+          width: size.width * 0.4,
+          height: size.height * 0.2,
+          alignment: Alignment.center,
+          color: MyColors.secondaryColor,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 0, size.height * 0.02),
+                child: Icon(
+                  icon,
+                  size: size.width * 0.28,
+                  color: color,
+                ),
+              ),
+              Text(
+                title,
+                style: TextStyle(fontSize: size.width * 0.05, color: color),
+              )
+            ],
+          ),
+        );
+      },
+    ));
   }
 }

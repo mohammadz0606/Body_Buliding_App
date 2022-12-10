@@ -17,25 +17,63 @@ import '/services/call_data/database.dart';
 import 'package:flutter/material.dart';
 
 class AppProvider extends ChangeNotifier {
-
   double sliderVal = 0;
   int age = 0;
-  int weight = 150;
 
+  // 0 = noSelected
+  // 1 = male
+  // 2 = female
+  int isMale = 0;
 
+  // 0 = noSelected
+  // 1 = male
+  // 2 = female
+  int isMuscular = 0;
+  Color muscularColor = Colors.grey;
+  Color dryingOfFatColor = Colors.grey;
 
+  Color maleColor = Color.fromRGBO(105, 104, 104, 1);
+  Color femaleColor = Color.fromRGBO(105, 104, 104, 1);
 
-  calculateData(){
+  double height = 175;
+  double weight = 70;
 
-
-
-
+  setType(bool isMuscular) {
+    if (isMuscular) {
+      this.isMuscular = 1;
+      dryingOfFatColor = Color.fromRGBO(105, 104, 104, 1);
+      muscularColor = Colors.white;
+    } else {
+      this.isMuscular = 2;
+      muscularColor = Color.fromRGBO(105, 104, 104, 1);
+      dryingOfFatColor = Colors.white;
+    }
+    notifyListeners();
   }
 
+  setGender(bool isMale) {
+    if (isMale) {
+      this.isMale = 1;
+      maleColor = Colors.blue;
+      femaleColor = Colors.grey;
+    } else {
+      this.isMale = 2;
 
+      maleColor = Colors.grey;
+      femaleColor = Colors.pink;
+    }
+    notifyListeners();
+  }
 
+  setHeight(double height) {
+    this.height = height;
+    notifyListeners();
+  }
 
-
+  setWeight(double weight) {
+    this.weight += weight;
+    notifyListeners();
+  }
 
   final Database _database = Database();
   UserModel? _userModel;
@@ -173,7 +211,7 @@ class AppProvider extends ChangeNotifier {
         );
         notifyListeners();
       }
-    }else {
+    } else {
       ConstantWidget.massage(
         context: context,
         text: "Unavailable at the moment 😢",
@@ -203,21 +241,20 @@ class AppProvider extends ChangeNotifier {
   Future<void> openTiktok({
     required String tiktok,
     required BuildContext context,
-  }) async{
+  }) async {
     if (await canLaunchUrl(Uri.parse(tiktok))) {
-      if(tiktok == "no"){
+      if (tiktok == "no") {
         ConstantWidget.massage(
           context: context,
           text: "Unavailable at the moment 😢",
         );
         notifyListeners();
-      }else{
+      } else {
         await launchUrl(
           Uri.parse(tiktok),
         );
         notifyListeners();
       }
-
     } else {
       ConstantWidget.massage(
         context: context,
