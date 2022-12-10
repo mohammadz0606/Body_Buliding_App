@@ -70,12 +70,12 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(top: 35, left: 22, bottom: 11),
+                  padding: const EdgeInsets.only(top: 35, left: 22, bottom: 10),
                   child: Text(
                     "The best coaches right now",
                     style: GoogleFonts.merriweather(
                       color: Colors.white,
-                      fontSize: 17.5,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -244,34 +244,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-/*
-                                CachedNetworkImage(
-                                  imageUrl: "https://firebasestorage.googleapis.com/v0/b/body-building-295c3.appspot.com/o/trainers%2F%D8%B5%D9%87%D9%8A%D8%A8%20%D8%A7%D9%84%D9%88%D8%AD%D8%B4.png?alt=media&token=1fed7007-cd68-4ab3-b381-2b122ffddc94",
-                                  height: 200,
-                                  width: 200,
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) {
-                                    return Image.asset(
-                                      "assets/blank-profile.jpg",
-                                      height: 200,
-                                      width: 200,
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
-                                  errorWidget: (context, url, error) {
-                                    return Text(error.toString());
-                                  },
-                                  imageBuilder: (context, imageProvider) {
-                                    return Container(
-                                      height: 500,
-                                      width: 500,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: imageProvider,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-*/

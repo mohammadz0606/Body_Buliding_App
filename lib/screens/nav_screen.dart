@@ -3,6 +3,7 @@ import 'package:body_building/constant/constant_widget.dart';
 import 'package:body_building/screens/auth/login_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -17,12 +18,10 @@ class NavScreen extends StatefulWidget {
 class _NavScreenState extends State<NavScreen> {
   @override
   void initState() {
-
-
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<AppProvider>(context,listen: false).getDataForeFireStore();
-      Provider.of<AppProvider>(context,listen: false).getTrainers();
+      Provider.of<AppProvider>(context, listen: false).getDataForeFireStore();
+      Provider.of<AppProvider>(context, listen: false).getTrainers();
     });
   }
 
@@ -38,7 +37,13 @@ class _NavScreenState extends State<NavScreen> {
           appBar: AppBar(
             elevation: 20,
             backgroundColor: MyColors.primaryColor,
-            title: Text("BODY BUILDING"),
+            title: Text(
+              "BODY BUILDING",
+              style: GoogleFonts.merriweather(
+                fontSize: 22.5,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             centerTitle: true,
             actions: [
               IconButton(
@@ -92,6 +97,7 @@ class _NavScreenState extends State<NavScreen> {
               ],
             ),
           ),
+          drawer: const Drawer(),
         );
       },
     );
