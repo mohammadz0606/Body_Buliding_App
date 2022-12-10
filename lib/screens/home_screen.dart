@@ -23,12 +23,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: MyColors.primaryColor,
       body: Consumer<AppProvider>(
         builder: (context, model, child) {
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
+                const SizedBox(height: 13),
                 CarouselSlider.builder(
                   itemCount: _carouselImage.length,
                   itemBuilder: (context, index, realIndex) {

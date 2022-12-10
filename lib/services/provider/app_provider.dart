@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../screens/profile_screen.dart';
+import '../../screens/exercises_screen.dart';
 import '../models/trainers_model.dart';
 import '/screens/calculate_screen.dart';
 import '/screens/home_screen.dart';
@@ -41,7 +41,7 @@ class AppProvider extends ChangeNotifier {
   final List<Widget> _screens = [
     HomeScreen(),
     const CalculateScreen(),
-    const ProfileScreen(),
+    const ExercisesScreen(),
   ];
 
   List<Widget> get screens => _screens;

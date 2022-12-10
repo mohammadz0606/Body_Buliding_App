@@ -39,7 +39,7 @@ class BodyBulidingApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          scaffoldBackgroundColor: MyColors.thridColor,
+          scaffoldBackgroundColor: MyColors.primaryColor,
           primaryColor: MyColors.firstColor,
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,

@@ -17,8 +17,8 @@ class NavScreen extends StatefulWidget {
 class _NavScreenState extends State<NavScreen> {
   @override
   void initState() {
-    Provider.of<AppProvider>(context,listen: false).getDataForeFireStore();
-    Provider.of<AppProvider>(context,listen: false).getTrainers();
+    Provider.of<AppProvider>(context, listen: false).getDataForeFireStore();
+    Provider.of<AppProvider>(context, listen: false).getTrainers();
     super.initState();
   }
 
@@ -32,6 +32,10 @@ class _NavScreenState extends State<NavScreen> {
       ) {
         return Scaffold(
           appBar: AppBar(
+            elevation: 20,
+            backgroundColor: MyColors.primaryColor,
+            title: Text("BODY BUILDING"),
+            centerTitle: true,
             actions: [
               IconButton(
                 onPressed: () {
@@ -46,20 +50,31 @@ class _NavScreenState extends State<NavScreen> {
           body: model.userModel == null
               ? ConstantWidget.circularProgressIndicator()
               : model.screens[model.selectedIndex],
-          bottomNavigationBar: GNav(
-            selectedIndex: model.selectedIndex,
-            onTabChange: (int index){
-              model.onTabChange(index);
-            },
-            gap: 10,
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, -2))
+              ],
+            ),
+            child: GNav(
+              selectedIndex: model.selectedIndex,
+              onTabChange: (int index) {
+                model.onTabChange(index);
+              },
+              gap: 10,
               activeColor: Colors.white,
               color: Colors.white,
-              rippleColor: MyColors.secondColor,
-            hoverColor: MyColors.secondColor,
+              rippleColor: MyColors.secondaryColor,
+              hoverColor: MyColors.secondaryColor,
+              backgroundColor: MyColors.primaryColor,
               duration: const Duration(milliseconds: 400),
               tabs: const [
                 GButton(
-                  icon:Icons.home_filled,
+                  icon: Icons.home_filled,
                   text: 'Home',
                 ),
                 GButton(
@@ -71,6 +86,7 @@ class _NavScreenState extends State<NavScreen> {
                   text: 'Exercises',
                 ),
               ],
+            ),
           ),
         );
       },
