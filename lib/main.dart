@@ -1,5 +1,6 @@
 import 'package:body_building/constant/constant_style.dart';
-
+import 'package:body_building/screens/nav_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -38,11 +39,12 @@ class BodyBulidingApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          scaffoldBackgroundColor: MyColors.thridColor,
+          scaffoldBackgroundColor: MyColors.primaryColor,
           primaryColor: MyColors.firstColor,
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.transparent,
             elevation: 0,
+            iconTheme: IconThemeData(color: Colors.white),
             systemOverlayStyle: SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
               statusBarBrightness: Brightness.light,
@@ -50,10 +52,11 @@ class BodyBulidingApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute: LoginScreen.route,
+        initialRoute:FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
         routes: {
           LoginScreen.route: (context) => LoginScreen(),
           SignupScreen.route: (context) => SignupScreen(),
+          NavScreen.route:(context) => const NavScreen(),
         },
       ),
     );

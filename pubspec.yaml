@@ -17,6 +17,12 @@ dependencies:
   google_fonts: ^3.0.1
   firebase_auth: ^4.1.4
   provider: ^6.0.4
+  cloud_firestore: ^4.1.0
+  google_nav_bar: ^5.0.6
+  carousel_slider: ^4.1.1
+  dots_indicator: ^2.1.0
+  cached_network_image: ^3.2.3
+  url_launcher: ^6.1.7
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +36,8 @@ flutter:
 
   assets:
     - assets/
+    - assets/carousel_images/
+    - assets/social_icons/
 
 
   # fonts:

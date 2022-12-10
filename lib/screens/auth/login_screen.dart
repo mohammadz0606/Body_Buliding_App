@@ -1,5 +1,8 @@
 import 'package:body_building/constant/constant_style.dart';
+import 'package:body_building/constant/constant_widget.dart';
+import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/background_image_widget.dart';
 import '../../widgets/custom_button.dart';
@@ -13,10 +16,12 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: MyColors.thridColor,
       extendBodyBehindAppBar: true,
       body: Form(
         key: _key,
@@ -75,16 +80,32 @@ class LoginScreen extends StatelessWidget {
                       keyboardType: TextInputType.visiblePassword,
                     ),
                     SizedBox(height: size.height * 0.039),
-                    Center(
-                      child: CustomButton(
-                        onTap: () {},
-                        text: "Login",
-                        size: size,
-                        boxDecoration: BoxDecoration(
-                          color: MyColors.firstColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                    Consumer<AppProvider>(
+                      builder: (
+                        BuildContext context,
+                        AppProvider model,
+                        Widget? child,
+                      ) {
+                        return model.isLoading
+                            ? ConstantWidget.circularProgressIndicator()
+                            : Center(
+                                child: CustomButton(
+                                  onTap: () {
+                                    model.signInApp(
+                                      context: context,
+                                      email: _emailController.text.trim(),
+                                      password: _passwordController.text.trim(),
+                                    );
+                                  },
+                                  text: "Login",
+                                  size: size,
+                                  boxDecoration: BoxDecoration(
+                                    color: MyColors.firstColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              );
+                      },
                     ),
                     const SizedBox(height: 12.5),
                     Center(

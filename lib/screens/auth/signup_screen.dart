@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:body_building/constant/constant_widget.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:body_building/widgets/background_image_widget.dart';
@@ -9,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/constant_style.dart';
-import '../../constant/status.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_button.dart';
 import '../../widgets/custom_text_filed.dart';
@@ -25,7 +22,8 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
+    return Scaffold(      backgroundColor: MyColors.thridColor,
+
       extendBodyBehindAppBar: true,
       body: Form(
         key: _key,
@@ -58,6 +56,9 @@ class SignupScreen extends StatelessWidget {
                         }
                         if (text.length > 16) {
                           return "name must be lees 16 char";
+                        }
+                        if(text.length <3){
+                          return "is not name";
                         }
                         return null;
                       },
@@ -115,40 +116,30 @@ class SignupScreen extends StatelessWidget {
                         AppProvider model,
                         Widget? child,
                       ) {
-                        return Center(
-                          child: CustomButton(
-                            onTap: () {
-                              if (_key.currentState!.validate()) {
-                                FocusScope.of(context).unfocus();
-                               if(model.status == Status.Initi){
-                                 model.signupApp(
-                                   email: _emailController.text.trim(),
-                                   password: _passwordController.text.trim(),
-                                   name: _nameController.text.trim(),
-                                 );
-                               }
-
-                                if (model.status == Status.Wait) {
-                                  ConstantWidget.massage(
-                                      context: context, text: 'Waiting');
-                                }
-                                if (model.status == Status.Succeeded) {
-                                  log('succs');
-                                  Navigator.of(context).pop();
-                                } else if(model.status == Status.Error){
-                                  ConstantWidget.massage(
-                                      context: context, text: model.errorMassage);
-                                }
-                              }
-                            },
-                            text: "Register",
-                            size: size,
-                            boxDecoration: BoxDecoration(
-                              color: MyColors.firstColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        );
+                        return model.isLoading
+                            ? ConstantWidget.circularProgressIndicator()
+                            : Center(
+                                child: CustomButton(
+                                  onTap: () {
+                                    if (_key.currentState!.validate()) {
+                                      FocusScope.of(context).unfocus();
+                                      model.signupApp(
+                                        email: _emailController.text.trim(),
+                                        password:
+                                            _passwordController.text.trim(),
+                                        name: _nameController.text.trim(),
+                                        context: context,
+                                      );
+                                    }
+                                  },
+                                  text: "Register",
+                                  size: size,
+                                  boxDecoration: BoxDecoration(
+                                    color: MyColors.firstColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              );
                       },
                     ),
                     Row(
