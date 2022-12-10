@@ -17,9 +17,13 @@ class NavScreen extends StatefulWidget {
 class _NavScreenState extends State<NavScreen> {
   @override
   void initState() {
-    Provider.of<AppProvider>(context,listen: false).getDataForeFireStore();
-    Provider.of<AppProvider>(context,listen: false).getTrainers();
+
+
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<AppProvider>(context,listen: false).getDataForeFireStore();
+      Provider.of<AppProvider>(context,listen: false).getTrainers();
+    });
   }
 
   @override

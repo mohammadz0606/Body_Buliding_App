@@ -17,6 +17,26 @@ import '/services/call_data/database.dart';
 import 'package:flutter/material.dart';
 
 class AppProvider extends ChangeNotifier {
+
+  double sliderVal = 0;
+  int age = 0;
+  int weight = 150;
+
+
+
+
+  calculateData(){
+
+
+
+
+  }
+
+
+
+
+
+
   final Database _database = Database();
   UserModel? _userModel;
 
