@@ -12,7 +12,6 @@ class CalculateScreen extends StatefulWidget {
 }
 
 class _CalculateScreenState extends State<CalculateScreen> {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -104,17 +103,14 @@ class _CalculateScreenState extends State<CalculateScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-
-                              Text(
-                                'WEIGHT',
-                                style: TextStyle(
-                                    fontSize: size.width * 0.050,
-                                    color: Colors.grey),
-                              ),
-
                             Text(
-        model.weight.toStringAsFixed(1)
-            .toString(),
+                              'WEIGHT',
+                              style: TextStyle(
+                                  fontSize: size.width * 0.050,
+                                  color: Colors.grey),
+                            ),
+                            Text(
+                              model.weight.toStringAsFixed(1).toString(),
                               style: TextStyle(
                                   fontSize: size.width * 0.13,
                                   color: Colors.white),
@@ -147,11 +143,50 @@ class _CalculateScreenState extends State<CalculateScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          typeMethode(size, 'drying of fat'.toUpperCase(),
-                              Icons.sports_gymnastics_sharp,model.dryingOfFatColor,false),
-                          typeMethode(size, 'muscular'.toUpperCase(),
-                              Icons.sports_gymnastics_sharp,model.muscularColor,true)
+                          typeMethode(
+                              size,
+                              'drying of fat'.toUpperCase(),
+                              Icons.sports_gymnastics_sharp,
+                              model.dryingOfFatColor,
+                              false),
+                          typeMethode(
+                              size,
+                              'muscular'.toUpperCase(),
+                              Icons.sports_gymnastics_sharp,
+                              model.muscularColor,
+                              true)
                         ],
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        color: MyColors.secondaryColor,
+                        margin: EdgeInsets.all(size.width * 0.04),
+                        width: double.infinity,
+                        height: size.height * 0.4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'ACTIVITY RATE DURING',
+                              style: TextStyle(
+                                  fontSize: size.width * 0.050,
+                                  color: Colors.grey),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            costumeButton(0, "Don't do sport", size,
+                                model.numberOfDay[0]['color']),
+                            costumeButton(1, "1 to 3 days per week", size,
+                                model.numberOfDay[1]['color']),
+                            costumeButton(2, "4 to 5 days per week", size,
+                                model.numberOfDay[2]['color']),
+                            costumeButton(3, "6 to 7 days per week", size,
+                                model.numberOfDay[3]['color']),
+                            costumeButton(4, "6 to 7 days but twice a day",
+                                size, model.numberOfDay[4]['color'])
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 35,
@@ -162,7 +197,8 @@ class _CalculateScreenState extends State<CalculateScreen> {
             Positioned(
               bottom: 0,
               left: 0,
-              child: SizedBox(width: size.width,
+              child: SizedBox(
+                width: size.width,
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.red),
@@ -184,6 +220,28 @@ class _CalculateScreenState extends State<CalculateScreen> {
     ));
   }
 
+  InkWell costumeButton(int value, String title, Size size, Color color) {
+    return InkWell(
+      onTap: () {
+        Provider.of<AppProvider>(context, listen: false).setNumberOfDay(value);
+      },
+      child: Container(
+          color: const Color(0x353956FF),
+          alignment: Alignment.center,
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          height: size.height * 0.05,
+          width: double.infinity,
+          child: Text(
+            title,
+            style: TextStyle(
+                fontSize: color == Colors.white
+                    ? size.width * 0.06
+                    : size.width * 0.05,
+                color: color),
+          )),
+    );
+  }
+
   SizedBox buildWeightButton(double inc, String text, double size) {
     return SizedBox(
       width: size,
@@ -191,23 +249,18 @@ class _CalculateScreenState extends State<CalculateScreen> {
         backgroundColor: const Color(0x353956FF),
         child: Text(text),
         onPressed: () {
-          Provider.of<AppProvider>(context,listen: false).setWeight(inc);
+          Provider.of<AppProvider>(context, listen: false).setWeight(inc);
         },
       ),
     );
   }
 
   InkWell typeMethode(
-    Size size,
-    String title,
-    IconData icon,
-      Color color,
-      bool isMuscular
-  ) {
+      Size size, String title, IconData icon, Color color, bool isMuscular) {
     return InkWell(
       onTap: () {
-Provider.of<AppProvider>(context,listen: false).setType(isMuscular);
-},
+        Provider.of<AppProvider>(context, listen: false).setType(isMuscular);
+      },
       child: Container(
         margin: EdgeInsets.all(size.width * 0.01),
         width: size.width * 0.4,
@@ -227,7 +280,7 @@ Provider.of<AppProvider>(context,listen: false).setType(isMuscular);
             ),
             Text(
               title,
-              style: TextStyle(fontSize: size.width * 0.05, color:color),
+              style: TextStyle(fontSize: size.width * 0.05, color: color),
             )
           ],
         ),

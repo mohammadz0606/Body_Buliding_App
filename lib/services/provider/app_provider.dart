@@ -38,7 +38,41 @@ class AppProvider extends ChangeNotifier {
   double height = 175;
   double weight = 70;
 
-  setType(bool isMuscular) {
+
+  int numberSelected = 5;
+List<Map<String, dynamic>> numberOfDay =[ {
+  'color':Colors.grey,
+  'value':0
+},{
+  'color':Colors.grey,
+  'value':1
+},{
+  'color':Colors.grey,
+  'value':2
+},{
+  'color':Colors.grey,
+  'value':3
+},{
+  'color':Colors.grey,
+  'value':4
+}
+];
+  void setNumberOfDay(int value){
+    numberOfDay.forEach((element) {
+      if(element['value'] == value){
+        element['color'] = Colors.white;
+        numberSelected = value;
+      }else{
+        element['color'] = Colors.grey;
+      }
+    });
+    notifyListeners();
+
+  }
+
+
+
+  void setType(bool isMuscular) {
     if (isMuscular) {
       this.isMuscular = 1;
       dryingOfFatColor = Color.fromRGBO(105, 104, 104, 1);
@@ -51,7 +85,7 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  setGender(bool isMale) {
+  void setGender(bool isMale) {
     if (isMale) {
       this.isMale = 1;
       maleColor = Colors.blue;
@@ -65,12 +99,12 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  setHeight(double height) {
+  void setHeight(double height) {
     this.height = height;
     notifyListeners();
   }
 
-  setWeight(double weight) {
+  void setWeight(double weight) {
     this.weight += weight;
     notifyListeners();
   }
