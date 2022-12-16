@@ -4,15 +4,11 @@ class UserModel {
   String? id;
   final String name;
   final String email;
-  final String bio;
-  final String image;
 
   UserModel({
     this.id,
     required this.name,
     required this.email,
-    required this.bio,
-    required this.image,
   });
 
   Map<String, dynamic> toMap() {
@@ -20,8 +16,6 @@ class UserModel {
       "id":id,
       "name": name,
       "email": email,
-      "bio": bio,
-      "image": image,
     };
   }
 
@@ -30,8 +24,6 @@ class UserModel {
       id: map["id"],
       name: map["name"],
       email: map["email"],
-      bio: map["bio"],
-      image: map["image"],
     );
   }
 }

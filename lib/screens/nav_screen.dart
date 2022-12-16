@@ -22,6 +22,7 @@ class _NavScreenState extends State<NavScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<AppProvider>(context, listen: false).getDataForeFireStore();
       Provider.of<AppProvider>(context, listen: false).getTrainers();
+      Provider.of<AppProvider>(context,listen: false).getCategory();
     });
   }
 

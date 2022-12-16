@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../screens/exercises_screen.dart';
+import '../models/category_model.dart';
 import '../models/trainers_model.dart';
 import '/screens/calculate_screen.dart';
 import '/screens/home_screen.dart';
@@ -32,54 +33,41 @@ class AppProvider extends ChangeNotifier {
   Color muscularColor = Colors.grey;
   Color dryingOfFatColor = Colors.grey;
 
-  Color maleColor = Color.fromRGBO(105, 104, 104, 1);
-  Color femaleColor = Color.fromRGBO(105, 104, 104, 1);
+  Color maleColor = const Color.fromRGBO(105, 104, 104, 1);
+  Color femaleColor = const Color.fromRGBO(105, 104, 104, 1);
 
   double height = 175;
   double weight = 70;
 
-
   int numberSelected = 5;
-List<Map<String, dynamic>> numberOfDay =[ {
-  'color':Colors.grey,
-  'value':0
-},{
-  'color':Colors.grey,
-  'value':1
-},{
-  'color':Colors.grey,
-  'value':2
-},{
-  'color':Colors.grey,
-  'value':3
-},{
-  'color':Colors.grey,
-  'value':4
-}
-];
-  void setNumberOfDay(int value){
+  List<Map<String, dynamic>> numberOfDay = [
+    {'color': Colors.grey, 'value': 0},
+    {'color': Colors.grey, 'value': 1},
+    {'color': Colors.grey, 'value': 2},
+    {'color': Colors.grey, 'value': 3},
+    {'color': Colors.grey, 'value': 4}
+  ];
+
+  void setNumberOfDay(int value) {
     numberOfDay.forEach((element) {
-      if(element['value'] == value){
+      if (element['value'] == value) {
         element['color'] = Colors.white;
         numberSelected = value;
-      }else{
+      } else {
         element['color'] = Colors.grey;
       }
     });
     notifyListeners();
-
   }
-
-
 
   void setType(bool isMuscular) {
     if (isMuscular) {
       this.isMuscular = 1;
-      dryingOfFatColor = Color.fromRGBO(105, 104, 104, 1);
+      dryingOfFatColor = const Color.fromRGBO(105, 104, 104, 1);
       muscularColor = Colors.white;
     } else {
       this.isMuscular = 2;
-      muscularColor = Color.fromRGBO(105, 104, 104, 1);
+      muscularColor = const Color.fromRGBO(105, 104, 104, 1);
       dryingOfFatColor = Colors.white;
     }
     notifyListeners();
@@ -129,6 +117,10 @@ List<Map<String, dynamic>> numberOfDay =[ {
   List<TrainersModel> _trainers = [];
 
   List<TrainersModel> get trainers => _trainers;
+
+  List<CategoryModel> _category = [];
+
+  List<CategoryModel> get category => _category;
 
   final List<Widget> _screens = [
     HomeScreen(),
@@ -224,6 +216,15 @@ List<Map<String, dynamic>> numberOfDay =[ {
       _trainers = await _database.getTrainers();
       notifyListeners();
     } catch (e) {
+      notifyListeners();
+    }
+  }
+
+  void getCategory()async{
+    try{
+      _category = await _database.getCategory();
+      notifyListeners();
+    }catch(e){
       notifyListeners();
     }
   }

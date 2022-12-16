@@ -1,3 +1,4 @@
+import 'package:body_building/services/models/category_model.dart';
 import 'package:body_building/services/models/trainers_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -57,9 +58,6 @@ class Database {
     final UserModel userModel = UserModel(
       name: name,
       email: email,
-      bio: "write your bio......",
-      image:
-          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
       id: _auth?.user!.uid,
     );
     try {
@@ -103,6 +101,19 @@ class Database {
     }catch(e){
       throw Exception(e.toString());
     }
+  }
+
+  Future<List<CategoryModel>> getCategory() async{
+    List<CategoryModel> category = [];
+   try{
+     QuerySnapshot querySnapshot =await FirebaseFirestore.instance.collection("categoresCol").get();
+     for(int i = 0; i < querySnapshot.docs.length; i++){
+       category.add(CategoryModel.fromMap(querySnapshot.docs[i]));
+     }
+     return category;
+   }catch(e){
+     throw Exception(e.toString());
+   }
   }
 }
 
