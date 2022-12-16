@@ -41,22 +41,18 @@ class AppProvider extends ChangeNotifier {
 
   int numberSelected = 5;
   List<Map<String, dynamic>> numberOfDay = [
-    {'color': Colors.grey, 'value': 0},
-    {'color': Colors.grey, 'value': 1},
-    {'color': Colors.grey, 'value': 2},
-    {'color': Colors.grey, 'value': 3},
-    {'color': Colors.grey, 'value': 4}
+    {'value': 1.2, 'submit': false},
+    {'value': 1.3, 'submit': false},
+    {'value': 1.5, 'submit': false},
+    {'value': 1.7, 'submit': false},
+    {'value': 1.9, 'submit': false}
   ];
 
   void setNumberOfDay(int value) {
-    numberOfDay.forEach((element) {
-      if (element['value'] == value) {
-        element['color'] = Colors.white;
-        numberSelected = value;
-      } else {
-        element['color'] = Colors.grey;
-      }
-    });
+    for (var element in numberOfDay) {
+element['submit'] = false;
+    }
+    numberOfDay[value]['submit'] = true;
     notifyListeners();
   }
 
@@ -220,11 +216,11 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
-  void getCategory()async{
-    try{
+  void getCategory() async {
+    try {
       _category = await _database.getCategory();
       notifyListeners();
-    }catch(e){
+    } catch (e) {
       notifyListeners();
     }
   }

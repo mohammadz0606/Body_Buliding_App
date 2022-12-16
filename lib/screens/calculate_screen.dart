@@ -1,3 +1,4 @@
+import 'package:body_building/screens/bmi_result_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -172,19 +173,20 @@ class _CalculateScreenState extends State<CalculateScreen> {
                                   fontSize: size.width * 0.050,
                                   color: Colors.grey),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
+
                             costumeButton(0, "Don't do sport", size,
-                                model.numberOfDay[0]['color']),
+                                model.numberOfDay[0]['submit'] == true?Colors.white:Colors.grey),
                             costumeButton(1, "1 to 3 days per week", size,
-                                model.numberOfDay[1]['color']),
+                                model.numberOfDay[1]['submit'] == true?Colors.white:Colors.grey),
                             costumeButton(2, "4 to 5 days per week", size,
-                                model.numberOfDay[2]['color']),
+                                model.numberOfDay[2]['submit'] == true?Colors.white:Colors.grey),
                             costumeButton(3, "6 to 7 days per week", size,
-                                model.numberOfDay[3]['color']),
+                                model.numberOfDay[3]['submit'] == true?Colors.white:Colors.grey),
                             costumeButton(4, "6 to 7 days but twice a day",
-                                size, model.numberOfDay[4]['color'])
+                                size,  model.numberOfDay[4]['submit'] == true?Colors.white:Colors.grey)
                           ],
                         ),
                       ),
@@ -203,7 +205,10 @@ class _CalculateScreenState extends State<CalculateScreen> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.red),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => BMIResultScreen()));
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
