@@ -205,8 +205,9 @@ class _CalculateScreenState extends State<CalculateScreen> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.red),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  onPressed: () {                    Provider.of<AppProvider>(context,listen: false).getResult();
+
+                  Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => BMIResultScreen()));
                   },
                   child: Padding(

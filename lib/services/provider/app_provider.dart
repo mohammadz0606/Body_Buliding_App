@@ -25,7 +25,7 @@ class AppProvider extends ChangeNotifier {
   // 1 = male
   // 2 = female
   int isMale = 0;
-
+double bestWeight = 0;
   // 0 = noSelected
   // 1 = male
   // 2 = female
@@ -38,7 +38,8 @@ class AppProvider extends ChangeNotifier {
 
   double height = 175;
   double weight = 70;
-
+  double activity = 0;
+int? calories;
   int numberSelected = 5;
   List<Map<String, dynamic>> numberOfDay = [
     {'value': 1.2, 'submit': false},
@@ -53,6 +54,7 @@ class AppProvider extends ChangeNotifier {
 element['submit'] = false;
     }
     numberOfDay[value]['submit'] = true;
+    activity = numberOfDay[value]['value'];
     notifyListeners();
   }
 
@@ -294,4 +296,28 @@ element['submit'] = false;
       notifyListeners();
     }
   }
+  void getResult()async{
+    getBestWeight();
+
+    if(isMuscular == 1){
+
+      calories = ((weight*2.2*10)*activity + 500).toInt();
+
+    }else{
+
+      calories = ((weight*2.2*10)*activity -500).toInt();
+    }
+    notifyListeners();
+
+}
+getBestWeight(){
+    if(isMale == 1){
+      bestWeight = height-100;
+    }else{
+      bestWeight = height-105;
+    }
+    notifyListeners();
+}
+
+
 }
