@@ -3,7 +3,6 @@ import 'package:body_building/constant/constant_widget.dart';
 import 'package:body_building/screens/auth/login_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +22,7 @@ class _NavScreenState extends State<NavScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<AppProvider>(context, listen: false).getDataForeFireStore();
       Provider.of<AppProvider>(context, listen: false).getTrainers();
-      Provider.of<AppProvider>(context,listen: false).getCategory();
+      Provider.of<AppProvider>(context, listen: false).getCategory();
     });
   }
 
@@ -65,10 +64,11 @@ class _NavScreenState extends State<NavScreen> {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, -2))
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, -2),
+                )
               ],
             ),
             child: GNav(
