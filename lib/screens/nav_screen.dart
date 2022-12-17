@@ -3,6 +3,7 @@ import 'package:body_building/constant/constant_widget.dart';
 import 'package:body_building/screens/auth/login_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';

@@ -26,6 +26,7 @@ class ExercisesScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var category = model.category[index];
                       return InkWell(
+                        borderRadius: BorderRadius.circular(18),
                         onTap: (){},
                         child: Card(
                           elevation: 15,
