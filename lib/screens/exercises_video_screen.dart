@@ -60,7 +60,7 @@ class ExerciseVideoScreen extends StatelessWidget {
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                   color: Colors.black.withOpacity(0.4),
-                                  borderRadius: BorderRadius.circular(15),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: const Icon(
                                   color: MyColors.firstColor,
