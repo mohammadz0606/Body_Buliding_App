@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
     "assets/carousel_images/ezgif-2-f8daed614f.jpg",
     "assets/carousel_images/high-five-after-workout-gym.jpg",
     "assets/carousel_images/muscular_hypertrophyf.jpg",
+    "assets/carousel_images/strong-man-training-gym.jpg",
   ];
 
   @override

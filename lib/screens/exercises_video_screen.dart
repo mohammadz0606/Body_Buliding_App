@@ -3,10 +3,12 @@ import 'package:body_building/constant/constant_widget.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ExerciseVideoScreen extends StatelessWidget {
-  const ExerciseVideoScreen({Key? key}) : super(key: key);
   static const String route = "exercise_video_screen";
+
+  const ExerciseVideoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,32 +38,42 @@ class ExerciseVideoScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                "https://img.freepik.com/free-photo/morning-concept-attractive-woman-after-running-holding-coffee-tea-relaxing-stay-stairs_496169-1880.jpg?w=740&t=st=1671611620~exp=1671612220~hmac=0ee4277db3e67a4e7f0836773a346d5f67d330e14b94080e4c1b4ab8089efa37",
-                                height: double.infinity,
-                                fit: BoxFit.cover,
+                        child: InkWell(
+                          onTap: () async {
+                            await model.excercisesVideo(
+                                      video:
+                                          model.excercisesFillters[index].video,
+                                      context: context,
+                                    );
+                            /*print(model.excercisesFillters[index].video);
+                            await launchUrl(
+                              Uri.parse(model.excercisesFillters[index].video),
+                            );*/
+                          },
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset(
+                                  "assets/exercise.jpg",
+                                  height: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            Container(
-                              alignment: const Alignment(-0.4, -0.4),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.4),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: IconButton(
-                                onPressed: () {},
-                                color: MyColors.firstColor,
-                                icon: const Icon(
+                              Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.4),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: const Icon(
+                                  color: MyColors.firstColor,
                                   Icons.play_circle_outline,
                                   size: 90,
                                 ),
                               ),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
                       );
                     },

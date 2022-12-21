@@ -236,12 +236,13 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
-  void excercisesFillter({required String id,required String appBarTitle}){
+  void excercisesFillter({required String id, required String appBarTitle}) {
     _excercisesFillters = [];
     this.appBarTitle = "";
     notifyListeners();
     this.appBarTitle = appBarTitle;
-    _excercisesFillters = _excercises.where((element) => element.id == id).toList();
+    _excercisesFillters =
+        _excercises.where((element) => element.id == id).toList();
     notifyListeners();
   }
 
@@ -315,6 +316,28 @@ class AppProvider extends ChangeNotifier {
         );
         notifyListeners();
       }
+    } else {
+      ConstantWidget.massage(
+        context: context,
+        text: "Unavailable at the moment 😢",
+      );
+      notifyListeners();
+    }
+  }
+
+  Future<void> excercisesVideo({
+    required String video,
+    required BuildContext context,
+  }) async {
+    /*ConstantWidget.massage(
+      context: context,
+      text: "Waiting 😄",
+    );*/
+    if (await canLaunchUrl(Uri.parse(video))) {
+      await launchUrl(
+        Uri.parse(video),
+      );
+      notifyListeners();
     } else {
       ConstantWidget.massage(
         context: context,
