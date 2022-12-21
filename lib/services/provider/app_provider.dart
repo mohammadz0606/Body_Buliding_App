@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../screens/exercises_screen.dart';
 import '../models/category_model.dart';
+import '../models/excercises_model.dart';
 import '../models/trainers_model.dart';
 import '/screens/calculate_screen.dart';
 import '/screens/home_screen.dart';
@@ -18,6 +17,8 @@ import '/services/call_data/database.dart';
 import 'package:flutter/material.dart';
 
 class AppProvider extends ChangeNotifier {
+  String appBarTitle = "";
+
   double sliderVal = 0;
   int age = 0;
 
@@ -25,7 +26,8 @@ class AppProvider extends ChangeNotifier {
   // 1 = male
   // 2 = female
   int isMale = 0;
-double bestWeight = 0;
+  double bestWeight = 0;
+
   // 0 = noSelected
   // 1 = male
   // 2 = female
@@ -39,7 +41,7 @@ double bestWeight = 0;
   double height = 175;
   double weight = 70;
   double activity = 0;
-int? calories;
+  int? calories;
   int numberSelected = 5;
   List<Map<String, dynamic>> numberOfDay = [
     {'value': 1.2, 'submit': false},
@@ -51,7 +53,7 @@ int? calories;
 
   void setNumberOfDay(int value) {
     for (var element in numberOfDay) {
-element['submit'] = false;
+      element['submit'] = false;
     }
     numberOfDay[value]['submit'] = true;
     activity = numberOfDay[value]['value'];
@@ -120,6 +122,14 @@ element['submit'] = false;
 
   List<CategoryModel> get category => _category;
 
+  List<ExcercisesModel> _excercises = [];
+
+  List<ExcercisesModel> get excercises => _excercises;
+
+  List<ExcercisesModel> _excercisesFillters = [];
+
+  List<ExcercisesModel> get excercisesFillters => _excercisesFillters;
+
   final List<Widget> _screens = [
     HomeScreen(),
     const CalculateScreen(),
@@ -148,7 +158,7 @@ element['submit'] = false;
         name: name,
       );
       _isLoading = false;
-      ConstantWidget.massage(context: context, text: "Register is Done");
+      ConstantWidget.massage(context: context, text: "Register is Done 😊");
       Navigator.of(context).pop();
       notifyListeners();
     } catch (e) {
@@ -216,6 +226,23 @@ element['submit'] = false;
     } catch (e) {
       notifyListeners();
     }
+  }
+
+  void getAllExcercises() async {
+    try {
+      _excercises = await _database.getAllExcercises();
+    } catch (e) {
+      notifyListeners();
+    }
+  }
+
+  void excercisesFillter({required String id,required String appBarTitle}){
+    _excercisesFillters = [];
+    this.appBarTitle = "";
+    notifyListeners();
+    this.appBarTitle = appBarTitle;
+    _excercisesFillters = _excercises.where((element) => element.id == id).toList();
+    notifyListeners();
   }
 
   void getCategory() async {
@@ -296,28 +323,24 @@ element['submit'] = false;
       notifyListeners();
     }
   }
-  void getResult()async{
+
+  void getResult() async {
     getBestWeight();
 
-    if(isMuscular == 1){
-
-      calories = ((weight*2.2*10)*activity + 500).toInt();
-
-    }else{
-
-      calories = ((weight*2.2*10)*activity -500).toInt();
+    if (isMuscular == 1) {
+      calories = ((weight * 2.2 * 10) * activity + 500).toInt();
+    } else {
+      calories = ((weight * 2.2 * 10) * activity - 500).toInt();
     }
     notifyListeners();
+  }
 
-}
-getBestWeight(){
-    if(isMale == 1){
-      bestWeight = height-100;
-    }else{
-      bestWeight = height-105;
+  void getBestWeight() {
+    if (isMale == 1) {
+      bestWeight = height - 100;
+    } else {
+      bestWeight = height - 105;
     }
     notifyListeners();
-}
-
-
+  }
 }

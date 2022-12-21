@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import 'exercises_video_screen.dart';
+
 class ExercisesScreen extends StatelessWidget {
   const ExercisesScreen({Key? key}) : super(key: key);
 
@@ -27,7 +29,12 @@ class ExercisesScreen extends StatelessWidget {
                       var category = model.category[index];
                       return InkWell(
                         borderRadius: BorderRadius.circular(18),
-                        onTap: (){},
+                        onTap: () {
+                          model.excercisesFillter(id: category.id,appBarTitle: category.title);
+                          Navigator.of(context).pushNamed(
+                            ExerciseVideoScreen.route,
+                          );
+                        },
                         child: Card(
                           elevation: 15,
                           shape: RoundedRectangleBorder(

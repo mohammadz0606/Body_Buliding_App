@@ -23,6 +23,7 @@ class _NavScreenState extends State<NavScreen> {
       Provider.of<AppProvider>(context, listen: false).getDataForeFireStore();
       Provider.of<AppProvider>(context, listen: false).getTrainers();
       Provider.of<AppProvider>(context, listen: false).getCategory();
+      Provider.of<AppProvider>(context, listen: false).getAllExcercises();
     });
   }
 
@@ -36,8 +37,7 @@ class _NavScreenState extends State<NavScreen> {
       ) {
         return Scaffold(
           appBar: AppBar(
-            elevation: 20,
-            backgroundColor: MyColors.primaryColor,
+
             title: Text(
               "BODY BUILDING",
               style: GoogleFonts.merriweather(
@@ -45,7 +45,6 @@ class _NavScreenState extends State<NavScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            centerTitle: true,
             actions: [
               IconButton(
                 onPressed: () {
