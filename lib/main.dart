@@ -1,5 +1,6 @@
 import 'package:body_building/constant/constant_style.dart';
 import 'package:body_building/screens/nav_screen.dart';
+import 'package:body_building/screens/no_internet_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -61,6 +62,7 @@ class BodyBulidingApp extends StatelessWidget {
           SignupScreen.route: (context) => SignupScreen(),
           NavScreen.route:(context) => const NavScreen(),
           ExerciseVideoScreen.route:(context) => const ExerciseVideoScreen(),
+          NoInterNetScreen.route:(context) => const NoInterNetScreen(),
         },
       ),
     );

@@ -45,10 +45,6 @@ class ExerciseVideoScreen extends StatelessWidget {
                                           model.excercisesFillters[index].video,
                                       context: context,
                                     );
-                            /*print(model.excercisesFillters[index].video);
-                            await launchUrl(
-                              Uri.parse(model.excercisesFillters[index].video),
-                            );*/
                           },
                           child: Stack(
                             children: [
