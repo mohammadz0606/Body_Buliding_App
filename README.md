@@ -1,4 +1,4 @@
-# body_building
+# Body Building
 
 A new Flutter project.
 
