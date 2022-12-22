@@ -3,6 +3,7 @@ import 'package:body_building/services/models/trainers_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../models/excercises_model.dart';
 import '../models/user_model.dart';
 
 class Database {
@@ -87,9 +88,9 @@ class Database {
 
   Future<List<TrainersModel>> getTrainers() async {
     List<TrainersModel> trainer = [];
-    try{
+    try {
       QuerySnapshot querySnapshot =
-      await FirebaseFirestore.instance.collection("trainersCol").get();
+          await FirebaseFirestore.instance.collection("trainersCol").get();
       for (int i = 0; i < querySnapshot.docs.length; i++) {
         trainer.add(
           TrainersModel.fromMap(
@@ -98,22 +99,36 @@ class Database {
         );
       }
       return trainer;
-    }catch(e){
+    } catch (e) {
       throw Exception(e.toString());
     }
   }
 
-  Future<List<CategoryModel>> getCategory() async{
+  Future<List<CategoryModel>> getCategory() async {
     List<CategoryModel> category = [];
-   try{
-     QuerySnapshot querySnapshot =await FirebaseFirestore.instance.collection("categoresCol").get();
-     for(int i = 0; i < querySnapshot.docs.length; i++){
-       category.add(CategoryModel.fromMap(querySnapshot.docs[i]));
-     }
-     return category;
-   }catch(e){
-     throw Exception(e.toString());
-   }
+    try {
+      QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection("categoresCol").get();
+      for (int i = 0; i < querySnapshot.docs.length; i++) {
+        category.add(CategoryModel.fromMap(querySnapshot.docs[i]));
+      }
+      return category;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<List<ExcercisesModel>> getAllExcercises() async {
+    List<ExcercisesModel> excercies = [];
+    try {
+      QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection("excercisesCol").get();
+      for (int i = 0; i < querySnapshot.docs.length; i++) {
+        excercies.add(ExcercisesModel.fromJson(querySnapshot.docs[i]));
+      }
+      return excercies;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }
-

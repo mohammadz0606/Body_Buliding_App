@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../screens/exercises_screen.dart';
 import '../models/category_model.dart';
+import '../models/excercises_model.dart';
 import '../models/trainers_model.dart';
 import '/screens/calculate_screen.dart';
 import '/screens/home_screen.dart';
@@ -18,6 +17,8 @@ import '/services/call_data/database.dart';
 import 'package:flutter/material.dart';
 
 class AppProvider extends ChangeNotifier {
+  String appBarTitle = "";
+
   double sliderVal = 0;
   int age = 0;
 
@@ -121,6 +122,14 @@ class AppProvider extends ChangeNotifier {
 
   List<CategoryModel> get category => _category;
 
+  List<ExcercisesModel> _excercises = [];
+
+  List<ExcercisesModel> get excercises => _excercises;
+
+  List<ExcercisesModel> _excercisesFillters = [];
+
+  List<ExcercisesModel> get excercisesFillters => _excercisesFillters;
+
   final List<Widget> _screens = [
     HomeScreen(),
     const CalculateScreen(),
@@ -149,7 +158,7 @@ class AppProvider extends ChangeNotifier {
         name: name,
       );
       _isLoading = false;
-      ConstantWidget.massage(context: context, text: "Register is Done");
+      ConstantWidget.massage(context: context, text: "Register is Done 😊");
       Navigator.of(context).pop();
       notifyListeners();
     } catch (e) {
@@ -217,6 +226,24 @@ class AppProvider extends ChangeNotifier {
     } catch (e) {
       notifyListeners();
     }
+  }
+
+  void getAllExcercises() async {
+    try {
+      _excercises = await _database.getAllExcercises();
+    } catch (e) {
+      notifyListeners();
+    }
+  }
+
+  void excercisesFillter({required String id, required String appBarTitle}) {
+    _excercisesFillters = [];
+    this.appBarTitle = "";
+    notifyListeners();
+    this.appBarTitle = appBarTitle;
+    _excercisesFillters =
+        _excercises.where((element) => element.id == id).toList();
+    notifyListeners();
   }
 
   void getCategory() async {
@@ -298,6 +325,28 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> excercisesVideo({
+    required String video,
+    required BuildContext context,
+  }) async {
+    /*ConstantWidget.massage(
+      context: context,
+      text: "Waiting 😄",
+    );*/
+    if (await canLaunchUrl(Uri.parse(video))) {
+      await launchUrl(
+        Uri.parse(video),
+      );
+      notifyListeners();
+    } else {
+      ConstantWidget.massage(
+        context: context,
+        text: "Unavailable at the moment 😢",
+      );
+      notifyListeners();
+    }
+  }
+
   void getResult() async {
     getBestWeight();
 
@@ -310,6 +359,13 @@ class AppProvider extends ChangeNotifier {
   }
 
   getBestWeight() {
+    if (isMale == 1) {
+      bestWeight = height - 100;
+    } else {
+      bestWeight = height - 105;
+  }
+
+  void getBestWeight() {
     if (isMale == 1) {
       bestWeight = height - 100;
     } else {

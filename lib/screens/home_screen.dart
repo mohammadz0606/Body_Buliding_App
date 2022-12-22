@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
     "assets/carousel_images/ezgif-2-f8daed614f.jpg",
     "assets/carousel_images/high-five-after-workout-gym.jpg",
     "assets/carousel_images/muscular_hypertrophyf.jpg",
+    "assets/carousel_images/strong-man-training-gym.jpg",
   ];
 
   @override
@@ -96,25 +97,30 @@ class HomeScreen extends StatelessWidget {
                             var trainer = model.trainers[index];
                             return Row(
                               children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(17),
+                                    side: const BorderSide(
                                       width: 2,
                                       color: MyColors.primaryColor,
                                     ),
-                                    borderRadius: BorderRadius.circular(17),
                                   ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(17),
-                                    child: FadeInImage(
-                                      fit: BoxFit.cover,
-                                      height: size.height / 3.1,
-                                      width: size.width / 2.55,
-                                      placeholder: const AssetImage(
-                                        "assets/blank-profile.jpg",
-                                      ),
-                                      image: NetworkImage(
-                                        trainer.image,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(17),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(17),
+                                      child: FadeInImage(
+                                        fit: BoxFit.cover,
+                                        height: size.height / 3.1,
+                                        width: size.width / 2.55,
+                                        placeholder: const AssetImage(
+                                          "assets/blank-profile.jpg",
+                                        ),
+                                        image: NetworkImage(
+                                          trainer.image,
+                                        ),
                                       ),
                                     ),
                                   ),
