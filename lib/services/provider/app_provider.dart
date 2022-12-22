@@ -25,7 +25,8 @@ class AppProvider extends ChangeNotifier {
   // 1 = male
   // 2 = female
   int isMale = 0;
-double bestWeight = 0;
+  double bestWeight = 0;
+
   // 0 = noSelected
   // 1 = male
   // 2 = female
@@ -39,7 +40,7 @@ double bestWeight = 0;
   double height = 175;
   double weight = 70;
   double activity = 0;
-int? calories;
+  int? calories;
   int numberSelected = 5;
   List<Map<String, dynamic>> numberOfDay = [
     {'value': 1.2, 'submit': false},
@@ -51,7 +52,7 @@ int? calories;
 
   void setNumberOfDay(int value) {
     for (var element in numberOfDay) {
-element['submit'] = false;
+      element['submit'] = false;
     }
     numberOfDay[value]['submit'] = true;
     activity = numberOfDay[value]['value'];
@@ -74,7 +75,7 @@ element['submit'] = false;
   void setGender(bool isMale) {
     if (isMale) {
       this.isMale = 1;
-      maleColor = Colors.blue;
+       maleColor = Colors.blue;
       femaleColor = Colors.grey;
     } else {
       this.isMale = 2;
@@ -296,28 +297,24 @@ element['submit'] = false;
       notifyListeners();
     }
   }
-  void getResult()async{
+
+  void getResult() async {
     getBestWeight();
 
-    if(isMuscular == 1){
-
-      calories = ((weight*2.2*10)*activity + 500).toInt();
-
-    }else{
-
-      calories = ((weight*2.2*10)*activity -500).toInt();
+    if (isMuscular == 1) {
+      calories = ((weight * 2.2 * 10) * activity + 500).toInt();
+    } else {
+      calories = ((weight * 2.2 * 10) * activity - 500).toInt();
     }
     notifyListeners();
+  }
 
-}
-getBestWeight(){
-    if(isMale == 1){
-      bestWeight = height-100;
-    }else{
-      bestWeight = height-105;
+  getBestWeight() {
+    if (isMale == 1) {
+      bestWeight = height - 100;
+    } else {
+      bestWeight = height - 105;
     }
     notifyListeners();
-}
-
-
+  }
 }
