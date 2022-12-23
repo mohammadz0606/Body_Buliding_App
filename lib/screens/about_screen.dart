@@ -24,7 +24,7 @@ class AboutScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
-                "assets/about_app/full-shot-happy-fit-people-gym.jpg",
+                "assets/about_app/ezgif-2-7f75d65483.jpg",
                 fit: BoxFit.cover,
               ),
               const SizedBox(height: 20),
