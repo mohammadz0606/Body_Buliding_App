@@ -1,9 +1,9 @@
-import 'package:body_building/screens/more_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../constant/constant_style.dart';
+import 'bmi_result_screen.dart';
 
 class CalculateScreen extends StatefulWidget {
   const CalculateScreen({Key? key}) : super(key: key);
@@ -176,17 +176,41 @@ class _CalculateScreenState extends State<CalculateScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-
-                            costumeButton(0, "Don't do sport", size,
-                                model.numberOfDay[0]['submit'] == true?Colors.white:Colors.grey),
-                            costumeButton(1, "1 to 3 days per week", size,
-                                model.numberOfDay[1]['submit'] == true?Colors.white:Colors.grey),
-                            costumeButton(2, "4 to 5 days per week", size,
-                                model.numberOfDay[2]['submit'] == true?Colors.white:Colors.grey),
-                            costumeButton(3, "6 to 7 days per week", size,
-                                model.numberOfDay[3]['submit'] == true?Colors.white:Colors.grey),
-                            costumeButton(4, "6 to 7 days but twice a day",
-                                size,  model.numberOfDay[4]['submit'] == true?Colors.white:Colors.grey)
+                            costumeButton(
+                                0,
+                                "Don't do sport",
+                                size,
+                                model.numberOfDay[0]['submit'] == true
+                                    ? Colors.white
+                                    : Colors.grey),
+                            costumeButton(
+                                1,
+                                "1 to 3 days per week",
+                                size,
+                                model.numberOfDay[1]['submit'] == true
+                                    ? Colors.white
+                                    : Colors.grey),
+                            costumeButton(
+                                2,
+                                "4 to 5 days per week",
+                                size,
+                                model.numberOfDay[2]['submit'] == true
+                                    ? Colors.white
+                                    : Colors.grey),
+                            costumeButton(
+                                3,
+                                "6 to 7 days per week",
+                                size,
+                                model.numberOfDay[3]['submit'] == true
+                                    ? Colors.white
+                                    : Colors.grey),
+                            costumeButton(
+                                4,
+                                "6 to 7 days but twice a day",
+                                size,
+                                model.numberOfDay[4]['submit'] == true
+                                    ? Colors.white
+                                    : Colors.grey)
                           ],
                         ),
                       ),
@@ -205,9 +229,11 @@ class _CalculateScreenState extends State<CalculateScreen> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.red),
                   ),
-                  onPressed: () {                    Provider.of<AppProvider>(context,listen: false).getResult();
+                  onPressed: () {
+                    Provider.of<AppProvider>(context, listen: false)
+                        .getResult();
 
-                  Navigator.of(context).pushNamed(MoreScreen.route);
+                    Navigator.of(context).pushNamed(BMIResultScreen.route);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
