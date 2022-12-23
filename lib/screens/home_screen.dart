@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(top: 35, left: 22, bottom: 10),
+                  padding: const EdgeInsets.only(top: 35, left: 20, bottom: 10),
                   child: Text(
                     "The best coaches right now",
                     style: GoogleFonts.merriweather(
@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                     ? ConstantWidget.circularProgressIndicator()
                     : Padding(
                         padding:
-                            const EdgeInsets.only(top: 8, bottom: 8, left: 8),
+                            const EdgeInsets.only(top: 8, bottom: 8, left: 5),
                         child: ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -184,8 +184,6 @@ class HomeScreen extends StatelessWidget {
                                         CustomDivider(),
                                         CustomListTitle(
                                           onTap: () async {
-                                            print(
-                                                "your phone is : ${trainer.whats}");
                                             await model.openWhatsAppChat(
                                               phone: trainer.whats,
                                               context: context,
@@ -193,7 +191,7 @@ class HomeScreen extends StatelessWidget {
                                           },
                                           size: size,
                                           icon:
-                                              "assets/social_icons/social_whats.png",
+                                              "assets/social_icons/social_whats_new.png",
                                           title: "Whats",
                                         ),
                                       ],

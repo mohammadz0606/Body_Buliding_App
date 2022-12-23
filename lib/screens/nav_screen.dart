@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
-
-import '../widgets/drawer.dart';
 import '../widgets/title_app.dart';
 
 class NavScreen extends StatefulWidget {
@@ -74,11 +72,12 @@ class _NavScreenState extends State<NavScreen> {
                     ],
                   ),
                   child: GNav(
+                    padding: EdgeInsets.only(top: 25,bottom: 25,left: 21,right: 21),
                     selectedIndex: model.selectedIndex,
                     onTabChange: (int index) {
                       model.onTabChange(index);
                     },
-                    gap: 10,
+                    gap: 7,
                     activeColor: Colors.white,
                     color: Colors.white,
                     rippleColor: MyColors.secondaryColor,
@@ -98,10 +97,14 @@ class _NavScreenState extends State<NavScreen> {
                         icon: Icons.fitness_center,
                         text: 'Exercises',
                       ),
+                      GButton(
+                        //icon: Icons.more_horiz,
+                        icon: Icons.accessibility,
+                        text: 'More',
+                      ),
                     ],
                   ),
                 ),
-                drawer: DrawerApp(),
               );
             }else{
               return const NoInterNetScreen();
