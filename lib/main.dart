@@ -57,8 +57,8 @@ class BodyBulidingApp extends StatelessWidget {
             ),
           ),
         ),
-        //initialRoute:FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
-        initialRoute: AboutScreen.route,
+        initialRoute:FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
+        //initialRoute: AboutScreen.route,
         routes: {
           LoginScreen.route: (context) => LoginScreen(),
           SignupScreen.route: (context) => SignupScreen(),
