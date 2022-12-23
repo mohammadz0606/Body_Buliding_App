@@ -1,3 +1,4 @@
+import 'package:body_building/screens/about_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -125,7 +126,9 @@ class MoreAppScreen extends StatelessWidget {
                     color: Colors.white,
                     //icon: Icons.account_tree_outlined,
                     icon: Icons.info,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushNamed(AboutScreen.route);
+                    },
                   ),
                   MoreScreenButton(
                     label: 'My Schedule',
