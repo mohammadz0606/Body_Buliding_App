@@ -46,16 +46,6 @@ class _NavScreenState extends State<NavScreen> {
               return Scaffold(
                 appBar: AppBar(
                   title: const TitleApp(),
-                  actions: [
-                    IconButton(
-                      onPressed: () {
-                        model.signOut();
-                        Navigator.of(context).pushReplacementNamed(LoginScreen.route);
-                      },
-                      icon: const Icon(Icons.logout),
-                    ),
-                    const SizedBox(width: 6),
-                  ],
                 ),
                 body: model.userModel == null
                     ? ConstantWidget.circularProgressIndicator()

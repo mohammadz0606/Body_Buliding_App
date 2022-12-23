@@ -18,4 +18,20 @@ class ConstantWidget {
       ),
     );
   }
+
+  static void dialog({
+    required BuildContext context,
+    required Widget title,
+    required Widget content,
+  }) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: title,
+          content: content,
+        );
+      },
+    );
+  }
 }
