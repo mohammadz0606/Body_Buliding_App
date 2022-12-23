@@ -1,3 +1,4 @@
+import 'package:body_building/constant/constant_style.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/more_screen_button.dart';
@@ -8,8 +9,8 @@ class MoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-        child: Container(
+    return Scaffold(backgroundColor: MyColors.secondaryColor,
+        body: Container(
       color: Color.fromRGBO(39, 42, 78, 1.0),
       child: SingleChildScrollView(
         child: Column(
