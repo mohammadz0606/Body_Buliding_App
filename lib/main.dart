@@ -1,4 +1,5 @@
 import 'package:body_building/constant/constant_style.dart';
+import 'package:body_building/screens/bmi_result_screen.dart';
 import 'package:body_building/screens/more_screen.dart';
 import 'package:body_building/screens/nav_screen.dart';
 import 'package:body_building/screens/no_internet_screen.dart';
@@ -59,6 +60,7 @@ class BodyBulidingApp extends StatelessWidget {
         ),
         initialRoute:MoreScreen.route,//FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
         routes: {
+          BMIResultScreen.route:(context)=>BMIResultScreen(),
           MoreScreen.route:(context)=>MoreScreen(),
           LoginScreen.route: (context) => LoginScreen(),
           SignupScreen.route: (context) => SignupScreen(),
