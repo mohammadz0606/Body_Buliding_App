@@ -1,3 +1,4 @@
+import 'package:body_building/screens/more_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../screens/exercises_screen.dart';
@@ -134,6 +135,7 @@ class AppProvider extends ChangeNotifier {
     HomeScreen(),
     const CalculateScreen(),
     const ExercisesScreen(),
+    MoreAppScreen(),
   ];
 
   List<Widget> get screens => _screens;
