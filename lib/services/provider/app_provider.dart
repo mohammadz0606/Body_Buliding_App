@@ -373,4 +373,4 @@ class AppProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-}
+}}

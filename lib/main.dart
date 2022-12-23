@@ -1,4 +1,5 @@
 import 'package:body_building/constant/constant_style.dart';
+import 'package:body_building/screens/more_screen.dart';
 import 'package:body_building/screens/nav_screen.dart';
 import 'package:body_building/screens/no_internet_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,8 +57,9 @@ class BodyBulidingApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute:FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
+        initialRoute:MoreScreen.route,//FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
         routes: {
+          MoreScreen.route:(context)=>MoreScreen(),
           LoginScreen.route: (context) => LoginScreen(),
           SignupScreen.route: (context) => SignupScreen(),
           NavScreen.route:(context) => const NavScreen(),
