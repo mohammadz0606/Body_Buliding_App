@@ -1,4 +1,3 @@
-import 'package:body_building/screens/bmi_result_screen.dart';
 import 'package:body_building/screens/more_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
