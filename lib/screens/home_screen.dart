@@ -232,19 +232,19 @@ class HomeScreen extends StatelessWidget {
       onTap: onTap,
       leading: Image.asset(
         icon,
-        width: size.width / 12,
+        width: size.width / 12.5,
         fit: BoxFit.cover,
       ),
       title: Text(
         title,
         style: GoogleFonts.anticSlab(
           fontWeight: FontWeight.w600,
-          fontSize: 17,
+          fontSize: 16.2,
         ),
       ),
       trailing: const Icon(
         Icons.arrow_forward_ios,
-        size: 16,
+        size: 13,
         color: Colors.black,
       ),
     );
