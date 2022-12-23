@@ -1,7 +1,7 @@
-import 'package:body_building/screens/more_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../screens/exercises_screen.dart';
+import '../../screens/more_screen_app.dart';
 import '../models/category_model.dart';
 import '../models/excercises_model.dart';
 import '../models/trainers_model.dart';
