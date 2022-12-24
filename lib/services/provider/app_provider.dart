@@ -148,9 +148,8 @@ class AppProvider extends ChangeNotifier {
   File? profileImage;
   bool _loadingImage = false;
 
-
-  void shareApp() async{
-  await  Share.share("com.example.body_building");
+  void shareApp() async {
+    await Share.share("com.example.body_building");
     notifyListeners();
   }
 
@@ -158,7 +157,11 @@ class AppProvider extends ChangeNotifier {
     required BuildContext context,
     required ImageSource source,
   }) async {
-    final XFile? image = await _picker.pickImage(source: source);
+    final XFile? image = await _picker.pickImage(
+      source: source,
+      maxHeight: 1080,
+      maxWidth: 1080,
+    );
     if (image != null) {
       _loadingImage = true;
       ConstantWidget.massage(
