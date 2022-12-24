@@ -36,6 +36,7 @@ void main() async {
 
 class BodyBulidingApp extends StatelessWidget {
   const BodyBulidingApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -57,15 +58,17 @@ class BodyBulidingApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute:FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
+        initialRoute: FirebaseAuth.instance.currentUser == null
+            ? LoginScreen.route
+            : NavScreen.route,
         routes: {
           LoginScreen.route: (context) => LoginScreen(),
           SignupScreen.route: (context) => SignupScreen(),
-          NavScreen.route:(context) => const NavScreen(),
-          ExerciseVideoScreen.route:(context) => const ExerciseVideoScreen(),
-          NoInterNetScreen.route:(context) => const NoInterNetScreen(),
-          BMIResultScreen.route :(context) => const BMIResultScreen(),
-          AboutScreen.route :(context) => const AboutScreen(),
+          NavScreen.route: (context) => const NavScreen(),
+          ExerciseVideoScreen.route: (context) => const ExerciseVideoScreen(),
+          NoInterNetScreen.route: (context) => const NoInterNetScreen(),
+          BMIResultScreen.route: (context) => const BMIResultScreen(),
+          AboutScreen.route: (context) => const AboutScreen(),
         },
       ),
     );

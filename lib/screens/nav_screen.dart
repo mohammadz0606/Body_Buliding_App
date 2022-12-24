@@ -89,7 +89,7 @@ class _NavScreenState extends State<NavScreen> {
                       ),
                       GButton(
                         //icon: Icons.more_horiz,
-                        icon: Icons.accessibility,
+                        icon: Icons.more_horiz_outlined,
                         text: 'More',
                       ),
                     ],
