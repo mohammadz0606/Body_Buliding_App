@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../screens/exercises_screen.dart';
@@ -140,6 +144,53 @@ class AppProvider extends ChangeNotifier {
 
   List<Widget> get screens => _screens;
 
+  final ImagePicker _picker = ImagePicker();
+  File? profileImage;
+  bool _loadingImage = false;
+
+  void shareApp() async {
+    await Share.share("com.example.body_building");
+    notifyListeners();
+  }
+
+  void getProfileImage({
+    required BuildContext context,
+    required ImageSource source,
+  }) async {
+    final XFile? image = await _picker.pickImage(
+      source: source,
+      maxHeight: 1080,
+      maxWidth: 1080,
+    );
+    if (image != null) {
+      _loadingImage = true;
+      ConstantWidget.massage(
+        context: context,
+        text: "Wait for the image to load",
+      );
+      notifyListeners();
+      profileImage = File(image.path);
+      String url = await _database.uploadImageProfileInFireStorage(
+        profileImage: profileImage!,
+        userImage: _userModel!.userImage,
+      );
+      await _database.updateData(userModel: _userModel!, newImage: url);
+      getDataForeFireStore();
+      _loadingImage = false;
+      notifyListeners();
+      ConstantWidget.massage(
+        context: context,
+        text: "Done Update 👌",
+      );
+      notifyListeners();
+    } else {
+      ConstantWidget.massage(
+          context: context, text: "You did not select an image 😒");
+      notifyListeners();
+      return;
+    }
+  }
+
   void signupApp({
     required BuildContext context,
     required String email,
@@ -197,6 +248,7 @@ class AppProvider extends ChangeNotifier {
   void signOut() async {
     await _database.signOut();
     _userModel = null;
+    _selectedIndex = 0;
     notifyListeners();
   }
 
@@ -360,12 +412,20 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getBestWeight() {
+  getBestWeight() {
     if (isMale == 1) {
       bestWeight = height - 100;
     } else {
       bestWeight = height - 105;
     }
-    notifyListeners();
+
+    void getBestWeight() {
+      if (isMale == 1) {
+        bestWeight = height - 100;
+      } else {
+        bestWeight = height - 105;
+      }
+      notifyListeners();
+    }
   }
 }

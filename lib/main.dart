@@ -1,12 +1,12 @@
 import 'package:body_building/constant/constant_style.dart';
 import 'package:body_building/screens/about_screen.dart';
+import 'package:body_building/screens/bmi_result_screen.dart';
 import 'package:body_building/screens/nav_screen.dart';
 import 'package:body_building/screens/no_internet_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'screens/auth/login_screen.dart';
@@ -58,13 +58,13 @@ class BodyBulidingApp extends StatelessWidget {
           ),
         ),
         initialRoute:FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
-        //initialRoute: AboutScreen.route,
         routes: {
           LoginScreen.route: (context) => LoginScreen(),
           SignupScreen.route: (context) => SignupScreen(),
           NavScreen.route:(context) => const NavScreen(),
           ExerciseVideoScreen.route:(context) => const ExerciseVideoScreen(),
           NoInterNetScreen.route:(context) => const NoInterNetScreen(),
+          BMIResultScreen.route :(context) => const BMIResultScreen(),
           AboutScreen.route :(context) => const AboutScreen(),
         },
       ),

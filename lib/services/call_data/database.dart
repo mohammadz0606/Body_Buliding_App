@@ -1,13 +1,19 @@
+import 'dart:io';
+
 import 'package:body_building/services/models/category_model.dart';
 import 'package:body_building/services/models/trainers_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import '../models/excercises_model.dart';
 import '../models/user_model.dart';
 
 class Database {
   UserCredential? _auth;
+  Reference _reference = FirebaseStorage.instance.ref();
+  String defaultImage =
+      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
 
   Future<UserCredential> signupApp({
     required String email,
@@ -60,6 +66,7 @@ class Database {
       name: name,
       email: email,
       id: _auth?.user!.uid,
+      userImage: defaultImage,
     );
     try {
       await FirebaseFirestore.instance
@@ -130,5 +137,42 @@ class Database {
     } catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  Future<String> uploadImageProfileInFireStorage({
+    required File profileImage,
+    required String userImage,
+  }) async {
+    String path =
+        "usersProfileImage/${Uri.file(profileImage.path).pathSegments.last}";
+
+    await _reference.child(path).putFile(profileImage);
+
+    final String getStorageImageProfileUrl =
+        await _reference.child(path).getDownloadURL();
+
+    if (userImage != defaultImage) {
+      FirebaseStorage.instance.refFromURL(userImage).delete();
+    }
+    return getStorageImageProfileUrl;
+  }
+
+  Future<void> updateData({
+    required UserModel userModel,
+    required String newImage,
+  }) async {
+    UserModel newUserModel = UserModel(
+      name: userModel.name,
+      email: userModel.email,
+      userImage: newImage,
+      id: userModel.id,
+    );
+
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(userModel.id)
+        .update(newUserModel.toMap());
+
+    await getDataForeFireStore();
   }
 }
