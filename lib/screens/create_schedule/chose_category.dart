@@ -14,13 +14,13 @@ class ChoseCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
     return Scaffold(
         appBar: AppBar(
           title: Text('CREATE SCHEDULE'),
         ),
         body: Center(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -48,7 +48,6 @@ class ChoseCategory extends StatelessWidget {
                   label: 'Starches',
                   imageUrl:
                       'https://foodrevolution.org/wp-content/uploads/iStock-177273143_rev2.jpg',
-
                 ),
                 TypeFoodButton(
                   type: 1,
@@ -70,4 +69,3 @@ class ChoseCategory extends StatelessWidget {
         ));
   }
 }
-

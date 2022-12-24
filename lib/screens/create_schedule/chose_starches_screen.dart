@@ -24,6 +24,7 @@ class ChoseStarchesScreen extends StatelessWidget {
                 Container(
                   child: model.typeCat == 0
                       ? ListView.builder(
+                          physics: const BouncingScrollPhysics(),
                           itemCount: model.starchesItems.length,
                           itemBuilder: (BuildContext context, int index) {
                             if (index != model.starchesItems.length - 1) {
@@ -50,6 +51,7 @@ class ChoseStarchesScreen extends StatelessWidget {
                         )
                       : model.typeCat == 1
                           ? ListView.builder(
+                              physics: const BouncingScrollPhysics(),
                               itemCount: model.fatsItems.length,
                               itemBuilder: (BuildContext context, int index) {
                                 if (index != model.fatsItems.length - 1) {
@@ -75,6 +77,7 @@ class ChoseStarchesScreen extends StatelessWidget {
                               },
                             )
                           : ListView.builder(
+                              physics: const BouncingScrollPhysics(),
                               itemCount: model.proteinsItems.length,
                               itemBuilder: (BuildContext context, int index) {
                                 if (index != model.proteinsItems.length - 1) {

@@ -371,6 +371,11 @@ class AppProvider extends ChangeNotifier {
   }
 
   void endPageView(BuildContext context){
+    /*
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+    });
+     */
     SaveData.setData(key: "goToLogin", value: true).then(
           (value) {
         notifyListeners();

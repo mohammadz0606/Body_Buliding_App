@@ -7,7 +7,6 @@ import 'package:body_building/screens/nav_screen.dart';
 import 'package:body_building/screens/no_internet_screen.dart';
 import 'package:body_building/screens/on_boarding_screen.dart';
 import 'package:body_building/screens/splash_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +21,7 @@ import 'services/provider/app_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SaveData.init();
+  //SaveData.sharedPreferences.clear();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -65,14 +65,9 @@ class BodyBulidingApp extends StatelessWidget {
           ),
         ),
         initialRoute: SplashScreen.route,
-        //initialRoute: OnBoardingScreen.route,
-        initialRoute: FirebaseAuth.instance.currentUser == null
-            ? LoginScreen.route
-            : NavScreen.route,
         routes: {
           SplashScreen.route : (context) => const SplashScreen(),
           ChoseStarchesScreen.route:(context)=>ChoseStarchesScreen(),
-
           ChoseCategory.route:(context)=>ChoseCategory(),
           LoginScreen.route: (context) => LoginScreen(),
           SignupScreen.route: (context) => SignupScreen(),
@@ -82,11 +77,6 @@ class BodyBulidingApp extends StatelessWidget {
           BMIResultScreen.route :(context) => const BMIResultScreen(),
           AboutScreen.route :(context) => const AboutScreen(),
           OnBoardingScreen.route : (context) => OnBoardingScreen(),
-          NavScreen.route: (context) => const NavScreen(),
-          ExerciseVideoScreen.route: (context) => const ExerciseVideoScreen(),
-          NoInterNetScreen.route: (context) => const NoInterNetScreen(),
-          BMIResultScreen.route: (context) => const BMIResultScreen(),
-          AboutScreen.route: (context) => const AboutScreen(),
         },
       ),
     );

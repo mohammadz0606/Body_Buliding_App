@@ -67,8 +67,8 @@ class MoreAppScreen extends StatelessWidget {
                             ),
                           ),
                           Positioned(
-                            top: size.height * 0.045,
-                            left: size.width * 0.097,
+                            top: size.height * 0.046,
+                            left: size.width * 0.090,
                             child: _editImageProfile(
                               icon: Icons.add_a_photo,
                               onPressed: () {
@@ -193,11 +193,11 @@ class MoreAppScreen extends StatelessWidget {
       onPressed: onPressed,
       icon: CircleAvatar(
         backgroundColor: MyColors.firstColor,
-        radius: 12.5,
+        radius: 12,
         child: Icon(
           icon,
           color: Colors.white,
-          size: 14,
+          size: 13.5,
         ),
       ),
     );
