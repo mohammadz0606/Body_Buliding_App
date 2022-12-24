@@ -1,6 +1,8 @@
 import 'package:body_building/constant/constant_style.dart';
 import 'package:body_building/screens/about_screen.dart';
 import 'package:body_building/screens/bmi_result_screen.dart';
+import 'package:body_building/screens/create_schedule/chose_category.dart';
+import 'package:body_building/screens/create_schedule/chose_starches_screen.dart';
 import 'package:body_building/screens/nav_screen.dart';
 import 'package:body_building/screens/no_internet_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -62,6 +64,9 @@ class BodyBulidingApp extends StatelessWidget {
             ? LoginScreen.route
             : NavScreen.route,
         routes: {
+          ChoseStarchesScreen.route:(context)=>ChoseStarchesScreen(),
+
+          ChoseCategory.route:(context)=>ChoseCategory(),
           LoginScreen.route: (context) => LoginScreen(),
           SignupScreen.route: (context) => SignupScreen(),
           NavScreen.route: (context) => const NavScreen(),

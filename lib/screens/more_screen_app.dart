@@ -1,4 +1,6 @@
 import 'package:body_building/screens/about_screen.dart';
+import 'package:body_building/screens/bmi_result_screen.dart';
+import 'package:body_building/screens/create_schedule/chose_category.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -42,7 +44,8 @@ class MoreAppScreen extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 70,
-                            backgroundImage: AssetImage("assets/blank-profile.jpg"),
+                            backgroundImage:
+                                AssetImage("assets/blank-profile.jpg"),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(60),
                               child: model.profileImage == null
@@ -134,7 +137,9 @@ class MoreAppScreen extends StatelessWidget {
                     label: 'My Schedule',
                     color: Colors.white,
                     icon: Icons.fastfood_rounded,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushNamed(ChoseCategory.route);
+                    },
                   ),
                   MoreScreenButton(
                     label: 'Log Out',
