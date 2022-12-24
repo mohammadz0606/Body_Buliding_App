@@ -1,15 +1,19 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 import '../../constant/constant_style.dart';
+import '../../constant/shared_preferences.dart';
+import '../../screens/auth/login_screen.dart';
 import '../../screens/exercises_screen.dart';
 import '../../screens/more_screen_app.dart';
 import '../models/category_model.dart';
 import '../models/excercises_model.dart';
+import '../models/on_boarding_model.dart';
 import '../models/trainers_model.dart';
 import '/screens/calculate_screen.dart';
 import '/screens/home_screen.dart';
@@ -149,10 +153,38 @@ class AppProvider extends ChangeNotifier {
   final ImagePicker _picker = ImagePicker();
   File? profileImage;
   bool _loadingImage = false;
+  bool _isLast = false;
+  bool get isLast => _isLast;
 
   void shareApp() async {
     await Share.share("com.example.body_building");
     notifyListeners();
+  }
+
+  void onPageViewChanged({
+    required int? indexChang,
+    required List<OnBoardingModel> items,
+  }) {
+    if (indexChang == items.length - 1) {
+      _isLast = true;
+      notifyListeners();
+    } else {
+      _isLast = false;
+      notifyListeners();
+    }
+  }
+
+  void endPageView(BuildContext context){
+    SaveData.setData(key: "goToLogin", value: true).then(
+          (value) {
+        notifyListeners();
+        return Navigator.of(context).pushReplacementNamed(
+          FirebaseAuth.instance.currentUser == null
+              ? LoginScreen.route
+              : NavScreen.route,
+        );
+      },
+    );
   }
 
   void getProfileImage({
@@ -170,7 +202,7 @@ class AppProvider extends ChangeNotifier {
         text: "Wait for the image to load",
       );
       notifyListeners();
-      profileImage =  await _cropImage(path: profileImage!);
+      profileImage = await _cropImage(path: profileImage!);
       String url = await _database.uploadImageProfileInFireStorage(
         profileImage: profileImage!,
         userImage: _userModel!.userImage,

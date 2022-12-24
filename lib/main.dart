@@ -3,12 +3,14 @@ import 'package:body_building/screens/about_screen.dart';
 import 'package:body_building/screens/bmi_result_screen.dart';
 import 'package:body_building/screens/nav_screen.dart';
 import 'package:body_building/screens/no_internet_screen.dart';
+import 'package:body_building/screens/on_boarding_screen.dart';
 import 'package:body_building/screens/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'constant/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
@@ -17,6 +19,7 @@ import 'services/provider/app_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SaveData.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -58,8 +61,8 @@ class BodyBulidingApp extends StatelessWidget {
             ),
           ),
         ),
-        //initialRoute:FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
         initialRoute: SplashScreen.route,
+        //initialRoute: OnBoardingScreen.route,
         routes: {
           SplashScreen.route : (context) => const SplashScreen(),
           LoginScreen.route: (context) => LoginScreen(),
@@ -69,6 +72,7 @@ class BodyBulidingApp extends StatelessWidget {
           NoInterNetScreen.route:(context) => const NoInterNetScreen(),
           BMIResultScreen.route :(context) => const BMIResultScreen(),
           AboutScreen.route :(context) => const AboutScreen(),
+          OnBoardingScreen.route : (context) => OnBoardingScreen(),
         },
       ),
     );
