@@ -64,7 +64,7 @@ class Database {
   }) async {
     final UserModel userModel = UserModel(
       name: name,
-      email: email,
+      email: email.toLowerCase(),
       id: _auth?.user!.uid,
       userImage: defaultImage,
     );

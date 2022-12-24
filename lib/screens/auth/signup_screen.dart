@@ -17,6 +17,7 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
@@ -98,6 +99,24 @@ class SignupScreen extends StatelessWidget {
                       },
                       prefixIcon: Icons.lock_outline,
                       hintText: "Enter your password",
+                      obscureText: true,
+                      keyboardType: TextInputType.visiblePassword,
+                    ),
+                    const SizedBox(height: 15),
+                    const TitleFields(text: "Confirm Password"),
+                    CustomTextField(
+                      controller: _confirmPasswordController,
+                      validator: (String? text) {
+                        if (text!.isEmpty) {
+                          return "you must not empty";
+                        }
+                        if (text.trim() != _passwordController.text.trim()) {
+                          return "Password does not match";
+                        }
+                        return null;
+                      },
+                      prefixIcon: Icons.lock_outline,
+                      hintText: "Confirm your password",
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                     ),
