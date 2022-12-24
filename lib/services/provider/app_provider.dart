@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:image_cropper/image_cropper.dart';
 
+import '../../constant/constant_style.dart';
 import '../../screens/exercises_screen.dart';
 import '../../screens/more_screen_app.dart';
 import '../models/category_model.dart';
@@ -159,17 +161,16 @@ class AppProvider extends ChangeNotifier {
   }) async {
     final XFile? image = await _picker.pickImage(
       source: source,
-      maxHeight: 1080,
-      maxWidth: 1080,
     );
     if (image != null) {
       _loadingImage = true;
+      profileImage = File(image.path);
       ConstantWidget.massage(
         context: context,
         text: "Wait for the image to load",
       );
       notifyListeners();
-      profileImage = File(image.path);
+      profileImage =  await _cropImage(path: profileImage!);
       String url = await _database.uploadImageProfileInFireStorage(
         profileImage: profileImage!,
         userImage: _userModel!.userImage,
@@ -185,9 +186,48 @@ class AppProvider extends ChangeNotifier {
       notifyListeners();
     } else {
       ConstantWidget.massage(
-          context: context, text: "You did not select an image 😒");
+        context: context,
+        text: "You did not select an image 😒",
+      );
       notifyListeners();
       return;
+    }
+  }
+
+  Future<File?> _cropImage({
+    required File path,
+  }) async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: path.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9,
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: 'Cropper',
+          toolbarColor: MyColors.primaryColor,
+          toolbarWidgetColor: Colors.white,
+          statusBarColor: MyColors.primaryColor,
+          backgroundColor: MyColors.primaryColor,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+        ),
+        IOSUiSettings(
+          title: 'Cropper',
+        ),
+      ],
+    );
+
+    if (croppedFile == null) {
+      notifyListeners();
+      return File(path.path);
+    } else {
+      notifyListeners();
+      return File(croppedFile.path);
     }
   }
 

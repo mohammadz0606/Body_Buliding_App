@@ -3,6 +3,7 @@ import 'package:body_building/screens/about_screen.dart';
 import 'package:body_building/screens/bmi_result_screen.dart';
 import 'package:body_building/screens/nav_screen.dart';
 import 'package:body_building/screens/no_internet_screen.dart';
+import 'package:body_building/screens/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -57,8 +58,10 @@ class BodyBulidingApp extends StatelessWidget {
             ),
           ),
         ),
-        initialRoute:FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
+        //initialRoute:FirebaseAuth.instance.currentUser == null? LoginScreen.route : NavScreen.route,
+        initialRoute: SplashScreen.route,
         routes: {
+          SplashScreen.route : (context) => const SplashScreen(),
           LoginScreen.route: (context) => LoginScreen(),
           SignupScreen.route: (context) => SignupScreen(),
           NavScreen.route:(context) => const NavScreen(),
