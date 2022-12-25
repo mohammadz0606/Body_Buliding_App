@@ -10,7 +10,11 @@ class CustomTextField extends StatelessWidget {
   final IconData prefixIcon;
   final TextEditingController controller;
   final String? Function(String? value) validator;
+  final FocusNode? focusNode;
+  final TextInputAction? textInputAction;
+  final VoidCallback? onEditingComplete;
   bool? obscureText;
+
   CustomTextField({
     Key? key,
     required this.hintText,
@@ -19,6 +23,9 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     required this.validator,
     this.obscureText,
+    this.focusNode,
+    this.textInputAction,
+    this.onEditingComplete,
   }) : super(key: key);
 
   @override
@@ -32,6 +39,9 @@ class CustomTextField extends StatelessWidget {
       cursorColor: Colors.white,
       obscureText: obscureText == null ? false : obscureText!,
       keyboardType: keyboardType,
+      focusNode: focusNode,
+      textInputAction: textInputAction,
+      onEditingComplete: onEditingComplete,
       decoration: InputDecoration(
         hintTextDirection: TextDirection.ltr,
         hintText: hintText,

@@ -16,11 +16,27 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  final FocusNode _focusNodeEmail = FocusNode();
+  final FocusNode _focusNodePassword = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(size.height * 0.46),
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          flexibleSpace: BulidBacgroundImage(
+            size: size,
+            title: "Sign in",
+            suptitle:
+            "Train and live new experience of\nexercising at home",
+            image: "assets/login_image.jpg",
+          ),
+        ),
+      ),
       backgroundColor: MyColors.thridColor,
       extendBodyBehindAppBar: true,
       body: Form(
@@ -30,13 +46,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BulidBacgroundImage(
-                size: size,
-                title: "Sign in",
-                suptitle:
-                    "Train and live new experience of\nexercising at home",
-                image: "assets/login_image.jpg",
-              ),
+              SizedBox(height: size.height * 0.55),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 15,
@@ -47,6 +57,11 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const TitleFields(text: "Email"),
                     CustomTextField(
+                      focusNode: _focusNodeEmail,
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () {
+                        FocusScope.of(context).requestFocus(_focusNodePassword);
+                      },
                       validator: (String? text) {
                         if (text!.isEmpty) {
                           return "you must not empty";
@@ -64,7 +79,12 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(height: 15),
                     const TitleFields(text: "Password"),
                     CustomTextField(
+                      focusNode: _focusNodePassword,
                       controller: _passwordController,
+                      onEditingComplete: () {
+                        FocusScope.of(context).unfocus();
+                      },
+                      textInputAction: TextInputAction.done,
                       validator: (String? text) {
                         if (text!.isEmpty) {
                           return "you must not empty";
@@ -81,21 +101,25 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(height: size.height * 0.039),
                     Consumer<AppProvider>(
-                      builder: (
-                        BuildContext context,
-                        AppProvider model,
-                        Widget? child,
-                      ) {
-                        return model.isLoading
-                            ? ConstantWidget.circularProgressIndicator()
-                            : Center(
+                      builder: (context, model, child) {
+                        return Visibility(
+                          visible: !model.isLoading,
+                          replacement:
+                              ConstantWidget.circularProgressIndicator(),
+                          child: Column(
+                            children: [
+                              Center(
                                 child: CustomButton(
                                   onTap: () {
-                                    model.signInApp(
-                                      context: context,
-                                      email: _emailController.text.trim(),
-                                      password: _passwordController.text.trim(),
-                                    );
+                                    if (_key.currentState!.validate()) {
+                                      FocusScope.of(context).unfocus();
+                                      model.signInApp(
+                                        context: context,
+                                        email: _emailController.text.trim(),
+                                        password:
+                                            _passwordController.text.trim(),
+                                      );
+                                    }
                                   },
                                   text: "Login",
                                   size: size,
@@ -104,27 +128,31 @@ class LoginScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
-                              );
-                      },
-                    ),
-                    const SizedBox(height: 12.5),
-                    Center(
-                      child: CustomButton(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(SignupScreen.route);
-                          FocusScope.of(context).unfocus();
-                        },
-                        text: "Sign Up",
-                        size: size,
-                        boxDecoration: BoxDecoration(
-                          color: MyColors.thridColor,
-                          border: Border.all(
-                            width: 2,
-                            color: MyColors.firstColor,
+                              ),
+                              const SizedBox(height: 12.5),
+                              Center(
+                                child: CustomButton(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .pushNamed(SignupScreen.route);
+                                    FocusScope.of(context).unfocus();
+                                  },
+                                  text: "Sign Up",
+                                  size: size,
+                                  boxDecoration: BoxDecoration(
+                                    color: MyColors.thridColor,
+                                    border: Border.all(
+                                      width: 2,
+                                      color: MyColors.firstColor,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -136,3 +164,4 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
