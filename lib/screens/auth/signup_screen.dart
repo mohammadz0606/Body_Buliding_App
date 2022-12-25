@@ -17,14 +17,33 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  final FocusNode _focusNodeEmail = FocusNode();
+  final FocusNode _focusNodePassword = FocusNode();
+  final FocusNode _focusNodeName = FocusNode();
+  final FocusNode _focusNodeConfirmPassword = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(      backgroundColor: MyColors.thridColor,
-
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(size.height * 0.46),
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          flexibleSpace: BulidBacgroundImage(
+            size: size,
+            suptitle:
+            "Train and live new experience of\nexercising at home",
+            title: "Sign Up",
+            image: "assets/signup_image.png",
+          ),
+        ),
+      ),
+      backgroundColor: MyColors.thridColor,
       extendBodyBehindAppBar: true,
       body: Form(
         key: _key,
@@ -33,13 +52,7 @@ class SignupScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BulidBacgroundImage(
-                size: size,
-                suptitle:
-                    "Train and live new experience of\nexercising at home",
-                title: "Sign Up",
-                image: "assets/signup_image.png",
-              ),
+              SizedBox(height: size.height * 0.55),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 15,
@@ -50,6 +63,11 @@ class SignupScreen extends StatelessWidget {
                   children: [
                     const TitleFields(text: "Name"),
                     CustomTextField(
+                      focusNode: _focusNodeName,
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () {
+                        FocusScope.of(context).requestFocus(_focusNodeEmail);
+                      },
                       controller: _nameController,
                       validator: (String? text) {
                         if (text!.isEmpty) {
@@ -58,7 +76,7 @@ class SignupScreen extends StatelessWidget {
                         if (text.length > 16) {
                           return "name must be lees 16 char";
                         }
-                        if(text.length <3){
+                        if (text.length < 3) {
                           return "is not name";
                         }
                         return null;
@@ -71,6 +89,11 @@ class SignupScreen extends StatelessWidget {
                     const TitleFields(text: "Email"),
                     CustomTextField(
                       controller: _emailController,
+                      focusNode: _focusNodeEmail,
+                      onEditingComplete: () {
+                        FocusScope.of(context).requestFocus(_focusNodePassword);
+                      },
+                      textInputAction: TextInputAction.next,
                       validator: (String? text) {
                         if (text!.isEmpty) {
                           return "you must not empty";
@@ -88,6 +111,12 @@ class SignupScreen extends StatelessWidget {
                     const TitleFields(text: "Password"),
                     CustomTextField(
                       controller: _passwordController,
+                      focusNode: _focusNodePassword,
+                      onEditingComplete: () {
+                        FocusScope.of(context)
+                            .requestFocus(_focusNodeConfirmPassword);
+                      },
+                      textInputAction: TextInputAction.next,
                       validator: (String? text) {
                         if (text!.isEmpty) {
                           return "you must not empty";
@@ -106,6 +135,11 @@ class SignupScreen extends StatelessWidget {
                     const TitleFields(text: "Confirm Password"),
                     CustomTextField(
                       controller: _confirmPasswordController,
+                      focusNode: _focusNodeConfirmPassword,
+                      textInputAction: TextInputAction.done,
+                      onEditingComplete: () {
+                        FocusScope.of(context).unfocus();
+                      },
                       validator: (String? text) {
                         if (text!.isEmpty) {
                           return "you must not empty";
@@ -130,14 +164,14 @@ class SignupScreen extends StatelessWidget {
                     ),
                     SizedBox(height: size.height * 0.03),
                     Consumer<AppProvider>(
-                      builder: (
-                        BuildContext context,
-                        AppProvider model,
-                        Widget? child,
-                      ) {
-                        return model.isLoading
-                            ? ConstantWidget.circularProgressIndicator()
-                            : Center(
+                      builder: (context, model, child) {
+                        return Visibility(
+                          visible: !model.isLoading,
+                          replacement:
+                              ConstantWidget.circularProgressIndicator(),
+                          child: Column(
+                            children: [
+                              Center(
                                 child: CustomButton(
                                   onTap: () {
                                     if (_key.currentState!.validate()) {
@@ -158,26 +192,29 @@ class SignupScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
-                              );
-                      },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already have an account?",
-                          style: GoogleFonts.lato(
-                            fontSize: 15,
-                            color: Colors.white,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Already have an account?",
+                                    style: GoogleFonts.lato(
+                                      fontSize: 15,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  BulidTextButton(
+                                    onPressd: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    text: "Login",
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ),
-                        BulidTextButton(
-                          onPressd: () {
-                            Navigator.of(context).pop();
-                          },
-                          text: "Login",
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   ],
                 ),
