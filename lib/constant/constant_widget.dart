@@ -23,11 +23,15 @@ class ConstantWidget {
     required BuildContext context,
     required Widget title,
     required Widget content,
+    List<Widget>? action,
+    Color? color
+
   }) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
+        return AlertDialog(backgroundColor: color??Colors.white,
+          actions: action??[],
           title: title,
           content: content,
         );

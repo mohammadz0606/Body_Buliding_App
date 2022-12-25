@@ -28,7 +28,9 @@ class ChoseStarchesScreen extends StatelessWidget {
                           itemCount: model.starchesItems.length,
                           itemBuilder: (BuildContext context, int index) {
                             if (index != model.starchesItems.length - 1) {
-                              return ChoseItemButton(
+                              return ChoseItemButton(type: 1,
+                                  visible: model.starchesItems[index]
+                                      ['visible'],
                                   imageUrl: model.starchesItems[index]
                                       ['imageUrl'],
                                   label: model.starchesItems[index]['name'],
@@ -37,6 +39,9 @@ class ChoseStarchesScreen extends StatelessWidget {
                               return Column(
                                 children: [
                                   ChoseItemButton(
+                                      type: 1,
+                                      visible: model.starchesItems[index]
+                                          ['visible'],
                                       imageUrl: model.starchesItems[index]
                                           ['imageUrl'],
                                       label: model.starchesItems[index]['name'],
@@ -55,15 +60,19 @@ class ChoseStarchesScreen extends StatelessWidget {
                               itemCount: model.fatsItems.length,
                               itemBuilder: (BuildContext context, int index) {
                                 if (index != model.fatsItems.length - 1) {
-                                  return ChoseItemButton(
+                                  return ChoseItemButton(type: 2,
                                       imageUrl: model.fatsItems[index]
                                           ['imageUrl'],
                                       label: model.fatsItems[index]['name'],
-                                      index: index);
+                                      index: index,
+                                      visible: model.fatsItems[index]['visible']);
                                 } else {
                                   return Column(
                                     children: [
                                       ChoseItemButton(
+                                          type: 2,
+                                          visible: model.fatsItems[index]
+                                              ['visible'],
                                           imageUrl: model.fatsItems[index]
                                               ['imageUrl'],
                                           label: model.fatsItems[index]['name'],
@@ -76,12 +85,14 @@ class ChoseStarchesScreen extends StatelessWidget {
                                 }
                               },
                             )
-                          : ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: model.proteinsItems.length,
+                          :  ListView.builder(
+                              itemCount: model.proteinsItems.length-2,
                               itemBuilder: (BuildContext context, int index) {
-                                if (index != model.proteinsItems.length - 1) {
+                                if (index != model.proteinsItems.length-3) {
                                   return ChoseItemButton(
+                                      type: 3,
+                                      visible: model.proteinsItems[index]
+                                          ['visible'],
                                       imageUrl: model.proteinsItems[index]
                                           ['imageUrl'],
                                       label: model.proteinsItems[index]['name'],
@@ -90,6 +101,9 @@ class ChoseStarchesScreen extends StatelessWidget {
                                   return Column(
                                     children: [
                                       ChoseItemButton(
+                                          type: 3,
+                                          visible: model.proteinsItems[index]
+                                              ['visible'],
                                           imageUrl: model.proteinsItems[index]
                                               ['imageUrl'],
                                           label: model.proteinsItems[index]
