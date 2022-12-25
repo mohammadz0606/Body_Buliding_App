@@ -17,14 +17,15 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(      backgroundColor: MyColors.thridColor,
-
+    return Scaffold(
+      backgroundColor: MyColors.thridColor,
       extendBodyBehindAppBar: true,
       body: Form(
         key: _key,
@@ -58,7 +59,7 @@ class SignupScreen extends StatelessWidget {
                         if (text.length > 16) {
                           return "name must be lees 16 char";
                         }
-                        if(text.length <3){
+                        if (text.length < 3) {
                           return "is not name";
                         }
                         return null;
