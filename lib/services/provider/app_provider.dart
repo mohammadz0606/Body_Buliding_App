@@ -369,7 +369,7 @@ class AppProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
+//
   void endPageView(BuildContext context){
     /*
     SchedulerBinding.instance.addPostFrameCallback((_) {
