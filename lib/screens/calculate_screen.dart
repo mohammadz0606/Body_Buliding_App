@@ -30,8 +30,13 @@ class _CalculateScreenState extends State<CalculateScreen> {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            genderMethode(size, 'MALE', Icons.male, true,
-                                model.maleColor),
+                            genderMethode(
+                              size,
+                              'MALE',
+                              Icons.male,
+                              true,
+                              model.maleColor,
+                            ),
                             genderMethode(
                               size,
                               'FEMALE',
@@ -331,7 +336,10 @@ class _CalculateScreenState extends State<CalculateScreen> {
             ),
             Text(
               title,
-              style: TextStyle(fontSize: size.width * 0.05, color: color),
+              style: TextStyle(
+                fontSize: size.width * 0.05,
+                color: color,
+              ),
             )
           ],
         ),
@@ -363,7 +371,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
                 padding: EdgeInsets.fromLTRB(0, 0, 0, size.height * 0.02),
                 child: Icon(
                   icon,
-                  size: size.width * 0.28,
+                  size: size.height * 0.134,
                   color: color,
                 ),
               ),

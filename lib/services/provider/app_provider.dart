@@ -724,7 +724,7 @@ class AppProvider extends ChangeNotifier {
   }
 
   void getResult(BuildContext context) async {
-    if (isMale == 0 && isMuscular == 0) {
+    if (isMale == 0 || isMuscular == 0 || activity == 0) {
       ConstantWidget.dialog(
         context: context,
         title: Text(
