@@ -10,6 +10,7 @@ import '../../helper/constant_style.dart';
 import '../../helper/constant_widget.dart';
 import '../../helper/shared_preferences.dart';
 import '../../screens/auth/login_screen.dart';
+import '../../screens/bmi_result_screen.dart';
 import '../../screens/exercises_screen.dart';
 import '../../screens/more_screen_app.dart';
 import '../models/category_model.dart';
@@ -95,8 +96,8 @@ class AppProvider extends ChangeNotifier {
     {
       'name': 'olive oil',
       'quantity': 10,
-      'visible': false,      'groupValue': 1,
-
+      'visible': false,
+      'groupValue': 1,
       'calories': 90,
       'value': false,
       'imageUrl':
@@ -106,8 +107,8 @@ class AppProvider extends ChangeNotifier {
       'name': 'butter',
       'quantity': 10,
       'calories': 72,
-      'visible': false,      'groupValue': 1,
-
+      'visible': false,
+      'groupValue': 1,
       'value': false,
       'imageUrl':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0jn1LpY4-TzWYKn7DTORYy18JuOzGeuxBNg&usqp=CAU',
@@ -115,8 +116,8 @@ class AppProvider extends ChangeNotifier {
     {
       'name': 'Lamb fat',
       'quantity': 10,
-      'calories': 54,      'groupValue': 1,
-
+      'calories': 54,
+      'groupValue': 1,
       'value': false,
       'visible': false,
       'imageUrl':
@@ -124,8 +125,8 @@ class AppProvider extends ChangeNotifier {
     },
     {
       'name': 'Nuts',
-      'quantity': 10,      'groupValue': 1,
-
+      'quantity': 10,
+      'groupValue': 1,
       'calories': 54,
       'visible': false,
       'value': false,
@@ -135,8 +136,8 @@ class AppProvider extends ChangeNotifier {
     {
       'name': 'avocado',
       'quantity': 10,
-      'calories': 45,      'groupValue': 1,
-
+      'calories': 45,
+      'groupValue': 1,
       'value': false,
       'visible': false,
       'imageUrl':
@@ -146,8 +147,8 @@ class AppProvider extends ChangeNotifier {
       'name': 'Peanut Butter',
       'quantity': 10,
       'calories': 54,
-      'value': false,      'groupValue': 1,
-
+      'value': false,
+      'groupValue': 1,
       'visible': false,
       'imageUrl':
           'https://assets.bonappetit.com/photos/63409999c6b2a3464a5c9bf3/16:9/w_2560%2Cc_limit/1007-pb-taste-test-lede.jpg',
@@ -159,8 +160,8 @@ class AppProvider extends ChangeNotifier {
       'quantity': 100,
       'calories': 125,
       'visible': false,
-      'value': false,      'groupValue': 1,
-
+      'value': false,
+      'groupValue': 1,
       'imageUrl':
           'https://www.wattan.net/data/image/794x466/06121401301764940612537543315301.jpg',
     },
@@ -168,8 +169,8 @@ class AppProvider extends ChangeNotifier {
       'name': 'Chicken Thigh',
       'quantity': 100,
       'visible': false,
-      'calories': 100,      'groupValue': 1,
-
+      'calories': 100,
+      'groupValue': 1,
       'value': false,
       'imageUrl':
           'https://sc01.alicdn.com/kf/UTB8qUgKQtoSdeJk43Owxh5a4XXaj/Frozen-Turkey-Leg-Meat-Thigh-meat-for.jpeg',
@@ -177,8 +178,8 @@ class AppProvider extends ChangeNotifier {
     {
       'name': 'Chicken leg',
       'quantity': 100,
-      'calories': 114,      'groupValue': 1,
-
+      'calories': 114,
+      'groupValue': 1,
       'visible': false,
       'value': false,
       'imageUrl':
@@ -186,8 +187,8 @@ class AppProvider extends ChangeNotifier {
     },
     {
       'name': 'Chicken Wing',
-      'quantity': 100,      'groupValue': 1,
-
+      'quantity': 100,
+      'groupValue': 1,
       'calories': 48,
       'visible': false,
       'value': false,
@@ -198,8 +199,8 @@ class AppProvider extends ChangeNotifier {
       'name': 'Veal',
       'quantity': 100,
       'calories': 220,
-      'value': false,      'groupValue': 1,
-
+      'value': false,
+      'groupValue': 1,
       'visible': false,
       'imageUrl':
           'https://hankstruebbq.com/wp-content/uploads/2018/12/Kalvracks-1000x666.jpg',
@@ -207,8 +208,8 @@ class AppProvider extends ChangeNotifier {
     {
       'name': 'Lamb',
       'quantity': 100,
-      'visible': false,      'groupValue': 1,
-
+      'visible': false,
+      'groupValue': 1,
       'calories': 140,
       'value': false,
       'imageUrl':
@@ -216,8 +217,8 @@ class AppProvider extends ChangeNotifier {
     },
     {
       'name': 'Fish',
-      'quantity': 100,      'groupValue': 1,
-
+      'quantity': 100,
+      'groupValue': 1,
       'calories': 120,
       'visible': false,
       'value': false,
@@ -225,8 +226,8 @@ class AppProvider extends ChangeNotifier {
           'https://www.thelist.com/img/gallery/what-happens-to-your-body-when-you-stop-eating-fish/l-intro-1615430058.jpg',
     },
     {
-      'name': 'Shrimp',      'groupValue': 1,
-
+      'name': 'Shrimp',
+      'groupValue': 1,
       'visible': false,
       'quantity': 100,
       'calories': 160,
@@ -427,13 +428,7 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
-//
   void endPageView(BuildContext context) {
-    /*
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
-    });
-     */
     SaveData.setData(key: "goToLogin", value: true).then(
       (value) {
         notifyListeners();
@@ -714,10 +709,6 @@ class AppProvider extends ChangeNotifier {
     required String video,
     required BuildContext context,
   }) async {
-    /*ConstantWidget.massage(
-      context: context,
-      text: "Waiting 😄",
-    );*/
     if (await canLaunchUrl(Uri.parse(video))) {
       await launchUrl(
         Uri.parse(video),
@@ -732,37 +723,55 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
-  void getResult() async {
-    getBestWeight();
-
-    if (isMuscular == 1) {
-      calories = ((weight * 2.2 * 10) * activity + 500).toInt();
+  void getResult(BuildContext context) async {
+    if (isMale == 0 && isMuscular == 0) {
+      ConstantWidget.dialog(
+        context: context,
+        title: Text(
+          "There is an empty field 😑",
+          style: TextStyle(
+            color: MyColors.primaryColor,
+          ),
+        ),
+        content: Text(
+          "Make sure you select all fields",
+          style: const TextStyle(
+            fontSize: 18,
+          ),
+        ),
+      );
+      notifyListeners();
     } else {
-      calories = ((weight * 2.2 * 10) * activity - 500).toInt();
+      getBestWeight();
+      if (isMuscular == 1) {
+        calories = ((weight * 2.2 * 10) * activity + 500).toInt();
+      } else {
+        calories = ((weight * 2.2 * 10) * activity - 500).toInt();
+      }
+      Navigator.of(context).pushNamed(BMIResultScreen.route);
+      notifyListeners();
     }
-    notifyListeners();
   }
 
-  getBestWeight() {
+  void getBestWeight() {
     if (isMale == 1) {
       bestWeight = height - 100;
     } else {
       bestWeight = height - 105;
     }
 
-    void getBestWeight() {
+    /*void getBestWeight() {
       if (isMale == 1) {
         bestWeight = height - 100;
       } else {
         bestWeight = height - 105;
       }
       notifyListeners();
-    }
+    }*/
   }
 
   void choseCategory(int type) {
     typeCat = type;
-
     notifyListeners();
   }
 }

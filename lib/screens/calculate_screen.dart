@@ -2,7 +2,6 @@ import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../helper/constant_style.dart';
-import 'bmi_result_screen.dart';
 
 class CalculateScreen extends StatefulWidget {
   const CalculateScreen({Key? key}) : super(key: key);
@@ -33,8 +32,13 @@ class _CalculateScreenState extends State<CalculateScreen> {
                           children: [
                             genderMethode(size, 'MALE', Icons.male, true,
                                 model.maleColor),
-                            genderMethode(size, 'FEMALE', Icons.female, false,
-                                model.femaleColor)
+                            genderMethode(
+                              size,
+                              'FEMALE',
+                              Icons.female,
+                              false,
+                              model.femaleColor,
+                            )
                           ],
                         );
                       }),
@@ -51,10 +55,11 @@ class _CalculateScreenState extends State<CalculateScreen> {
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(
-                                        0,
-                                        size.height * 0.01,
-                                        0,
-                                        size.height * 0.03),
+                                      0,
+                                      size.height * 0.01,
+                                      0,
+                                      size.height * 0.03,
+                                    ),
                                     child: Text(
                                       'HEIGHT',
                                       style: TextStyle(
@@ -106,8 +111,9 @@ class _CalculateScreenState extends State<CalculateScreen> {
                             Text(
                               'WEIGHT',
                               style: TextStyle(
-                                  fontSize: size.width * 0.050,
-                                  color: Colors.grey),
+                                fontSize: size.width * 0.050,
+                                color: Colors.grey,
+                              ),
                             ),
                             Text(
                               model.weight.toStringAsFixed(1).toString(),
@@ -169,8 +175,9 @@ class _CalculateScreenState extends State<CalculateScreen> {
                             Text(
                               'ACTIVITY RATE DURING',
                               style: TextStyle(
-                                  fontSize: size.width * 0.050,
-                                  color: Colors.grey),
+                                fontSize: size.width * 0.050,
+                                color: Colors.grey,
+                              ),
                             ),
                             const SizedBox(
                               height: 10,
@@ -229,10 +236,10 @@ class _CalculateScreenState extends State<CalculateScreen> {
                     backgroundColor: MaterialStateProperty.all(Colors.red),
                   ),
                   onPressed: () {
-                    Provider.of<AppProvider>(context, listen: false)
-                        .getResult();
-
-                    Navigator.of(context).pushNamed(BMIResultScreen.route);
+                    Provider.of<AppProvider>(
+                      context,
+                      listen: false,
+                    ).getResult(context);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -243,14 +250,19 @@ class _CalculateScreenState extends State<CalculateScreen> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         );
       },
     ));
   }
 
-  InkWell costumeButton(int value, String title, Size size, Color color) {
+  InkWell costumeButton(
+    int value,
+    String title,
+    Size size,
+    Color color,
+  ) {
     return InkWell(
       onTap: () {
         Provider.of<AppProvider>(context, listen: false).setNumberOfDay(value);
@@ -272,7 +284,11 @@ class _CalculateScreenState extends State<CalculateScreen> {
     );
   }
 
-  SizedBox buildWeightButton(double inc, String text, double size) {
+  SizedBox buildWeightButton(
+    double inc,
+    String text,
+    double size,
+  ) {
     return SizedBox(
       width: size,
       child: FloatingActionButton(
@@ -286,7 +302,12 @@ class _CalculateScreenState extends State<CalculateScreen> {
   }
 
   InkWell typeMethode(
-      Size size, String title, IconData icon, Color color, bool isMuscular) {
+    Size size,
+    String title,
+    IconData icon,
+    Color color,
+    bool isMuscular,
+  ) {
     return InkWell(
       onTap: () {
         Provider.of<AppProvider>(context, listen: false).setType(isMuscular);
@@ -319,7 +340,12 @@ class _CalculateScreenState extends State<CalculateScreen> {
   }
 
   InkWell genderMethode(
-      Size size, String title, IconData icon, bool isMale, Color color) {
+    Size size,
+    String title,
+    IconData icon,
+    bool isMale,
+    Color color,
+  ) {
     return InkWell(onTap: () {
       Provider.of<AppProvider>(context, listen: false).setGender(isMale);
     }, child: Consumer<AppProvider>(
