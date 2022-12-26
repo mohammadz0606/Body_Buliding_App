@@ -450,13 +450,15 @@ class AppProvider extends ChangeNotifier {
     );
     if (image != null) {
       _loadingImage = true;
-      profileImage = File(image.path);
       ConstantWidget.massage(
         context: context,
         text: "Wait for the image to load",
       );
       notifyListeners();
+      profileImage = File(image.path);
+      notifyListeners();
       profileImage = await _cropImage(path: profileImage!);
+      notifyListeners();
       String url = await _database.uploadImageProfileInFireStorage(
         profileImage: profileImage!,
         userImage: _userModel!.userImage,
