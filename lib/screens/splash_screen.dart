@@ -4,7 +4,7 @@ import 'package:body_building/screens/on_boarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../constant/shared_preferences.dart';
+import '../helper/shared_preferences.dart';
 import 'auth/login_screen.dart';
 import 'nav_screen.dart';
 

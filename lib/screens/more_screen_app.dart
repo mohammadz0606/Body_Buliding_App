@@ -1,13 +1,11 @@
 import 'package:body_building/screens/about_screen.dart';
-import 'package:body_building/screens/bmi_result_screen.dart';
 import 'package:body_building/screens/create_schedule/chose_category.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
-import '../constant/constant_style.dart';
-import '../constant/constant_widget.dart';
+import '../helper/constant_style.dart';
+import '../helper/constant_widget.dart';
 import '../widgets/more_screen_button.dart';
 import 'auth/login_screen.dart';
 

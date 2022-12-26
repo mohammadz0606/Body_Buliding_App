@@ -1,5 +1,5 @@
-import 'package:body_building/constant/constant_style.dart';
-import 'package:body_building/services/provider/app_provider.dart';
+import '../helper/constant_style.dart';
+import '/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

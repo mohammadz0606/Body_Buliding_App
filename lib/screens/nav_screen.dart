@@ -1,12 +1,11 @@
-import 'package:body_building/constant/constant_style.dart';
-import 'package:body_building/constant/constant_widget.dart';
-import 'package:body_building/screens/auth/login_screen.dart';
 import 'package:body_building/screens/no_internet_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
+import '../helper/constant_style.dart';
+import '../helper/constant_widget.dart';
 import '../widgets/title_app.dart';
 
 class NavScreen extends StatefulWidget {

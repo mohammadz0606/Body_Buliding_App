@@ -1,9 +1,8 @@
-import 'package:body_building/constant/constant_style.dart';
-import 'package:body_building/screens/create_schedule/chose_starches_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../helper/constant_style.dart';
 import '../../widgets/ChoseCategoryButton.dart';
 
 class ChoseCategory extends StatelessWidget {

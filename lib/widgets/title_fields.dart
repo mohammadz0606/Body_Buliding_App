@@ -1,5 +1,6 @@
-import 'package:body_building/constant/constant_style.dart';
 import 'package:flutter/material.dart';
+
+import '../helper/constant_style.dart';
 
 class TitleFields extends StatelessWidget {
   final String text;

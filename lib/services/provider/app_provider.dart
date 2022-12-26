@@ -6,8 +6,9 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_cropper/image_cropper.dart';
 
-import '../../constant/constant_style.dart';
-import '../../constant/shared_preferences.dart';
+import '../../helper/constant_style.dart';
+import '../../helper/constant_widget.dart';
+import '../../helper/shared_preferences.dart';
 import '../../screens/auth/login_screen.dart';
 import '../../screens/exercises_screen.dart';
 import '../../screens/more_screen_app.dart';
@@ -21,7 +22,6 @@ import '/screens/home_screen.dart';
 import '/screens/nav_screen.dart';
 
 import '../models/user_model.dart';
-import '/constant/constant_widget.dart';
 
 import '/services/call_data/database.dart';
 

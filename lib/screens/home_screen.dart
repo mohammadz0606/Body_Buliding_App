@@ -1,7 +1,6 @@
-import 'package:body_building/constant/constant_style.dart';
-import 'package:body_building/constant/constant_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../helper/constant_style.dart';
+import '../helper/constant_widget.dart';
 import '/services/provider/app_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';

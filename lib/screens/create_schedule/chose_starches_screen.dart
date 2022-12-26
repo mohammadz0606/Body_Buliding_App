@@ -1,7 +1,7 @@
-import 'package:body_building/constant/constant_style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../helper/constant_style.dart';
 import '../../services/provider/app_provider.dart';
 import '../../widgets/chose_item_button.dart';
 import '../../widgets/submit_item_button.dart';

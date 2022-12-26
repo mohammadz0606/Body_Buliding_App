@@ -1,7 +1,8 @@
-import 'package:body_building/constant/constant_style.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../helper/constant_style.dart';
 
 class BMIResultScreen extends StatelessWidget {
   static const String route = "result_screen";

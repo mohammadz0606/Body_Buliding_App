@@ -1,9 +1,10 @@
-import 'package:body_building/constant/constant_style.dart';
-import 'package:body_building/constant/constant_widget.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../helper/constant_style.dart';
+import '../helper/constant_widget.dart';
 
 class ExerciseVideoScreen extends StatelessWidget {
   static const String route = "exercise_video_screen";

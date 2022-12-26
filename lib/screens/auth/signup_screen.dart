@@ -1,4 +1,3 @@
-import 'package:body_building/constant/constant_widget.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:body_building/widgets/background_image_widget.dart';
 import 'package:body_building/widgets/title_fields.dart';
@@ -6,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../constant/constant_style.dart';
+import '../../helper/constant_style.dart';
+import '../../helper/constant_widget.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_button.dart';
 import '../../widgets/custom_text_filed.dart';

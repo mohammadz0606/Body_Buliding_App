@@ -1,8 +1,7 @@
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../constant/constant_style.dart';
+import '../helper/constant_style.dart';
 import 'bmi_result_screen.dart';
 
 class CalculateScreen extends StatefulWidget {
