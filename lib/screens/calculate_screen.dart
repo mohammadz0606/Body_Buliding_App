@@ -123,8 +123,9 @@ class _CalculateScreenState extends State<CalculateScreen> {
                             Text(
                               model.weight.toStringAsFixed(1).toString(),
                               style: TextStyle(
-                                  fontSize: size.width * 0.13,
-                                  color: Colors.white),
+                                fontSize: size.width * 0.13,
+                                color: Colors.white,
+                              ),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -297,6 +298,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
     return SizedBox(
       width: size,
       child: FloatingActionButton(
+        heroTag: null,
         backgroundColor: const Color(0x353956FF),
         child: Text(text),
         onPressed: () {
