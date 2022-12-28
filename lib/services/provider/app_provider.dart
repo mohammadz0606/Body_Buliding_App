@@ -577,6 +577,7 @@ class AppProvider extends ChangeNotifier {
     await _database.signOut();
     _userModel = null;
     _selectedIndex = 0;
+    profileImage = null;
     notifyListeners();
   }
 
