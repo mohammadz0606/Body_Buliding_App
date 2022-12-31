@@ -235,6 +235,11 @@ class AppProvider extends ChangeNotifier {
     }
   ];
 
+  //name      =>  'name'
+  //calories  =>  'calories'
+  //image     =>  'imageUrl'
+  //quantity  =>  'quantity'
+  //name      =>  'name'
   List<Map<String, dynamic>> finalProteinsItems = [];
   List<Map<String, dynamic>> finalFatsItems = [];
   List<Map<String, dynamic>> finalStarchesItems = [];
