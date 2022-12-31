@@ -31,10 +31,10 @@ class ChoseItemButton extends StatelessWidget {
                 child: CheckboxListTile(
                   activeColor: Colors.red,
                   value: model.typeCat == 0
-                      ? model.starchesItems[index]['value']
+                      ? model.starchesItems[index]['value']==0?false:true
                       : model.typeCat == 1
-                          ? model.fatsItems[index]['value']
-                          : model.proteinsItems[index]['value'],
+                          ? model.fatsItems[index]['value']==0?false:true
+                          : model.proteinsItems[index]['value']==0?false:true,
                   onChanged: (value) {
                     model.choseStarchesItem(value ?? false, index, context);
                   },
@@ -71,6 +71,7 @@ class ChoseItemButton extends StatelessWidget {
                       ? [
                           RadioListTile<int>(
                               activeColor: Colors.red,
+
                               title: Text(
                                 '${model.starchesItems[index]['quantity'] * 1}G',
                                 style: TextStyle(color: Colors.white),

@@ -5,12 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_cropper/image_cropper.dart';
-
 import '../../helper/constant_style.dart';
 import '../../helper/constant_widget.dart';
 import '../../helper/shared_preferences.dart';
 import '../../screens/auth/login_screen.dart';
-import '../../screens/bmi_result_screen.dart';
 import '../../screens/exercises_screen.dart';
 import '../../screens/more_screen_app.dart';
 import '../models/category_model.dart';
@@ -36,7 +34,7 @@ class AppProvider extends ChangeNotifier {
       'groupValue': 1,
       'quantity': 100,
       'calories': 240,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://storage.googleapis.com/tm-zopsmart-uploads/320/20201101/275654_1-20201101-005423.png',
       'visible': false
@@ -45,7 +43,7 @@ class AppProvider extends ChangeNotifier {
       'name': 'Samun bread',
       'quantity': 100,
       'calories': 200,
-      'value': false,
+      'value': 0,
       'groupValue': 1,
       'imageUrl':
           'https://www.196flavors.com/wp-content/uploads/2019/10/samoon-1.jpg',
@@ -55,7 +53,7 @@ class AppProvider extends ChangeNotifier {
       'name': 'Hmam bread',
       'quantity': 100,
       'calories': 190,
-      'value': false,
+      'value': 0,
       'groupValue': 1,
       'imageUrl':
           'https://d1w12by6syh8ys.cloudfront.net/media/catalog/product/cache/7fedf0e3853b01c200bc50c01bc9a2d2/m/a/marhaba_1235.jpg',
@@ -66,7 +64,7 @@ class AppProvider extends ChangeNotifier {
       'groupValue': 1,
       'quantity': 100,
       'calories': 240,
-      'value': false,
+      'value': 0,
       'visible': false,
       'imageUrl':
           'https://post.healthline.com/wp-content/uploads/2020/03/oats-oatmeal-732x549-thumbnail.jpg',
@@ -77,7 +75,7 @@ class AppProvider extends ChangeNotifier {
       'visible': false,
       'calories': 140,
       'groupValue': 1,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://insanelygoodrecipes.com/wp-content/uploads/2022/05/Old-Fashioned-Macaroni-and-Cheese-in-a-Casserole.jpg',
     },
@@ -87,7 +85,7 @@ class AppProvider extends ChangeNotifier {
       'quantity': 100,
       'calories': 160,
       'visible': false,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://www.almrsal.com/wp-content/uploads/2019/02/%D8%A7%D9%84%D8%A8%D8%B7%D8%A7%D8%B7%D8%B3-%D8%A7%D9%84%D9%85%D8%B3%D9%84%D9%88%D9%82%D8%A9.jpg',
     }
@@ -99,7 +97,7 @@ class AppProvider extends ChangeNotifier {
       'visible': false,
       'groupValue': 1,
       'calories': 90,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEPp_KRTCQMwQn5p5HqB1nnSU6pXmUyMiSYg&usqp=CAU',
     },
@@ -109,7 +107,7 @@ class AppProvider extends ChangeNotifier {
       'calories': 72,
       'visible': false,
       'groupValue': 1,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0jn1LpY4-TzWYKn7DTORYy18JuOzGeuxBNg&usqp=CAU',
     },
@@ -118,7 +116,7 @@ class AppProvider extends ChangeNotifier {
       'quantity': 10,
       'calories': 54,
       'groupValue': 1,
-      'value': false,
+      'value': 0,
       'visible': false,
       'imageUrl':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgCVyfXNhXev0QfPORkOptPthYqd29EDBEYw&usqp=CAU',
@@ -129,7 +127,7 @@ class AppProvider extends ChangeNotifier {
       'groupValue': 1,
       'calories': 54,
       'visible': false,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqtEOXeSOIKz68QGb80iR2ZfacwGfY2WS5Jg&usqp=CAU',
     },
@@ -138,7 +136,7 @@ class AppProvider extends ChangeNotifier {
       'quantity': 10,
       'calories': 45,
       'groupValue': 1,
-      'value': false,
+      'value': 0,
       'visible': false,
       'imageUrl':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnJRjzfngT-B2JLVCtEDHYKg_J7E70N49qwg&usqp=CAU',
@@ -147,7 +145,7 @@ class AppProvider extends ChangeNotifier {
       'name': 'Peanut Butter',
       'quantity': 10,
       'calories': 54,
-      'value': false,
+      'value': 0,
       'groupValue': 1,
       'visible': false,
       'imageUrl':
@@ -157,10 +155,10 @@ class AppProvider extends ChangeNotifier {
   final List<Map<String, dynamic>> proteinsItems = [
     {
       'name': 'Chicken Breast',
-      'quantity': 100,
+      'quantity': 20,
       'calories': 125,
       'visible': false,
-      'value': false,
+      'value': 0,
       'groupValue': 1,
       'imageUrl':
           'https://www.wattan.net/data/image/794x466/06121401301764940612537543315301.jpg',
@@ -171,7 +169,7 @@ class AppProvider extends ChangeNotifier {
       'visible': false,
       'calories': 100,
       'groupValue': 1,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://sc01.alicdn.com/kf/UTB8qUgKQtoSdeJk43Owxh5a4XXaj/Frozen-Turkey-Leg-Meat-Thigh-meat-for.jpeg',
     },
@@ -181,7 +179,7 @@ class AppProvider extends ChangeNotifier {
       'calories': 114,
       'groupValue': 1,
       'visible': false,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgE_hX5frt6PN7U6kxINyw1jS7_E3josFs4w&usqp=CAU',
     },
@@ -191,7 +189,7 @@ class AppProvider extends ChangeNotifier {
       'groupValue': 1,
       'calories': 48,
       'visible': false,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://thewoksoflife.com/wp-content/uploads/2016/11/spicy-fried-chicken-8-1.jpg',
     },
@@ -199,7 +197,7 @@ class AppProvider extends ChangeNotifier {
       'name': 'Veal',
       'quantity': 100,
       'calories': 220,
-      'value': false,
+      'value': 0,
       'groupValue': 1,
       'visible': false,
       'imageUrl':
@@ -211,7 +209,7 @@ class AppProvider extends ChangeNotifier {
       'visible': false,
       'groupValue': 1,
       'calories': 140,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://www.sainsburysmagazine.co.uk/uploads/media/1800x1800/00/10490-Roast-lamb.jpg?v=1-0',
     },
@@ -221,7 +219,7 @@ class AppProvider extends ChangeNotifier {
       'groupValue': 1,
       'calories': 120,
       'visible': false,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://www.thelist.com/img/gallery/what-happens-to-your-body-when-you-stop-eating-fish/l-intro-1615430058.jpg',
     },
@@ -231,22 +229,90 @@ class AppProvider extends ChangeNotifier {
       'visible': false,
       'quantity': 100,
       'calories': 160,
-      'value': false,
+      'value': 0,
       'imageUrl':
           'https://www.sweetandsavorybyshinee.com/wp-content/uploads/2021/05/Shrimp-2-1.jpg',
     }
   ];
+
+  List<Map<String, dynamic>> finalProteinsItems = [];
+  List<Map<String, dynamic>> finalFatsItems = [];
+  List<Map<String, dynamic>> finalStarchesItems = [];
+
+  changeFinalList({required int cal,
+      required int quantity,
+      required String name,
+      required String imageUrl, required int type}) {
+    if (type == 1) {
+      if (!finalStarchesItems.isEmpty) {
+        finalStarchesItems.removeWhere((element) => name == element['name']);
+      }
+
+      finalStarchesItems.add({
+        'name': name,
+        'calories': cal,
+        'quantity': quantity,
+        'imageUrl': imageUrl
+      });
+    } else if (type == 2) {
+      if (!finalFatsItems.isEmpty) {
+        finalFatsItems.removeWhere((element) => name == element['name']);
+      }
+
+      finalFatsItems.add({
+        'name': name,
+        'calories': cal,
+        'quantity': quantity,
+        'imageUrl': imageUrl
+      });
+    } else {
+      if (!finalProteinsItems.isEmpty) {
+        finalProteinsItems.removeWhere((element) => name == element['name']);
+      }
+      finalProteinsItems.add({
+        'name': name,
+        'calories': cal,
+        'quantity': quantity,
+        'imageUrl': imageUrl
+      });
+    }
+
+    notifyListeners();
+  }
+
   int portion = 1;
 
   void changeCount(int val, int type, int index) {
     if (type == 1) {
       starchesItems[index]['groupValue'] = val;
+      starchesItems[index]['value'] = val;
+
+      changeFinalList(
+          cal: starchesItems[index]['calories'] * val,
+          quantity: starchesItems[index]['quantity'] * val,
+          name: starchesItems[index]['name'],
+          imageUrl: starchesItems[index]['imageUrl'],
+          type: type);
     } else if (type == 2) {
       fatsItems[index]['groupValue'] = val;
+      fatsItems[index]['value'] = val;
+      changeFinalList(
+          cal: fatsItems[index]['calories'] * val,
+          quantity: fatsItems[index]['quantity'] * val,
+          name: fatsItems[index]['name'],
+          imageUrl: fatsItems[index]['imageUrl'],
+          type: type);
     } else {
       proteinsItems[index]['groupValue'] = val;
+      proteinsItems[index]['value'] = val;
+      changeFinalList(
+          cal: proteinsItems[index]['calories'] * val,
+          quantity: proteinsItems[index]['quantity'] * val,
+          name: proteinsItems[index]['name'],
+          imageUrl: proteinsItems[index]['imageUrl'],
+          type: type);
     }
-
+changeCalories();
     notifyListeners();
   }
 
@@ -254,31 +320,60 @@ class AppProvider extends ChangeNotifier {
     if (typeCat == 0) {
       starchesItems[index]['visible'] = value;
 
-      starchesItems[index]['value'] = value;
+      starchesItems[index]['value'] = value ? 1 : 0;
       if (value) {
-        calories = calories! - (starchesItems[index]['calories'] as int);
+        changeFinalList(
+            cal: starchesItems[index]['calories'],
+            quantity: starchesItems[index]['quantity'] *
+                starchesItems[index]['value'],
+            name: starchesItems[index]['name'],
+            imageUrl: starchesItems[index]['imageUrl'],
+            type: 1);
+
       } else {
-        calories = calories! + (starchesItems[index]['calories'] as int);
+        finalStarchesItems.removeWhere(
+            (element) => starchesItems[index]['name'] == element['name']);
+
       }
     } else if (typeCat == 1) {
       fatsItems[index]['visible'] = value;
 
-      fatsItems[index]['value'] = value;
+      fatsItems[index]['value'] = value ? 1 : 0;
+
       if (value) {
-        calories = calories! - (fatsItems[index]['calories'] as int);
+        changeFinalList(
+            cal: fatsItems[index]['calories'],
+            quantity: fatsItems[index]['quantity'] * fatsItems[index]['value'],
+            name: fatsItems[index]['name'],
+            imageUrl: fatsItems[index]['imageUrl'],
+            type: 2);
+
       } else {
-        calories = calories! + (fatsItems[index]['calories'] as int);
+        finalFatsItems.removeWhere(
+            (element) => fatsItems[index]['name'] == element['name']);
+
       }
     } else {
       proteinsItems[index]['visible'] = value;
+      proteinsItems[index]['value'] = value ? 1 : 0;
 
-      proteinsItems[index]['value'] = value;
       if (value) {
-        calories = calories! - (proteinsItems[index]['calories'] as int);
+        changeFinalList(
+            cal: proteinsItems[index]['calories'],
+            quantity: proteinsItems[index]['quantity'] *
+                proteinsItems[index]['value'],
+            name: proteinsItems[index]['name'],
+            imageUrl: proteinsItems[index]['imageUrl'],
+            type: 3);
+
       } else {
-        calories = calories! + (proteinsItems[index]['calories'] as int);
+        finalProteinsItems.removeWhere(
+            (element) => proteinsItems[index]['name'] == element['name']);
+
       }
     }
+
+changeCalories();
     notifyListeners();
   }
 
@@ -307,6 +402,7 @@ class AppProvider extends ChangeNotifier {
   double weight = 70;
   double activity = 0;
   int? calories;
+  int? calories1;
   int numberSelected = 5;
   List<Map<String, dynamic>> numberOfDay = [
     {'value': 1.2, 'submit': false},
@@ -428,7 +524,13 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
+//
   void endPageView(BuildContext context) {
+    /*
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+    });
+     */
     SaveData.setData(key: "goToLogin", value: true).then(
       (value) {
         notifyListeners();
@@ -450,15 +552,13 @@ class AppProvider extends ChangeNotifier {
     );
     if (image != null) {
       _loadingImage = true;
+      profileImage = File(image.path);
       ConstantWidget.massage(
         context: context,
         text: "Wait for the image to load",
       );
       notifyListeners();
-      profileImage = File(image.path);
-      notifyListeners();
       profileImage = await _cropImage(path: profileImage!);
-      notifyListeners();
       String url = await _database.uploadImageProfileInFireStorage(
         profileImage: profileImage!,
         userImage: _userModel!.userImage,
@@ -577,7 +677,6 @@ class AppProvider extends ChangeNotifier {
     await _database.signOut();
     _userModel = null;
     _selectedIndex = 0;
-    profileImage = null;
     notifyListeners();
   }
 
@@ -727,54 +826,52 @@ class AppProvider extends ChangeNotifier {
   }
 
   void getResult(BuildContext context) async {
-    if (isMale == 0 || isMuscular == 0 || activity == 0) {
-      ConstantWidget.dialog(
-        context: context,
-        title: Text(
-          "There is an empty field 😑",
-          style: TextStyle(
-            color: MyColors.primaryColor,
-          ),
-        ),
-        content: Text(
-          "Make sure you select all fields",
-          style: const TextStyle(
-            fontSize: 18,
-          ),
-        ),
-      );
-      notifyListeners();
+    getBestWeight();
+
+    if (isMuscular == 1) {
+      calories = ((weight * 2.2 * 10) * activity + 500).toInt();
     } else {
-      getBestWeight();
-      if (isMuscular == 1) {
-        calories = ((weight * 2.2 * 10) * activity + 500).toInt();
-      } else {
-        calories = ((weight * 2.2 * 10) * activity - 500).toInt();
-      }
-      Navigator.of(context).pushNamed(BMIResultScreen.route);
-      notifyListeners();
+      calories = ((weight * 2.2 * 10) * activity - 500).toInt();
     }
+
+    calories1 = calories;
+    notifyListeners();
   }
 
-  void getBestWeight() {
+  getBestWeight() {
     if (isMale == 1) {
       bestWeight = height - 100;
     } else {
       bestWeight = height - 105;
     }
 
-    /*void getBestWeight() {
+    void getBestWeight() {
       if (isMale == 1) {
         bestWeight = height - 100;
       } else {
         bestWeight = height - 105;
       }
       notifyListeners();
-    }*/
+    }
   }
 
   void choseCategory(int type) {
     typeCat = type;
+
+    notifyListeners();
+  }
+
+  void changeCalories() {
+    calories1 = calories;
+    finalFatsItems.forEach((element) {
+      calories1 = (calories1! - element['calories']) as int?;
+    });
+    finalStarchesItems.forEach((element) {
+      calories1 = (calories1! - element['calories']) as int?;
+    });
+    finalProteinsItems.forEach((element) {
+      calories1 = (calories1! - element['calories']) as int?;
+    });
     notifyListeners();
   }
 }

@@ -33,7 +33,7 @@ class ChoseCategory extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Text(
-                    'You have ${Provider.of<AppProvider>(context).calories} Calories',
+                    'You have ${Provider.of<AppProvider>(context).calories1} Calories',
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
                 ),

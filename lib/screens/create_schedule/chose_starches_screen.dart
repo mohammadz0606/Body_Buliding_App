@@ -147,7 +147,7 @@ class ChoseStarchesScreen extends StatelessWidget {
                                     fontSize: 25, color: Colors.white),
                               ),
                               Text(
-                                model.calories.toString(),
+                                model.calories1.toString(),
                                 style: TextStyle(
                                     fontSize: 30,
                                     color: Colors.red,
