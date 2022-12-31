@@ -27,8 +27,11 @@ import '/services/call_data/database.dart';
 import 'package:flutter/material.dart';
 
 class AppProvider extends ChangeNotifier {
+  double? proteinPercentage;
+  double? carbPercentage;
+  double? fatPercentage;
   int? typeCat;
-  final List<Map<String, dynamic>> starchesItems = [
+  final List<Map<String, dynamic>> carbItems = [
     {
       'name': 'Arabic white bread',
       'groupValue': 1,
@@ -241,18 +244,18 @@ class AppProvider extends ChangeNotifier {
   //quantity  =>  'quantity'
   List<Map<String, dynamic>> finalProteinsItems = [];
   List<Map<String, dynamic>> finalFatsItems = [];
-  List<Map<String, dynamic>> finalStarchesItems = [];
+  List<Map<String, dynamic>> finalCarbItems = [];
 
   changeFinalList({required int cal,
       required int quantity,
       required String name,
       required String imageUrl, required int type}) {
     if (type == 1) {
-      if (!finalStarchesItems.isEmpty) {
-        finalStarchesItems.removeWhere((element) => name == element['name']);
+      if (!finalCarbItems.isEmpty) {
+        finalCarbItems.removeWhere((element) => name == element['name']);
       }
 
-      finalStarchesItems.add({
+      finalCarbItems.add({
         'name': name,
         'calories': cal,
         'quantity': quantity,
@@ -288,14 +291,14 @@ class AppProvider extends ChangeNotifier {
 
   void changeCount(int val, int type, int index) {
     if (type == 1) {
-      starchesItems[index]['groupValue'] = val;
-      starchesItems[index]['value'] = val;
+      carbItems[index]['groupValue'] = val;
+      carbItems[index]['value'] = val;
 
       changeFinalList(
-          cal: starchesItems[index]['calories'] * val,
-          quantity: starchesItems[index]['quantity'] * val,
-          name: starchesItems[index]['name'],
-          imageUrl: starchesItems[index]['imageUrl'],
+          cal: carbItems[index]['calories'] * val,
+          quantity: carbItems[index]['quantity'] * val,
+          name: carbItems[index]['name'],
+          imageUrl: carbItems[index]['imageUrl'],
           type: type);
     } else if (type == 2) {
       fatsItems[index]['groupValue'] = val;
@@ -322,21 +325,21 @@ changeCalories();
 
   void choseStarchesItem(bool value, int index, BuildContext context) {
     if (typeCat == 0) {
-      starchesItems[index]['visible'] = value;
+      carbItems[index]['visible'] = value;
 
-      starchesItems[index]['value'] = value ? 1 : 0;
+      carbItems[index]['value'] = value ? 1 : 0;
       if (value) {
         changeFinalList(
-            cal: starchesItems[index]['calories'],
-            quantity: starchesItems[index]['quantity'] *
-                starchesItems[index]['value'],
-            name: starchesItems[index]['name'],
-            imageUrl: starchesItems[index]['imageUrl'],
+            cal: carbItems[index]['calories'],
+            quantity: carbItems[index]['quantity'] *
+                carbItems[index]['value'],
+            name: carbItems[index]['name'],
+            imageUrl: carbItems[index]['imageUrl'],
             type: 1);
 
       } else {
-        finalStarchesItems.removeWhere(
-            (element) => starchesItems[index]['name'] == element['name']);
+        finalCarbItems.removeWhere(
+            (element) => carbItems[index]['name'] == element['name']);
 
       }
     } else if (typeCat == 1) {
@@ -392,9 +395,7 @@ changeCalories();
   int isMale = 0;
   double bestWeight = 0;
 
-  // 0 = noSelected
-  // 1 = male
-  // 2 = female
+
   int isMuscular = 0;
   Color muscularColor = Colors.grey;
   Color dryingOfFatColor = Colors.grey;
@@ -839,6 +840,7 @@ changeCalories();
     }
 
     calories1 = calories;
+    getTypePercentage(isMuscular==1);
     notifyListeners();
   }
 
@@ -868,14 +870,35 @@ changeCalories();
   void changeCalories() {
     calories1 = calories;
     finalFatsItems.forEach((element) {
+      fatPercentage = (fatPercentage! - element['calories']);
       calories1 = (calories1! - element['calories']) as int?;
+
     });
-    finalStarchesItems.forEach((element) {
+    finalCarbItems.forEach((element) {
+      carbPercentage = (carbPercentage! - element['calories']);
       calories1 = (calories1! - element['calories']) as int?;
+
     });
     finalProteinsItems.forEach((element) {
+      proteinPercentage = (proteinPercentage! - element['calories']);
       calories1 = (calories1! - element['calories']) as int?;
+
     });
     notifyListeners();
+  }
+  void getTypePercentage(bool isHypertrophy){
+    if(isHypertrophy){
+      carbPercentage = calories!*(50/100);
+      proteinPercentage = calories!*(40/100);
+      fatPercentage = calories!*(10/100);
+
+    }else{
+      carbPercentage = calories!*(25/100);
+      proteinPercentage = calories!*(50/100);
+      fatPercentage = calories!*(25/100);
+
+    }
+    notifyListeners();
+
   }
 }

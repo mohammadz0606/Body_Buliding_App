@@ -31,7 +31,7 @@ class ChoseItemButton extends StatelessWidget {
                 child: CheckboxListTile(
                   activeColor: Colors.red,
                   value: model.typeCat == 0
-                      ? model.starchesItems[index]['value']==0?false:true
+                      ? model.carbItems[index]['value']==0?false:true
                       : model.typeCat == 1
                           ? model.fatsItems[index]['value']==0?false:true
                           : model.proteinsItems[index]['value']==0?false:true,
@@ -73,11 +73,11 @@ class ChoseItemButton extends StatelessWidget {
                               activeColor: Colors.red,
 
                               title: Text(
-                                '${model.starchesItems[index]['quantity'] * 1}G',
+                                '${model.carbItems[index]['quantity'] * 1}G',
                                 style: TextStyle(color: Colors.white),
                               ),
                               value: 1,
-                              groupValue: model.starchesItems[index]
+                              groupValue: model.carbItems[index]
                                   ['groupValue'],
                               onChanged: (int? val) {
                                 model.changeCount(val!, type, index);
@@ -85,11 +85,11 @@ class ChoseItemButton extends StatelessWidget {
                           RadioListTile<int>(
                               activeColor: Colors.red,
                               title: Text(
-                                '${model.starchesItems[index]['quantity'] * 2}G',
+                                '${model.carbItems[index]['quantity'] * 2}G',
                                 style: TextStyle(color: Colors.white),
                               ),
                               value: 2,
-                              groupValue: model.starchesItems[index]
+                              groupValue: model.carbItems[index]
                                   ['groupValue'],
                               onChanged: (int? val) {
                                 model.changeCount(val!, type, index);
@@ -97,11 +97,11 @@ class ChoseItemButton extends StatelessWidget {
                           RadioListTile<int>(
                               activeColor: Colors.red,
                               title: Text(
-                                '${model.starchesItems[index]['quantity'] * 3}G',
+                                '${model.carbItems[index]['quantity'] * 3}G',
                                 style: TextStyle(color: Colors.white),
                               ),
                               value: 3,
-                              groupValue: model.starchesItems[index]
+                              groupValue: model.carbItems[index]
                                   ['groupValue'],
                               onChanged: (int? val) {
                                 model.changeCount(val!, type, index);
@@ -112,7 +112,7 @@ class ChoseItemButton extends StatelessWidget {
                               RadioListTile<int>(
                                 activeColor: Colors.red,
                                 title: Text(
-                                  '${model.starchesItems[index]['quantity'] * 1}G',
+                                  '${model.carbItems[index]['quantity'] * 1}G',
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 value: 1,
@@ -125,7 +125,7 @@ class ChoseItemButton extends StatelessWidget {
                               RadioListTile<int>(
                                 activeColor: Colors.red,
                                 title: Text(
-                                  '${model.starchesItems[index]['quantity'] * 2}G',
+                                  '${model.carbItems[index]['quantity'] * 2}G',
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 value: 2,
@@ -138,7 +138,7 @@ class ChoseItemButton extends StatelessWidget {
                               RadioListTile<int>(
                                 activeColor: Colors.red,
                                 title: Text(
-                                  '${model.starchesItems[index]['quantity'] * 3}G',
+                                  '${model.carbItems[index]['quantity'] * 3}G',
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 value: 3,
@@ -153,7 +153,7 @@ class ChoseItemButton extends StatelessWidget {
                               RadioListTile<int>(
                                   activeColor: Colors.red,
                                   title: Text(
-                                    '${model.starchesItems[index]['quantity'] * 1}G',
+                                    '${model.carbItems[index]['quantity'] * 1}G',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   value: 1,
@@ -165,7 +165,7 @@ class ChoseItemButton extends StatelessWidget {
                               RadioListTile<int>(
                                   activeColor: Colors.red,
                                   title: Text(
-                                    '${model.starchesItems[index]['quantity'] * 2}G',
+                                    '${model.carbItems[index]['quantity'] * 2}G',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   value: 2,
@@ -177,7 +177,7 @@ class ChoseItemButton extends StatelessWidget {
                               RadioListTile<int>(
                                   activeColor: Colors.red,
                                   title: Text(
-                                    '${model.starchesItems[index]['quantity'] * 3}G',
+                                    '${model.carbItems[index]['quantity'] * 3}G',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   value: 3,

@@ -25,26 +25,25 @@ class ChoseStarchesScreen extends StatelessWidget {
                   child: model.typeCat == 0
                       ? ListView.builder(
                           physics: const BouncingScrollPhysics(),
-                          itemCount: model.starchesItems.length,
+                          itemCount: model.carbItems.length,
                           itemBuilder: (BuildContext context, int index) {
-                            if (index != model.starchesItems.length - 1) {
-                              return ChoseItemButton(type: 1,
-                                  visible: model.starchesItems[index]
-                                      ['visible'],
-                                  imageUrl: model.starchesItems[index]
-                                      ['imageUrl'],
-                                  label: model.starchesItems[index]['name'],
+                            if (index != model.carbItems.length - 1) {
+                              return ChoseItemButton(
+                                  type: 1,
+                                  visible: model.carbItems[index]['visible'],
+                                  imageUrl: model.carbItems[index]['imageUrl'],
+                                  label: model.carbItems[index]['name'],
                                   index: index);
                             } else {
                               return Column(
                                 children: [
                                   ChoseItemButton(
                                       type: 1,
-                                      visible: model.starchesItems[index]
+                                      visible: model.carbItems[index]
                                           ['visible'],
-                                      imageUrl: model.starchesItems[index]
+                                      imageUrl: model.carbItems[index]
                                           ['imageUrl'],
-                                      label: model.starchesItems[index]['name'],
+                                      label: model.carbItems[index]['name'],
                                       index: index),
                                   SizedBox(
                                     height: 160,
@@ -60,12 +59,14 @@ class ChoseStarchesScreen extends StatelessWidget {
                               itemCount: model.fatsItems.length,
                               itemBuilder: (BuildContext context, int index) {
                                 if (index != model.fatsItems.length - 1) {
-                                  return ChoseItemButton(type: 2,
+                                  return ChoseItemButton(
+                                      type: 2,
                                       imageUrl: model.fatsItems[index]
                                           ['imageUrl'],
                                       label: model.fatsItems[index]['name'],
                                       index: index,
-                                      visible: model.fatsItems[index]['visible']);
+                                      visible: model.fatsItems[index]
+                                          ['visible']);
                                 } else {
                                   return Column(
                                     children: [
@@ -85,10 +86,10 @@ class ChoseStarchesScreen extends StatelessWidget {
                                 }
                               },
                             )
-                          :  ListView.builder(
-                              itemCount: model.proteinsItems.length-2,
+                          : ListView.builder(
+                              itemCount: model.proteinsItems.length - 2,
                               itemBuilder: (BuildContext context, int index) {
-                                if (index != model.proteinsItems.length-3) {
+                                if (index != model.proteinsItems.length - 3) {
                                   return ChoseItemButton(
                                       type: 3,
                                       visible: model.proteinsItems[index]
@@ -147,7 +148,15 @@ class ChoseStarchesScreen extends StatelessWidget {
                                     fontSize: 25, color: Colors.white),
                               ),
                               Text(
-                                model.calories1.toString(),
+                                model.typeCat == 0
+                                    ? model.carbPercentage!.round().toString()
+                                    : model.typeCat == 1
+                                        ? model.fatPercentage!
+                                            .round()
+                                            .toString()
+                                        : model.proteinPercentage!
+                                            .round()
+                                            .toString(),
                                 style: TextStyle(
                                     fontSize: 30,
                                     color: Colors.red,
