@@ -529,13 +529,7 @@ changeCalories();
     }
   }
 
-//
   void endPageView(BuildContext context) {
-    /*
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
-    });
-     */
     SaveData.setData(key: "goToLogin", value: true).then(
       (value) {
         notifyListeners();
@@ -844,7 +838,7 @@ changeCalories();
     notifyListeners();
   }
 
-  getBestWeight() {
+  void getBestWeight() {
     if (isMale == 1) {
       bestWeight = height - 100;
     } else {

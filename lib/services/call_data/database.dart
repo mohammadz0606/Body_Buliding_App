@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../models/excercises_model.dart';
+import '../models/resuelt_of_schedule_model.dart';
 import '../models/user_model.dart';
 
 class Database {
@@ -174,5 +175,26 @@ class Database {
         .update(newUserModel.toMap());
 
     await getDataForeFireStore();
+  }
+
+  Future<void> setScheduleInDatabase({
+    required ResueltOfSheduleModel resuelt,
+  }) async {
+    try{
+      DocumentSnapshot isExisting = await FirebaseFirestore.instance.collection("usersSchedule").doc(resuelt.userId).get();
+      if(isExisting.exists){
+        throw Exception("You already own a schedule, delete or modify it");
+      }else{
+      return await FirebaseFirestore.instance
+            .collection("usersSchedule")
+            .doc(resuelt.userId)
+            .set(
+          resuelt.toMap(),
+        );
+      }
+
+    }catch(e){
+      throw Exception(e.toString());
+    }
   }
 }
