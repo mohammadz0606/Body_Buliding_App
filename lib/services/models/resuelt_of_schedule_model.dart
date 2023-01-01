@@ -3,38 +3,41 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ResueltOfSheduleModel {
   final String userId;
   final int calories;
-  final double proteinPercentage;
-  final double carbPercentage;
-  final double fatPercentage;
-  final int age;
+  double proteinPercentage;
+  double carbPercentage;
+  double fatPercentage;
   final double height;
   final double weight;
-  final List<Map<String, dynamic>> finalProteinsItems;
-  final List<Map<String, dynamic>> finalFatsItems;
-  final List<Map<String, dynamic>> finalCarbItems;
+  final String gender;
+  final String muscular;
+  final String activity;
+  List<Map<String, dynamic>> finalProteinsItems;
+  List<Map<String, dynamic>> finalFatsItems;
+  List<Map<String, dynamic>> finalCarbItems;
 
-  const ResueltOfSheduleModel({
+  ResueltOfSheduleModel({
     required this.userId,
     required this.calories,
-    required this.proteinPercentage,
-    required this.carbPercentage,
-    required this.fatPercentage,
-    required this.age,
+    this.proteinPercentage = 0,
+    this.carbPercentage = 0,
+    this.fatPercentage = 0,
     required this.height,
     required this.weight,
-    required this.finalProteinsItems,
-    required this.finalFatsItems,
-    required this.finalCarbItems,
+    required this.gender,
+    required this.muscular,
+    required this.activity,
+    this.finalProteinsItems = const [],
+    this.finalFatsItems = const [],
+    this.finalCarbItems = const [],
   });
 
-  factory ResueltOfSheduleModel.fromJson(QueryDocumentSnapshot json) {
+  factory ResueltOfSheduleModel.fromJson(DocumentSnapshot json) {
     return ResueltOfSheduleModel(
       userId: json["userID"],
       calories: int.parse(json["calories"]),
       proteinPercentage: double.parse(json["proteinPercentage"]),
       carbPercentage: double.parse(json["carbPercentage"]),
       fatPercentage: double.parse(json["fatPercentage"]),
-      age: int.parse(json["age"]),
       height: double.parse(json["height"]),
       weight: double.parse(json["weight"]),
       finalProteinsItems:
@@ -52,17 +55,22 @@ class ResueltOfSheduleModel {
               .map((e) {
         return e;
       }).toList(),
+      muscular: json["muscular"],
+      gender: json["gender"],
+      activity: json["activity"],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      "userID":this.userId,
+      "userID": this.userId,
       "calories": this.calories,
+      "muscular":this.muscular,
+      "gender":this.gender,
+      "activity": this.activity,
       "proteinPercentage": this.proteinPercentage,
       "carbPercentage": this.carbPercentage,
       "fatPercentage": this.fatPercentage,
-      "age": this.age,
       "height": this.height,
       "weight": this.weight,
       "finalProteinsItems": this.finalProteinsItems,

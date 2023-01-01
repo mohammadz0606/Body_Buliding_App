@@ -22,7 +22,7 @@ class UserModel {
     };
   }
 
-  factory UserModel.fromMap(map) {
+  factory UserModel.fromMap(DocumentSnapshot map) {
     return UserModel(
       id: map["id"],
       name: map["name"],

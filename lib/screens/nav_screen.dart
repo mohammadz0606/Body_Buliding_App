@@ -25,6 +25,7 @@ class _NavScreenState extends State<NavScreen> {
       Provider.of<AppProvider>(context, listen: false).getTrainers();
       Provider.of<AppProvider>(context, listen: false).getCategory();
       Provider.of<AppProvider>(context, listen: false).getAllExcercises();
+      Provider.of<AppProvider>(context, listen: false).getCaloriesAndScheduleInDatabase();
     });
   }
 

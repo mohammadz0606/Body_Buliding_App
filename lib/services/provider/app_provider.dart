@@ -9,11 +9,13 @@ import '../../helper/constant_style.dart';
 import '../../helper/constant_widget.dart';
 import '../../helper/shared_preferences.dart';
 import '../../screens/auth/login_screen.dart';
+import '../../screens/create_schedule/chose_category.dart';
 import '../../screens/exercises_screen.dart';
 import '../../screens/more_screen_app.dart';
 import '../models/category_model.dart';
 import '../models/excercises_model.dart';
 import '../models/on_boarding_model.dart';
+import '../models/resuelt_of_schedule_model.dart';
 import '../models/trainers_model.dart';
 import '/screens/calculate_screen.dart';
 import '/screens/home_screen.dart';
@@ -246,10 +248,12 @@ class AppProvider extends ChangeNotifier {
   List<Map<String, dynamic>> finalFatsItems = [];
   List<Map<String, dynamic>> finalCarbItems = [];
 
-  changeFinalList({required int cal,
+  changeFinalList(
+      {required int cal,
       required int quantity,
       required String name,
-      required String imageUrl, required int type}) {
+      required String imageUrl,
+      required int type}) {
     if (type == 1) {
       if (!finalCarbItems.isEmpty) {
         finalCarbItems.removeWhere((element) => name == element['name']);
@@ -319,7 +323,7 @@ class AppProvider extends ChangeNotifier {
           imageUrl: proteinsItems[index]['imageUrl'],
           type: type);
     }
-changeCalories();
+    changeCalories();
     notifyListeners();
   }
 
@@ -331,16 +335,13 @@ changeCalories();
       if (value) {
         changeFinalList(
             cal: carbItems[index]['calories'],
-            quantity: carbItems[index]['quantity'] *
-                carbItems[index]['value'],
+            quantity: carbItems[index]['quantity'] * carbItems[index]['value'],
             name: carbItems[index]['name'],
             imageUrl: carbItems[index]['imageUrl'],
             type: 1);
-
       } else {
         finalCarbItems.removeWhere(
             (element) => carbItems[index]['name'] == element['name']);
-
       }
     } else if (typeCat == 1) {
       fatsItems[index]['visible'] = value;
@@ -354,11 +355,9 @@ changeCalories();
             name: fatsItems[index]['name'],
             imageUrl: fatsItems[index]['imageUrl'],
             type: 2);
-
       } else {
         finalFatsItems.removeWhere(
             (element) => fatsItems[index]['name'] == element['name']);
-
       }
     } else {
       proteinsItems[index]['visible'] = value;
@@ -372,29 +371,26 @@ changeCalories();
             name: proteinsItems[index]['name'],
             imageUrl: proteinsItems[index]['imageUrl'],
             type: 3);
-
       } else {
         finalProteinsItems.removeWhere(
             (element) => proteinsItems[index]['name'] == element['name']);
-
       }
     }
 
-changeCalories();
+    changeCalories();
     notifyListeners();
   }
 
   String appBarTitle = "";
 
   double sliderVal = 0;
-  int age = 0;
+  //int age = 0;
 
   // 0 = noSelected
   // 1 = male
   // 2 = female
   int isMale = 0;
   double bestWeight = 0;
-
 
   int isMuscular = 0;
   Color muscularColor = Colors.grey;
@@ -824,17 +820,23 @@ changeCalories();
     }
   }
 
-  void getResult(BuildContext context,VoidCallback onSuccess) async {
-    if(isMale == 0){
-      ConstantWidget.massage(context: context, text: 'Pleas choose Your Gender ');
-
-    }else if(isMuscular == 0){
-      ConstantWidget.massage(context: context, text: 'Please select a schedule type ');
-
-    }
-    else if(activity == 0){
-      ConstantWidget.massage(context: context, text: 'Please select your activity rate ');
-    }else{
+  void getResult(BuildContext context) async {
+    if (isMale == 0) {
+      ConstantWidget.massage(
+        context: context,
+        text: 'Pleas choose Your Gender ',
+      );
+    } else if (isMuscular == 0) {
+      ConstantWidget.massage(
+        context: context,
+        text: 'Please select a schedule type ',
+      );
+    } else if (activity == 0) {
+      ConstantWidget.massage(
+        context: context,
+        text: 'Please select your activity rate ',
+      );
+    } else {
       getBestWeight();
 
       if (isMuscular == 1) {
@@ -844,9 +846,20 @@ changeCalories();
       }
 
       calories1 = calories;
-      getTypePercentage(isMuscular==1);
+      getTypePercentage(isMuscular == 1);
 
-      onSuccess();
+      setCaloriesInDatabase(
+        resuelt: ResueltOfSheduleModel(
+          userId: userModel!.id!,
+          calories: calories!,
+          height: height,
+          weight: weight,
+          muscular: isMuscular == 1 ? "MUSCULAR" : "DRYING OF FAT",
+          gender: isMale == 1 ? "Male":"Female",
+          activity: activity.toString(),
+        ),
+        context: context,
+      );
     }
 
     notifyListeners();
@@ -858,23 +871,12 @@ changeCalories();
     } else {
       bestWeight = height - 105;
     }
-
-    void getBestWeight() {
-      if (isMale == 1) {
-        bestWeight = height - 100;
-      } else {
-        bestWeight = height - 105;
-      }
-      notifyListeners();
-    }
   }
 
   void choseCategory(int type) {
     typeCat = type;
 
     notifyListeners();
-
-
   }
 
   void changeCalories() {
@@ -882,62 +884,154 @@ changeCalories();
     finalFatsItems.forEach((element) {
       fatPercentage = (fatPercentage! - element['calories']);
       calories1 = (calories1! - element['calories']) as int?;
-
     });
     finalCarbItems.forEach((element) {
       carbPercentage = (carbPercentage! - element['calories']);
       calories1 = (calories1! - element['calories']) as int?;
-
     });
     finalProteinsItems.forEach((element) {
       proteinPercentage = (proteinPercentage! - element['calories']);
       calories1 = (calories1! - element['calories']) as int?;
-
     });
     notifyListeners();
   }
-  void getTypePercentage(bool isHypertrophy){
-    if(isHypertrophy){
-      carbPercentage = calories!*(50/100);
-      proteinPercentage = calories!*(40/100);
-      fatPercentage = calories!*(10/100);
 
-    }else{
-      carbPercentage = calories!*(25/100);
-      proteinPercentage = calories!*(50/100);
-      fatPercentage = calories!*(25/100);
-
+  void getTypePercentage(bool isHypertrophy) {
+    if (isHypertrophy) {
+      carbPercentage = calories! * (50 / 100);
+      proteinPercentage = calories! * (40 / 100);
+      fatPercentage = calories! * (10 / 100);
+    } else {
+      carbPercentage = calories! * (25 / 100);
+      proteinPercentage = calories! * (50 / 100);
+      fatPercentage = calories! * (25 / 100);
     }
     notifyListeners();
-
   }
-  void cancelMeals(BuildContext context){
+
+  void cancelMeals(BuildContext context) {
     cancelFatMeals(context);
     cancelProteinMeals(context);
     cancelCarbMeals(context);
   }
-  cancelFatMeals(BuildContext context){
 
-    for(int i = 0;i<fatsItems.length;i++){
+  void cancelFatMeals(BuildContext context) {
+    for (int i = 0; i < fatsItems.length; i++) {
       choseStarchesItem(false, i, context);
     }
-
 
     finalFatsItems = [];
     notifyListeners();
   }
-  cancelProteinMeals(BuildContext context){
-    for(int i = 0;i<proteinsItems.length;i++){
+
+  void cancelProteinMeals(BuildContext context) {
+    for (int i = 0; i < proteinsItems.length; i++) {
       choseStarchesItem(false, i, context);
     }
     finalProteinsItems = [];
     notifyListeners();
   }
-  cancelCarbMeals(BuildContext context){
-    for(int i = 0;i<carbItems.length-2;i++){
+
+  void cancelCarbMeals(BuildContext context) {
+    for (int i = 0; i < carbItems.length - 2; i++) {
       choseStarchesItem(false, i, context);
     }
     finalCarbItems = [];
     notifyListeners();
+  }
+
+  /*
+      calculate and schedule
+   */
+  bool _isLoadingCalories = false;
+
+  bool get isLoadingCalories => _isLoadingCalories;
+
+  ResueltOfSheduleModel? _resueltOfSheduleModel;
+
+  ResueltOfSheduleModel? get resueltOfSheduleModel => _resueltOfSheduleModel;
+
+
+
+  Future<bool> isExistingCalories({required String userID}) async{
+    return await _database.isExisting(userID: userID);
+    notifyListeners();
+  }
+
+  void getCaloriesAndScheduleInDatabase() async {
+    try {
+      String userID = FirebaseAuth.instance.currentUser!.uid;
+      if (await isExistingCalories(userID: userID)) {
+        _resueltOfSheduleModel = ResueltOfSheduleModel.fromJson(
+          await _database.getCaloriesAndScheduleInDatabase(userID: userID),
+        );
+        notifyListeners();
+      } else {
+        notifyListeners();
+      }
+      notifyListeners();
+    } catch (e) {
+      notifyListeners();
+    }
+  }
+
+  void setCaloriesInDatabase({
+    required ResueltOfSheduleModel resuelt,
+    required BuildContext context,
+  }) async {
+    try {
+      if (await isExistingCalories(userID: resuelt.userId)) {
+        ConstantWidget.dialog(
+          context: context,
+          title: Text("Warning⚠"),
+          content: Text(
+            "You already have calories. Are you sure to recalculate again?",
+          ),
+          action: [
+            ElevatedButton(
+              onPressed: () {
+                _isLoadingCalories = true;
+                Navigator.of(context).pop();
+                ConstantWidget.massage(
+                    context: context, text: "Wait tell me...");
+                notifyListeners();
+                _database.setCaloriesInDatabase(resuelt: resuelt);
+                _isLoadingCalories = false;
+                ConstantWidget.massage(
+                  context: context,
+                  text: "Done",
+                );
+                Navigator.of(context).pushNamed(
+                  ChoseCategory.route,
+                );
+                notifyListeners();
+              },
+              child: Text("Yes"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                notifyListeners();
+              },
+              child: Text("No"),
+            ),
+          ],
+        );
+      } else {
+        _isLoadingCalories = true;
+        ConstantWidget.massage(context: context, text: "Wait tell me...");
+        notifyListeners();
+        _database.setCaloriesInDatabase(resuelt: resuelt);
+        _isLoadingCalories = false;
+        ConstantWidget.massage(context: context, text: "Done");
+        Navigator.of(context).pushNamed(
+          ChoseCategory.route,
+        );
+        notifyListeners();
+      }
+    } catch (e) {
+      print(e.toString());
+      notifyListeners();
+    }
   }
 }

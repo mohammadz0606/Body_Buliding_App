@@ -180,20 +180,72 @@ class Database {
   Future<void> setScheduleInDatabase({
     required ResueltOfSheduleModel resuelt,
   }) async {
-    try{
-      DocumentSnapshot isExisting = await FirebaseFirestore.instance.collection("usersSchedule").doc(resuelt.userId).get();
-      if(isExisting.exists){
+    try {
+      DocumentSnapshot isExisting = await FirebaseFirestore.instance
+          .collection("usersSchedule")
+          .doc(resuelt.userId)
+          .get();
+      if (isExisting.exists) {
         throw Exception("You already own a schedule, delete or modify it");
-      }else{
-      return await FirebaseFirestore.instance
+      } else {
+        return await FirebaseFirestore.instance
             .collection("usersSchedule")
             .doc(resuelt.userId)
             .set(
-          resuelt.toMap(),
-        );
+              resuelt.toMap(),
+            );
       }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 
-    }catch(e){
+  Future<bool> isExisting({required String userID}) async {
+    DocumentSnapshot isExisting = await FirebaseFirestore.instance
+        .collection("usersSchedule")
+        .doc(userID)
+        .get();
+    return isExisting.exists;
+  }
+
+  Future<void> setCaloriesInDatabase({
+    required ResueltOfSheduleModel resuelt,
+  }) async {
+    try {
+      if (await isExisting(userID: resuelt.userId)) {
+        var delete =
+            await getCaloriesAndScheduleInDatabase(userID: resuelt.userId);
+        delete.reference.delete();
+        return await FirebaseFirestore.instance
+            .collection("usersSchedule")
+            .doc(resuelt.userId)
+            .set(
+              resuelt.toMap(),
+            );
+      } else {
+        return await FirebaseFirestore.instance
+            .collection("usersSchedule")
+            .doc(resuelt.userId)
+            .set(
+              resuelt.toMap(),
+            );
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<DocumentSnapshot> getCaloriesAndScheduleInDatabase({
+    required String userID,
+  }) async {
+    try {
+      return await FirebaseFirestore.instance
+          .collection("usersSchedule")
+          .doc(
+            userID,
+          )
+          .get();
+    } catch (e) {
       throw Exception(e.toString());
     }
   }

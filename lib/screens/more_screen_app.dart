@@ -138,12 +138,16 @@ class MoreAppScreen extends StatelessWidget {
                     label: 'My Schedule',
                     color: Colors.white,
                     icon: Icons.fastfood_rounded,
-                    onTap: () {
-                      if(model.calories == null){
+                    onTap: () async {
+                      if (!await model.isExistingCalories(
+                          userID: model.userModel!.id!)) {
                         Navigator.of(context).pushNamed(GoToCalculatePage.rout);
-                      }else if(model.finalProteinsItems.isEmpty||model.finalCarbItems.isEmpty||model.finalFatsItems.isEmpty){
-                        Navigator.of(context).pushNamed(GoToChooseMealPage.rout);
-                      }else{
+                      } else if (model.finalProteinsItems.isEmpty ||
+                          model.finalCarbItems.isEmpty ||
+                          model.finalFatsItems.isEmpty) {
+                        Navigator.of(context)
+                            .pushNamed(GoToChooseMealPage.rout);
+                      } else {
                         Navigator.of(context).pushNamed(BMIResultScreen.route);
                       }
                     },

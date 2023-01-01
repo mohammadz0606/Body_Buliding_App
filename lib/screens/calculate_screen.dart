@@ -1,5 +1,7 @@
+import 'package:body_building/helper/constant_widget.dart';
 import 'package:body_building/screens/create_schedule/chose_category.dart';
 import 'package:body_building/screens/nav_screen.dart';
+import 'package:body_building/services/models/resuelt_of_schedule_model.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -276,34 +278,37 @@ class _CalculateScreenState extends State<CalculateScreen> {
                           )
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SubmitItemButton(
-                            size: size,
-                            label: 'Discard',
-                            onTap: () {
-                              if (Navigator.of(context).canPop()) {
-                                Navigator.of(context).pop();
-                              } else
-                                model.onTabChange(0);
-                            },
-                            backgroundColor: MyColors.secondaryColor,
-                            labelColor: Colors.red,
-                          ),
-                          SubmitItemButton(
-                            size: size,
-                            label: 'Calculate',
-                            onTap: () {
-                              model.getResult(context, () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed(ChoseCategory.route);
-                              });
-                            },
-                            backgroundColor: Colors.red,
-                            labelColor: Colors.white,
-                          )
-                        ],
+                      Visibility(
+                        visible: !model.isLoadingCalories,
+                        replacement: ConstantWidget.circularProgressIndicator(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            SubmitItemButton(
+                              size: size,
+                              label: 'Discard',
+                              onTap: () {
+                                if (Navigator.of(context).canPop()) {
+                                  Navigator.of(context).pop();
+                                } else
+                                  model.onTabChange(0);
+                              },
+                              backgroundColor: MyColors.secondaryColor,
+                              labelColor: Colors.red,
+                            ),
+                            SubmitItemButton(
+                              size: size,
+                              label: 'Calculate',
+                              onTap: () {
+                                model.getResult(
+                                  context,
+                                );
+                              },
+                              backgroundColor: Colors.red,
+                              labelColor: Colors.white,
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   )),
