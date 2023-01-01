@@ -1,5 +1,7 @@
 import 'package:body_building/screens/about_screen.dart';
 import 'package:body_building/screens/create_schedule/chose_category.dart';
+import 'package:body_building/screens/go_to_calculate.dart';
+import 'package:body_building/screens/go_to_chose_food_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -136,7 +138,14 @@ class MoreAppScreen extends StatelessWidget {
                     color: Colors.white,
                     icon: Icons.fastfood_rounded,
                     onTap: () {
-                      Navigator.of(context).pushNamed(ChoseCategory.route);
+                      if(model.calories == null){
+                        Navigator.of(context).pushNamed(GoToCalculatePage.rout);
+                      }else if(model.finalProteinsItems.isEmpty||model.finalCarbItems.isEmpty||model.finalFatsItems.isEmpty){
+                        Navigator.of(context).pushNamed(GoToChooseMealPage.rout);
+                      }else{
+                        Navigator.of(context).pushNamed(ChoseCategory.route);
+
+                      }
                     },
                   ),
                   MoreScreenButton(

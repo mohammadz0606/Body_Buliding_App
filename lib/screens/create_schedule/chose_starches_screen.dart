@@ -176,6 +176,16 @@ class ChoseStarchesScreen extends StatelessWidget {
                                 size: size,
                                 label: 'Discard',
                                 onTap: () {
+
+                                  if(model.typeCat == 1){
+                                    model.cancelCarbMeals(context);
+                                  }else if(model.typeCat == 2){
+                                    model.cancelProteinMeals(context);
+                                  }else{
+                                    model.cancelFatMeals(context);
+                                  }
+
+
                                   Navigator.of(context).pop();
                                 },
                                 backgroundColor: MyColors.secondaryColor,
@@ -184,7 +194,7 @@ class ChoseStarchesScreen extends StatelessWidget {
                               SubmitItemButton(
                                 size: size,
                                 label: 'Apply',
-                                onTap: () {},
+                                onTap: () {Navigator.of(context).pop();},
                                 backgroundColor: Colors.red,
                                 labelColor: Colors.white,
                               )

@@ -1,3 +1,6 @@
+import 'package:body_building/screens/calculate_screen.dart';
+import 'package:body_building/screens/go_to_calculate.dart';
+import 'package:body_building/screens/go_to_chose_food_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/about_screen.dart';
@@ -25,5 +28,8 @@ class RoutesScreen{
     BMIResultScreen.route :(context) => const BMIResultScreen(),
     AboutScreen.route :(context) => const AboutScreen(),
     OnBoardingScreen.route : (context) => OnBoardingScreen(),
+    GoToCalculatePage.rout:(context)=>GoToCalculatePage(),
+    CalculateScreen.route:(context)=>CalculateScreen(),
+    GoToChooseMealPage.rout:(context)=>GoToChooseMealPage()
   };
 }

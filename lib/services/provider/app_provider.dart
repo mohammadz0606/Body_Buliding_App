@@ -824,17 +824,31 @@ changeCalories();
     }
   }
 
-  void getResult(BuildContext context) async {
-    getBestWeight();
+  void getResult(BuildContext context,VoidCallback onSuccess) async {
+    if(isMale == 0){
+      ConstantWidget.massage(context: context, text: 'Pleas choose Your Gender ');
 
-    if (isMuscular == 1) {
-      calories = ((weight * 2.2 * 10) * activity + 500).toInt();
-    } else {
-      calories = ((weight * 2.2 * 10) * activity - 500).toInt();
+    }else if(isMuscular == 0){
+      ConstantWidget.massage(context: context, text: 'Please select a schedule type ');
+
+    }
+    else if(activity == 0){
+      ConstantWidget.massage(context: context, text: 'Please select your activity rate ');
+    }else{
+      getBestWeight();
+
+      if (isMuscular == 1) {
+        calories = ((weight * 2.2 * 10) * activity + 500).toInt();
+      } else {
+        calories = ((weight * 2.2 * 10) * activity - 500).toInt();
+      }
+
+      calories1 = calories;
+      getTypePercentage(isMuscular==1);
+
+      onSuccess();
     }
 
-    calories1 = calories;
-    getTypePercentage(isMuscular==1);
     notifyListeners();
   }
 
@@ -859,6 +873,8 @@ changeCalories();
     typeCat = type;
 
     notifyListeners();
+
+
   }
 
   void changeCalories() {
@@ -894,5 +910,34 @@ changeCalories();
     }
     notifyListeners();
 
+  }
+  void cancelMeals(BuildContext context){
+    cancelFatMeals(context);
+    cancelProteinMeals(context);
+    cancelCarbMeals(context);
+  }
+  cancelFatMeals(BuildContext context){
+
+    for(int i = 0;i<fatsItems.length;i++){
+      choseStarchesItem(false, i, context);
+    }
+
+
+    finalFatsItems = [];
+    notifyListeners();
+  }
+  cancelProteinMeals(BuildContext context){
+    for(int i = 0;i<proteinsItems.length;i++){
+      choseStarchesItem(false, i, context);
+    }
+    finalProteinsItems = [];
+    notifyListeners();
+  }
+  cancelCarbMeals(BuildContext context){
+    for(int i = 0;i<carbItems.length-2;i++){
+      choseStarchesItem(false, i, context);
+    }
+    finalCarbItems = [];
+    notifyListeners();
   }
 }

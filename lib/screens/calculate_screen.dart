@@ -1,10 +1,14 @@
+import 'package:body_building/screens/create_schedule/chose_category.dart';
+import 'package:body_building/screens/nav_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../helper/constant_style.dart';
+import '../widgets/submit_item_button.dart';
 
 class CalculateScreen extends StatefulWidget {
   const CalculateScreen({Key? key}) : super(key: key);
+  static const String route = 'calculate_screen';
 
   @override
   State<CalculateScreen> createState() => _CalculateScreenState();
@@ -227,7 +231,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 35,
+                        height: 140,
                       )
                     ],
                   ),
@@ -235,27 +239,74 @@ class _CalculateScreenState extends State<CalculateScreen> {
             Positioned(
               bottom: 0,
               left: 0,
-              child: SizedBox(
-                width: size.width,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.red),
+              child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        spreadRadius: 1,
+                        blurRadius: 10,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                    color: MyColors.secondaryColor,
                   ),
-                  onPressed: () {
-                    Provider.of<AppProvider>(
-                      context,
-                      listen: false,
-                    ).getResult(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'CALCULATE',
-                      style: TextStyle(fontSize: size.width * 0.07),
-                    ),
-                  ),
-                ),
-              ),
+                  width: size.width,
+                  height: size.height * 0.2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Do you want to ',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                          Text(
+                            'Calculate ',
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            'your calories? ',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SubmitItemButton(
+                            size: size,
+                            label: 'Discard',
+                            onTap: () {
+                              if (Navigator.of(context).canPop()) {
+                                Navigator.of(context).pop();
+                              } else
+                                model.onTabChange(0);
+                            },
+                            backgroundColor: MyColors.secondaryColor,
+                            labelColor: Colors.red,
+                          ),
+                          SubmitItemButton(
+                            size: size,
+                            label: 'Calculate',
+                            onTap: () {
+                              model.getResult(context, () {
+                                Navigator.of(context)
+                                    .pushReplacementNamed(ChoseCategory.route);
+                              });
+                            },
+                            backgroundColor: Colors.red,
+                            labelColor: Colors.white,
+                          )
+                        ],
+                      ),
+                    ],
+                  )),
             ),
           ],
         );
