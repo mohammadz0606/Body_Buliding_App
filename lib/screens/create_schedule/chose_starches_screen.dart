@@ -87,6 +87,7 @@ class ChoseStarchesScreen extends StatelessWidget {
                               },
                             )
                           : ListView.builder(
+                              physics: const BouncingScrollPhysics(),
                               itemCount: model.proteinsItems.length - 2,
                               itemBuilder: (BuildContext context, int index) {
                                 if (index != model.proteinsItems.length - 3) {
@@ -149,23 +150,43 @@ class ChoseStarchesScreen extends StatelessWidget {
                               ),
                               Text(
                                 model.typeCat == 0
-                                    ? model.carbPercentage!.round().toString()
-                                    : model.typeCat == 1
-                                        ? model.fatPercentage!
+                                    ? model.carbPercentage == null
+                                        ? model.resueltOfSheduleModel!
+                                            .carbPercentage!
                                             .round()
                                             .toString()
-                                        : model.proteinPercentage!
+                                        : model.carbPercentage!
                                             .round()
-                                            .toString(),
+                                            .toString()
+                                    : model.typeCat == 1
+                                        ? model.fatPercentage == null
+                                            ? model.resueltOfSheduleModel!
+                                                .fatPercentage
+                                                .round()
+                                                .toString()
+                                            : model.fatPercentage!
+                                                .round()
+                                                .toString()
+                                        : model.proteinPercentage == null
+                                            ? model.resueltOfSheduleModel!
+                                                .proteinPercentage
+                                                .round()
+                                                .toString()
+                                            : model.proteinPercentage!
+                                                .round()
+                                                .toString(),
                                 style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold),
+                                  fontSize: 30,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 ' calories ',
                                 style: TextStyle(
-                                    fontSize: 25, color: Colors.white),
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
                               )
                             ],
                           ),
@@ -176,15 +197,13 @@ class ChoseStarchesScreen extends StatelessWidget {
                                 size: size,
                                 label: 'Discard',
                                 onTap: () {
-
-                                  if(model.typeCat == 1){
+                                  if (model.typeCat == 1) {
                                     model.cancelCarbMeals(context);
-                                  }else if(model.typeCat == 2){
+                                  } else if (model.typeCat == 2) {
                                     model.cancelProteinMeals(context);
-                                  }else{
+                                  } else {
                                     model.cancelFatMeals(context);
                                   }
-
 
                                   Navigator.of(context).pop();
                                 },
@@ -194,7 +213,9 @@ class ChoseStarchesScreen extends StatelessWidget {
                               SubmitItemButton(
                                 size: size,
                                 label: 'Apply',
-                                onTap: () {Navigator.of(context).pop();},
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
                                 backgroundColor: Colors.red,
                                 labelColor: Colors.white,
                               )

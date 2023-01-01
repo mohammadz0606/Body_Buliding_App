@@ -34,12 +34,12 @@ class ResueltOfSheduleModel {
   factory ResueltOfSheduleModel.fromJson(DocumentSnapshot json) {
     return ResueltOfSheduleModel(
       userId: json["userID"],
-      calories: int.parse(json["calories"]),
-      proteinPercentage: double.parse(json["proteinPercentage"]),
-      carbPercentage: double.parse(json["carbPercentage"]),
-      fatPercentage: double.parse(json["fatPercentage"]),
-      height: double.parse(json["height"]),
-      weight: double.parse(json["weight"]),
+      calories: json["calories"],
+      proteinPercentage: json["proteinPercentage"],
+      carbPercentage: json["carbPercentage"],
+      fatPercentage: json["fatPercentage"],
+      height: json["height"],
+      weight: json["weight"],
       finalProteinsItems:
           List<Map<String, dynamic>>.from(json["finalProteinsItems"] as List)
               .map((e) {

@@ -384,6 +384,7 @@ class AppProvider extends ChangeNotifier {
   String appBarTitle = "";
 
   double sliderVal = 0;
+
   //int age = 0;
 
   // 0 = noSelected
@@ -668,10 +669,14 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
-  void signOut() async {
+  void signOut(BuildContext context) async {
     await _database.signOut();
     _userModel = null;
     _selectedIndex = 0;
+    cancelMeals(context);
+    isMuscular = 0;
+    activity = 0;
+    isMale = 0;
     notifyListeners();
   }
 
@@ -845,7 +850,7 @@ class AppProvider extends ChangeNotifier {
         calories = ((weight * 2.2 * 10) * activity - 500).toInt();
       }
 
-      calories1 = calories;
+      calories1 = _resueltOfSheduleModel!.calories;
       getTypePercentage(isMuscular == 1);
 
       setCaloriesInDatabase(
@@ -855,8 +860,11 @@ class AppProvider extends ChangeNotifier {
           height: height,
           weight: weight,
           muscular: isMuscular == 1 ? "MUSCULAR" : "DRYING OF FAT",
-          gender: isMale == 1 ? "Male":"Female",
+          gender: isMale == 1 ? "Male" : "Female",
           activity: activity.toString(),
+          proteinPercentage: proteinPercentage!,
+          carbPercentage: carbPercentage!,
+          fatPercentage: fatPercentage!,
         ),
         context: context,
       );
@@ -880,7 +888,10 @@ class AppProvider extends ChangeNotifier {
   }
 
   void changeCalories() {
-    calories1 = calories;
+    calories1 = _resueltOfSheduleModel!.calories;
+    fatPercentage = _resueltOfSheduleModel!.fatPercentage;
+    carbPercentage = _resueltOfSheduleModel!.carbPercentage;
+    proteinPercentage = _resueltOfSheduleModel!.proteinPercentage;
     finalFatsItems.forEach((element) {
       fatPercentage = (fatPercentage! - element['calories']);
       calories1 = (calories1! - element['calories']) as int?;
@@ -916,28 +927,42 @@ class AppProvider extends ChangeNotifier {
   }
 
   void cancelFatMeals(BuildContext context) {
-    for (int i = 0; i < fatsItems.length; i++) {
-      choseStarchesItem(false, i, context);
+    if(!finalFatsItems.isEmpty){
+      for (int i = 0; i < fatsItems.length; i++) {
+        choseStarchesItem(false, i, context);
+      }
+      finalFatsItems = [];
+      notifyListeners();
+    }else{
+      notifyListeners();
     }
 
-    finalFatsItems = [];
-    notifyListeners();
+
   }
 
   void cancelProteinMeals(BuildContext context) {
-    for (int i = 0; i < proteinsItems.length; i++) {
-      choseStarchesItem(false, i, context);
+    if(!finalProteinsItems.isEmpty){
+      for (int i = 0; i < proteinsItems.length; i++) {
+        choseStarchesItem(false, i, context);
+      }
+      finalProteinsItems = [];
+      notifyListeners();
+    }else{
+      notifyListeners();
     }
-    finalProteinsItems = [];
-    notifyListeners();
+
   }
 
   void cancelCarbMeals(BuildContext context) {
-    for (int i = 0; i < carbItems.length - 2; i++) {
-      choseStarchesItem(false, i, context);
+    if(!finalCarbItems.isEmpty){
+      for (int i = 0; i < carbItems.length - 2; i++) {
+        choseStarchesItem(false, i, context);
+      }
+      finalCarbItems = [];
+      notifyListeners();
+    }else{
+      notifyListeners();
     }
-    finalCarbItems = [];
-    notifyListeners();
   }
 
   /*
@@ -947,32 +972,27 @@ class AppProvider extends ChangeNotifier {
 
   bool get isLoadingCalories => _isLoadingCalories;
 
+  bool _isLoadingSchedule = false;
+
+  bool get isLoadingSchedule => _isLoadingCalories;
+
   ResueltOfSheduleModel? _resueltOfSheduleModel;
 
   ResueltOfSheduleModel? get resueltOfSheduleModel => _resueltOfSheduleModel;
 
-
-
-  Future<bool> isExistingCalories({required String userID}) async{
+  Future<bool> isExistingCalories({required String userID}) async {
     return await _database.isExisting(userID: userID);
-    notifyListeners();
   }
 
   void getCaloriesAndScheduleInDatabase() async {
-    try {
       String userID = FirebaseAuth.instance.currentUser!.uid;
       if (await isExistingCalories(userID: userID)) {
+        print("yesss");
         _resueltOfSheduleModel = ResueltOfSheduleModel.fromJson(
           await _database.getCaloriesAndScheduleInDatabase(userID: userID),
         );
         notifyListeners();
-      } else {
-        notifyListeners();
       }
-      notifyListeners();
-    } catch (e) {
-      notifyListeners();
-    }
   }
 
   void setCaloriesInDatabase({
@@ -991,6 +1011,7 @@ class AppProvider extends ChangeNotifier {
             ElevatedButton(
               onPressed: () {
                 _isLoadingCalories = true;
+                cancelMeals(context);
                 Navigator.of(context).pop();
                 ConstantWidget.massage(
                     context: context, text: "Wait tell me...");
@@ -1031,6 +1052,40 @@ class AppProvider extends ChangeNotifier {
       }
     } catch (e) {
       print(e.toString());
+      notifyListeners();
+    }
+  }
+
+  void setScheduleInDatabase({
+    required BuildContext context,
+  }) async {
+    try {
+      _isLoadingSchedule = true;
+      ConstantWidget.massage(context: context, text: "Wait tell me...");
+      notifyListeners();
+     await _database.setScheduleInDatabase(
+        resuelt: ResueltOfSheduleModel(
+          userId: _resueltOfSheduleModel!.userId,
+          calories: _resueltOfSheduleModel!.calories,
+          height: _resueltOfSheduleModel!.height,
+          weight: _resueltOfSheduleModel!.weight,
+          gender: _resueltOfSheduleModel!.gender,
+          muscular: _resueltOfSheduleModel!.muscular,
+          activity: _resueltOfSheduleModel!.activity,
+          proteinPercentage: proteinPercentage!,
+          carbPercentage: carbPercentage!,
+          fatPercentage: fatPercentage!,
+          finalProteinsItems: finalProteinsItems,
+          finalFatsItems: finalFatsItems,
+          finalCarbItems: finalCarbItems,
+        ),
+      );
+      getCaloriesAndScheduleInDatabase();
+      _isLoadingSchedule = false;
+      Navigator.of(context).pop();
+      ConstantWidget.massage(context: context, text: "The schedule has been selected successfully");
+      notifyListeners();
+    } catch (e) {
       notifyListeners();
     }
   }

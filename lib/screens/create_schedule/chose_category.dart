@@ -1,3 +1,4 @@
+import 'package:body_building/helper/constant_widget.dart';
 import 'package:body_building/screens/nav_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../../helper/constant_style.dart';
 import '../../widgets/ChoseCategoryButton.dart';
 import '../../widgets/submit_item_button.dart';
-import '../calculate_screen.dart';
 
 class ChoseCategory extends StatelessWidget {
   static const String route = 'chose_type_of_food';
@@ -16,6 +16,7 @@ class ChoseCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    var provider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Container(),
@@ -39,7 +40,7 @@ class ChoseCategory extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Text(
-                      'You have ${Provider.of<AppProvider>(context).calories1} Calories',
+                      'You have ${provider.calories1 == null ? provider.resueltOfSheduleModel!.calories : provider.calories1} Calories',
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ),
@@ -68,6 +69,7 @@ class ChoseCategory extends StatelessWidget {
                     imageUrl:
                         'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F44%2F2021%2F08%2F10%2Fwhat-is-protein.jpg',
                   ),
+                  SizedBox(height: size.height * 0.2),
                 ],
               ),
             ),
@@ -76,71 +78,86 @@ class ChoseCategory extends StatelessWidget {
             bottom: 0,
             left: 0,
             child: Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      spreadRadius: 1,
-                      blurRadius: 10,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                  color: MyColors.secondaryColor,
-                ),
-                width: size.width,
-                height: size.height * 0.2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Apply your  ',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                        Text(
-                          'Meals ',
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SubmitItemButton(
-                          size: size,
-                          label: 'Discard',
-                          onTap: () {
-                            Provider.of<AppProvider>(context, listen: false)
-                                .cancelMeals(context);
-                            if (Navigator.of(context).canPop()) {
-                              Navigator.of(context).pop();
-                            } else {
-                              Provider.of<AppProvider>(context, listen: false)
-                                  .onTabChange(0);
-
-                              Navigator.of(context)
-                                  .pushReplacementNamed(NavScreen.route);
-                            }
-                          },
-                          backgroundColor: MyColors.secondaryColor,
-                          labelColor: Colors.red,
-                        ),
-                        SubmitItemButton(
-                          size: size,
-                          label: 'Apply',
-                          onTap: () {},
-                          backgroundColor: Colors.red,
-                          labelColor: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ],
-                )),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black,
+                    spreadRadius: 1,
+                    blurRadius: 10,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+                color: MyColors.secondaryColor,
+              ),
+              width: size.width,
+              height: size.height * 0.2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Apply your  ',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      Text(
+                        'Meals ',
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  Consumer<AppProvider>(
+                    builder: (context, model, child) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SubmitItemButton(
+                            size: size,
+                            label: 'Discard',
+                            onTap: () {
+                              model.cancelMeals(context);
+                              if (Navigator.of(context).canPop()) {
+                                Navigator.of(context).pop();
+                              } else {
+                                model.onTabChange(0);
+                                Navigator.of(context)
+                                    .pushReplacementNamed(NavScreen.route);
+                              }
+                            },
+                            backgroundColor: MyColors.secondaryColor,
+                            labelColor: Colors.red,
+                          ),
+                          SubmitItemButton(
+                            size: size,
+                            label: 'Apply',
+                            onTap: () {
+                              if (model.finalProteinsItems.length < 1 ||
+                                  model.finalCarbItems.length < 1 ||
+                                  model.finalFatsItems.length < 1) {
+                                ConstantWidget.dialog(
+                                  context: context,
+                                  title: Text("Warning⚠"),
+                                  content: Text(
+                                      "Make sure you choose nutrients from each category"),
+                                );
+                              } else {
+                                model.setScheduleInDatabase(context: context);
+                              }
+                            },
+                            backgroundColor: Colors.red,
+                            labelColor: Colors.white,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
           )
         ],
       ),

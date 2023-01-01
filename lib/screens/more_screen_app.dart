@@ -142,11 +142,13 @@ class MoreAppScreen extends StatelessWidget {
                       if (!await model.isExistingCalories(
                           userID: model.userModel!.id!)) {
                         Navigator.of(context).pushNamed(GoToCalculatePage.rout);
-                      } else if (model.finalProteinsItems.isEmpty ||
-                          model.finalCarbItems.isEmpty ||
-                          model.finalFatsItems.isEmpty) {
-                        Navigator.of(context)
-                            .pushNamed(GoToChooseMealPage.rout);
+                      } else if (model.resueltOfSheduleModel!.finalProteinsItems
+                              .isEmpty ||
+                          model.resueltOfSheduleModel!.finalCarbItems.isEmpty ||
+                          model.resueltOfSheduleModel!.finalFatsItems.isEmpty) {
+                        Navigator.of(context).pushNamed(
+                          GoToChooseMealPage.rout,
+                        );
                       } else {
                         Navigator.of(context).pushNamed(BMIResultScreen.route);
                       }
@@ -157,7 +159,7 @@ class MoreAppScreen extends StatelessWidget {
                     color: Colors.red,
                     icon: Icons.logout,
                     onTap: () {
-                      model.signOut();
+                      model.signOut(context);
                       Navigator.of(context).pushReplacementNamed(
                         LoginScreen.route,
                       );

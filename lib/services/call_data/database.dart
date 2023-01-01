@@ -181,20 +181,28 @@ class Database {
     required ResueltOfSheduleModel resuelt,
   }) async {
     try {
-      DocumentSnapshot isExisting = await FirebaseFirestore.instance
+      ResueltOfSheduleModel newResuelt = ResueltOfSheduleModel(
+        userId: resuelt.userId,
+        calories: resuelt.calories,
+        height: resuelt.height,
+        weight: resuelt.weight,
+        gender: resuelt.gender,
+        muscular: resuelt.muscular,
+        activity: resuelt.activity,
+        proteinPercentage: resuelt.proteinPercentage,
+        carbPercentage: resuelt.carbPercentage,
+        fatPercentage: resuelt.fatPercentage,
+        finalProteinsItems: resuelt.finalProteinsItems,
+        finalCarbItems: resuelt.finalCarbItems,
+        finalFatsItems: resuelt.finalFatsItems,
+      );
+      await FirebaseFirestore.instance
           .collection("usersSchedule")
           .doc(resuelt.userId)
-          .get();
-      if (isExisting.exists) {
-        throw Exception("You already own a schedule, delete or modify it");
-      } else {
-        return await FirebaseFirestore.instance
-            .collection("usersSchedule")
-            .doc(resuelt.userId)
-            .set(
-              resuelt.toMap(),
-            );
-      }
+          .update(
+            newResuelt.toMap(),
+          );
+      await getCaloriesAndScheduleInDatabase(userID: newResuelt.userId);
     } catch (e) {
       throw Exception(e.toString());
     }
