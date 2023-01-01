@@ -673,10 +673,12 @@ class AppProvider extends ChangeNotifier {
     await _database.signOut();
     _userModel = null;
     _selectedIndex = 0;
-    cancelMeals(context);
+    //cancelMeals(context);
     isMuscular = 0;
     activity = 0;
     isMale = 0;
+    weight = 70;
+    height = 175;
     notifyListeners();
   }
 
@@ -927,42 +929,27 @@ class AppProvider extends ChangeNotifier {
   }
 
   void cancelFatMeals(BuildContext context) {
-    if(!finalFatsItems.isEmpty){
-      for (int i = 0; i < fatsItems.length; i++) {
-        choseStarchesItem(false, i, context);
-      }
-      finalFatsItems = [];
-      notifyListeners();
-    }else{
-      notifyListeners();
+    for (int i = 0; i < fatsItems.length; i++) {
+      choseStarchesItem(false, i, context);
     }
-
-
+    finalFatsItems = [];
+    notifyListeners();
   }
 
   void cancelProteinMeals(BuildContext context) {
-    if(!finalProteinsItems.isEmpty){
-      for (int i = 0; i < proteinsItems.length; i++) {
-        choseStarchesItem(false, i, context);
-      }
-      finalProteinsItems = [];
-      notifyListeners();
-    }else{
-      notifyListeners();
+    for (int i = 0; i < proteinsItems.length; i++) {
+      choseStarchesItem(false, i, context);
     }
-
+    finalProteinsItems = [];
+    notifyListeners();
   }
 
   void cancelCarbMeals(BuildContext context) {
-    if(!finalCarbItems.isEmpty){
-      for (int i = 0; i < carbItems.length - 2; i++) {
-        choseStarchesItem(false, i, context);
-      }
-      finalCarbItems = [];
-      notifyListeners();
-    }else{
-      notifyListeners();
+    for (int i = 0; i < carbItems.length - 2; i++) {
+      choseStarchesItem(false, i, context);
     }
+    finalCarbItems = [];
+    notifyListeners();
   }
 
   /*
@@ -985,14 +972,14 @@ class AppProvider extends ChangeNotifier {
   }
 
   void getCaloriesAndScheduleInDatabase() async {
-      String userID = FirebaseAuth.instance.currentUser!.uid;
-      if (await isExistingCalories(userID: userID)) {
-        print("yesss");
-        _resueltOfSheduleModel = ResueltOfSheduleModel.fromJson(
-          await _database.getCaloriesAndScheduleInDatabase(userID: userID),
-        );
-        notifyListeners();
-      }
+    String userID = FirebaseAuth.instance.currentUser!.uid;
+    if (await isExistingCalories(userID: userID)) {
+      print("yesss");
+      _resueltOfSheduleModel = ResueltOfSheduleModel.fromJson(
+        await _database.getCaloriesAndScheduleInDatabase(userID: userID),
+      );
+      notifyListeners();
+    }
   }
 
   void setCaloriesInDatabase({
@@ -1011,10 +998,12 @@ class AppProvider extends ChangeNotifier {
             ElevatedButton(
               onPressed: () {
                 _isLoadingCalories = true;
-                cancelMeals(context);
+                //cancelMeals(context);
                 Navigator.of(context).pop();
                 ConstantWidget.massage(
-                    context: context, text: "Wait tell me...");
+                  context: context,
+                  text: "Wait tell me...",
+                );
                 notifyListeners();
                 _database.setCaloriesInDatabase(resuelt: resuelt);
                 _isLoadingCalories = false;
@@ -1063,7 +1052,7 @@ class AppProvider extends ChangeNotifier {
       _isLoadingSchedule = true;
       ConstantWidget.massage(context: context, text: "Wait tell me...");
       notifyListeners();
-     await _database.setScheduleInDatabase(
+      await _database.setScheduleInDatabase(
         resuelt: ResueltOfSheduleModel(
           userId: _resueltOfSheduleModel!.userId,
           calories: _resueltOfSheduleModel!.calories,
@@ -1083,7 +1072,9 @@ class AppProvider extends ChangeNotifier {
       getCaloriesAndScheduleInDatabase();
       _isLoadingSchedule = false;
       Navigator.of(context).pop();
-      ConstantWidget.massage(context: context, text: "The schedule has been selected successfully");
+      ConstantWidget.massage(
+          context: context,
+          text: "The schedule has been selected successfully");
       notifyListeners();
     } catch (e) {
       notifyListeners();
