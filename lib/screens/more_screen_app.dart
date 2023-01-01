@@ -10,6 +10,7 @@ import '../helper/constant_style.dart';
 import '../helper/constant_widget.dart';
 import '../widgets/more_screen_button.dart';
 import 'auth/login_screen.dart';
+import 'bmi_result_screen.dart';
 
 class MoreAppScreen extends StatelessWidget {
   const MoreAppScreen({Key? key}) : super(key: key);
@@ -143,8 +144,7 @@ class MoreAppScreen extends StatelessWidget {
                       }else if(model.finalProteinsItems.isEmpty||model.finalCarbItems.isEmpty||model.finalFatsItems.isEmpty){
                         Navigator.of(context).pushNamed(GoToChooseMealPage.rout);
                       }else{
-                        Navigator.of(context).pushNamed(ChoseCategory.route);
-
+                        Navigator.of(context).pushNamed(BMIResultScreen.route);
                       }
                     },
                   ),
