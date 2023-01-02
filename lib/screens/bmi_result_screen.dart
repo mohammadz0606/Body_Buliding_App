@@ -124,10 +124,121 @@ class BMIResultScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: size.height * 0.02),
+                buildCard(
+                  size: size,
+                  resuelt: resuelt.finalFatsItems,
+                  image: "assets/chose_category/starches.jpg",
+                  title: "Starches",
+                ),
+                buildCard(
+                  size: size,
+                  resuelt: resuelt.finalCarbItems,
+                  image: "assets/chose_category/fats.jpg",
+                  title: "Carb",
+                ),
+                buildCard(
+                  size: size,
+                  resuelt: resuelt.finalProteinsItems,
+                  image: "assets/chose_category/proteins.jpg",
+                  title: "Proteins",
+                ),
               ],
             ),
           );
         },
+      ),
+    );
+  }
+
+  Card buildCard({
+    required Size size,
+    required List resuelt,
+    required String image,
+    required String title,
+  }) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+        side: BorderSide(
+          color: Colors.black,
+          width: 1.4,
+        ),
+      ),
+      color: MyColors.secondaryColor,
+      margin: EdgeInsets.all(size.height * 0.03),
+      child: Column(
+        children: [
+          Container(
+            width: size.width * 0.9,
+            height: size.height * 0.16,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: ExactAssetImage(
+                  image,
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          ExpansionTile(
+            iconColor: Colors.white,
+            collapsedIconColor: Colors.white,
+            title: Text(
+              title,
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.white,
+              ),
+            ),
+            children: resuelt.map(
+              (item) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: ListTile(
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: FadeInImage(
+                        placeholder: AssetImage("assets/placeholder.gif"),
+                        placeholderFit: BoxFit.cover,
+                        fit: BoxFit.cover,
+                        image: NetworkImage(item["imageUrl"],)
+                      ),
+                    ),
+                    title: Text(
+                      item["name"],
+                      style: GoogleFonts.roboto(
+                        color: Colors.white,
+                        fontSize: 19,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Calories: ${item["calories"]}",
+                          style: TextStyle(
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        Text(
+                          "Quantity: ${item["quantity"]}",
+                          style: TextStyle(
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ).toList(),
+          ),
+        ],
       ),
     );
   }
@@ -137,18 +248,19 @@ class BMIResultScreen extends StatelessWidget {
     required int number,
   }) {
     return CircularPercentIndicator(
-      radius: 45,
+      radius: 46,
       lineWidth: 8.0,
       animation: true,
       animationDuration: 700,
       percent: 0.5,
-      center: new Text(
-        number.toString(),
+      center: Text(
+        "${number.toString()}\nCalorie",
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 16.0,
+          fontSize: 16,
           color: Colors.white,
         ),
+        textAlign: TextAlign.center,
       ),
       circularStrokeCap: CircularStrokeCap.round,
       progressColor: color,

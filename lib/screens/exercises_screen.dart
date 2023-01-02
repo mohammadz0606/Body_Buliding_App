@@ -50,7 +50,7 @@ class ExercisesScreen extends StatelessWidget {
                                   height: size.height / 3.1,
                                   width: double.infinity,
                                   placeholder: const AssetImage(
-                                    "assets/blank-profile.jpg",
+                                    "assets/placeholder.gif",
                                   ),
                                   image: NetworkImage(
                                     category.image,

@@ -30,35 +30,38 @@ class TypeFoodButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: InkWell(
-          borderRadius: BorderRadius.circular(30),
-          onTap: () {
-            Provider.of<AppProvider>(context,listen: false).choseCategory(type);
+        borderRadius: BorderRadius.circular(30),
+        onTap: () {
+          Provider.of<AppProvider>(context, listen: false).choseCategory(type);
 
-            Navigator.of(context).pushNamed(ChoseStarchesScreen.route);
-          },
-          child: Row(
-            children: [
-              Expanded(
-                child: Center(
-                    child: Text(
+          Navigator.of(context).pushNamed(ChoseStarchesScreen.route);
+        },
+        child: Row(
+          children: [
+            Expanded(
+              child: Center(
+                child: Text(
                   label,
                   style: TextStyle(fontSize: 30, color: Colors.white),
-                )),
-              ),
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(30),
-                      bottomRight: Radius.circular(30)),
-                  child: Image.asset(
-                    imageUrl,
-                    fit: BoxFit.cover,
-                    height: double.infinity,
-                  ),
                 ),
-              )
-            ],
-          )),
+              ),
+            ),
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                ),
+                child: Image.asset(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  height: double.infinity,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

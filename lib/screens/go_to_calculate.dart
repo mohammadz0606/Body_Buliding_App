@@ -58,18 +58,18 @@ class GoToCalculatePage extends StatelessWidget {
                       children: [
                         Text(
                           'Do you want to ',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 17, color: Colors.white),
                         ),
                         Text(
                           'Calculate ',
                           style: TextStyle(
-                              fontSize: 25,
+                              fontSize: 21,
                               color: Colors.red,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           'your calories? ',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 17, color: Colors.white),
                         )
                       ],
                     ),

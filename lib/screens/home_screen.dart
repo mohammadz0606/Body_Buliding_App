@@ -115,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                                         height: size.height / 3.1,
                                         width: size.width / 2.55,
                                         placeholder: const AssetImage(
-                                          "assets/blank-profile.jpg",
+                                          "assets/placeholder.gif",
                                         ),
                                         image: NetworkImage(
                                           trainer.image,

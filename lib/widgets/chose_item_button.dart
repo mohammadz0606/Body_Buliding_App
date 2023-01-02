@@ -26,39 +26,46 @@ class ChoseItemButton extends StatelessWidget {
         return Column(
           children: [
             Container(
-                margin: EdgeInsets.fromLTRB(0, 4, 0, visible == true ? 0 : 4),
-                color: MyColors.secondaryColor,
-                child: CheckboxListTile(
-                  activeColor: Colors.red,
-                  value: model.typeCat == 0
-                      ? model.carbItems[index]['value']==0?false:true
-                      : model.typeCat == 1
-                          ? model.fatsItems[index]['value']==0?false:true
-                          : model.proteinsItems[index]['value']==0?false:true,
-                  onChanged: (value) {
-                    model.choseStarchesItem(value ?? false, index, context);
-                  },
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.fromLTRB(0, 5, 20, 0),
-                        height: 100,
-                        width: 100,
-                        child: ClipRRect(
-                          child: Image.network(
-                            imageUrl,
-                            fit: BoxFit.cover,
-                          ),
+              margin: EdgeInsets.fromLTRB(0, 4, 0, visible == true ? 0 : 4),
+              color: MyColors.secondaryColor,
+              child: CheckboxListTile(
+                activeColor: Colors.red,
+                value: model.typeCat == 0
+                    ? model.carbItems[index]['value'] == 0
+                        ? false
+                        : true
+                    : model.typeCat == 1
+                        ? model.fatsItems[index]['value'] == 0
+                            ? false
+                            : true
+                        : model.proteinsItems[index]['value'] == 0
+                            ? false
+                            : true,
+                onChanged: (value) {
+                  model.choseStarchesItem(value ?? false, index, context);
+                },
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 5, 20, 0),
+                      height: 100,
+                      width: 100,
+                      child: ClipRRect(
+                        child: Image.network(
+                          imageUrl,
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      Text(
-                        label,
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                    ],
-                  ),
-                )),
+                    ),
+                    Text(
+                      label,
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Visibility(
               visible: visible,
               child: AnimatedContainer(
@@ -71,14 +78,12 @@ class ChoseItemButton extends StatelessWidget {
                       ? [
                           RadioListTile<int>(
                               activeColor: Colors.red,
-
                               title: Text(
                                 '${model.carbItems[index]['quantity'] * 1}G',
                                 style: TextStyle(color: Colors.white),
                               ),
                               value: 1,
-                              groupValue: model.carbItems[index]
-                                  ['groupValue'],
+                              groupValue: model.carbItems[index]['groupValue'],
                               onChanged: (int? val) {
                                 model.changeCount(val!, type, index);
                               }),
@@ -89,8 +94,7 @@ class ChoseItemButton extends StatelessWidget {
                                 style: TextStyle(color: Colors.white),
                               ),
                               value: 2,
-                              groupValue: model.carbItems[index]
-                                  ['groupValue'],
+                              groupValue: model.carbItems[index]['groupValue'],
                               onChanged: (int? val) {
                                 model.changeCount(val!, type, index);
                               }),
@@ -101,8 +105,7 @@ class ChoseItemButton extends StatelessWidget {
                                 style: TextStyle(color: Colors.white),
                               ),
                               value: 3,
-                              groupValue: model.carbItems[index]
-                                  ['groupValue'],
+                              groupValue: model.carbItems[index]['groupValue'],
                               onChanged: (int? val) {
                                 model.changeCount(val!, type, index);
                               })
