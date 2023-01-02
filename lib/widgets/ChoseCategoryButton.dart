@@ -50,7 +50,7 @@ class TypeFoodButton extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(30),
                       bottomRight: Radius.circular(30)),
-                  child: Image.network(
+                  child: Image.asset(
                     imageUrl,
                     fit: BoxFit.cover,
                     height: double.infinity,

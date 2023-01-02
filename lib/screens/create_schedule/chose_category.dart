@@ -53,21 +53,21 @@ class ChoseCategory extends StatelessWidget {
                     size: size,
                     label: 'Starches',
                     imageUrl:
-                        'https://foodrevolution.org/wp-content/uploads/iStock-177273143_rev2.jpg',
+                        'assets/chose_category/starches.jpg',
                   ),
                   TypeFoodButton(
                     type: 1,
                     size: size,
                     label: 'Fats',
                     imageUrl:
-                        'https://i1.wp.com/www.differencebetween.com/wp-content/uploads/2021/11/Grains.jpg',
+                        'assets/chose_category/fats.jpg',
                   ),
                   TypeFoodButton(
                     type: 2,
                     size: size,
                     label: 'Proteins',
                     imageUrl:
-                        'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F44%2F2021%2F08%2F10%2Fwhat-is-protein.jpg',
+                        'assets/chose_category/proteins.jpg',
                   ),
                   SizedBox(height: size.height * 0.2),
                 ],

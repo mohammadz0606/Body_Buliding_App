@@ -673,6 +673,7 @@ class AppProvider extends ChangeNotifier {
     await _database.signOut();
     _userModel = null;
     _selectedIndex = 0;
+    profileImage = null;
     //cancelMeals(context);
     isMuscular = 0;
     activity = 0;
@@ -961,7 +962,7 @@ class AppProvider extends ChangeNotifier {
 
   bool _isLoadingSchedule = false;
 
-  bool get isLoadingSchedule => _isLoadingCalories;
+  //bool get isLoadingSchedule => _isLoadingCalories;
 
   ResueltOfSheduleModel? _resueltOfSheduleModel;
 
@@ -974,7 +975,6 @@ class AppProvider extends ChangeNotifier {
   void getCaloriesAndScheduleInDatabase() async {
     String userID = FirebaseAuth.instance.currentUser!.uid;
     if (await isExistingCalories(userID: userID)) {
-      print("yesss");
       _resueltOfSheduleModel = ResueltOfSheduleModel.fromJson(
         await _database.getCaloriesAndScheduleInDatabase(userID: userID),
       );
@@ -1061,9 +1061,9 @@ class AppProvider extends ChangeNotifier {
           gender: _resueltOfSheduleModel!.gender,
           muscular: _resueltOfSheduleModel!.muscular,
           activity: _resueltOfSheduleModel!.activity,
-          proteinPercentage: proteinPercentage!,
-          carbPercentage: carbPercentage!,
-          fatPercentage: fatPercentage!,
+          proteinPercentage: _resueltOfSheduleModel!.proteinPercentage,
+          carbPercentage: _resueltOfSheduleModel!.carbPercentage,
+          fatPercentage: _resueltOfSheduleModel!.fatPercentage,
           finalProteinsItems: finalProteinsItems,
           finalFatsItems: finalFatsItems,
           finalCarbItems: finalCarbItems,
