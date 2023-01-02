@@ -962,8 +962,6 @@ class AppProvider extends ChangeNotifier {
 
   bool _isLoadingSchedule = false;
 
-  //bool get isLoadingSchedule => _isLoadingCalories;
-
   ResueltOfSheduleModel? _resueltOfSheduleModel;
 
   ResueltOfSheduleModel? get resueltOfSheduleModel => _resueltOfSheduleModel;
@@ -990,12 +988,21 @@ class AppProvider extends ChangeNotifier {
       if (await isExistingCalories(userID: resuelt.userId)) {
         ConstantWidget.dialog(
           context: context,
-          title: Text("Warning⚠"),
+          title: Text(
+            "Warning",
+            style: TextStyle(
+              color: MyColors.primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           content: Text(
             "You already have calories. Are you sure to recalculate again?",
+            style: const TextStyle(
+              fontSize: 16,
+            ),
           ),
           action: [
-            ElevatedButton(
+            TextButton(
               onPressed: () {
                 _isLoadingCalories = true;
                 //cancelMeals(context);
@@ -1016,14 +1023,24 @@ class AppProvider extends ChangeNotifier {
                 );
                 notifyListeners();
               },
-              child: Text("Yes"),
+              child: Text(
+                "Yes",
+                style: TextStyle(
+                  color: MyColors.primaryColor,
+                ),
+              ),
             ),
-            ElevatedButton(
+            TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 notifyListeners();
               },
-              child: Text("No"),
+              child: Text(
+                "No",
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
             ),
           ],
         );

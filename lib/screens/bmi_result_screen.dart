@@ -14,14 +14,14 @@ class BMIResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My Schedule'.toUpperCase()),
-      ),
-      body: Consumer<AppProvider>(
-        builder: (context, model, child) {
-          var resuelt = model.resueltOfSheduleModel!;
-          return SingleChildScrollView(
+    return Consumer<AppProvider>(
+      builder: (context, model, child) {
+        var resuelt = model.resueltOfSheduleModel!;
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('My Schedule'.toUpperCase()),
+          ),
+          body: SingleChildScrollView(
             padding: const EdgeInsets.all(10),
             physics: const BouncingScrollPhysics(),
             child: Column(
@@ -143,11 +143,30 @@ class BMIResultScreen extends StatelessWidget {
                   image: "assets/chose_category/proteins.jpg",
                   title: "Proteins",
                 ),
+                SizedBox(height: size.height * 0.1),
               ],
             ),
-          );
-        },
-      ),
+          ), //var resuelt = model.resueltOfSheduleModel!;
+          floatingActionButton: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FloatingActionButton.small(
+                heroTag: null,
+                backgroundColor: Color(0xff18DE0E),
+                onPressed: () {},
+                child: Icon(Icons.edit),
+              ),
+              SizedBox(height: size.height * 0.01),
+              FloatingActionButton(
+                heroTag: null,
+                backgroundColor: Color(0xffFF0000),
+                onPressed: () {},
+                child: Icon(Icons.delete),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -166,7 +185,12 @@ class BMIResultScreen extends StatelessWidget {
         ),
       ),
       color: MyColors.secondaryColor,
-      margin: EdgeInsets.all(size.height * 0.03),
+      margin: EdgeInsets.only(
+        top: size.height * 0.03,
+        left: size.height * 0.03,
+        right: size.height * 0.03,
+        bottom: 7,
+      ),
       child: Column(
         children: [
           Container(
@@ -200,11 +224,12 @@ class BMIResultScreen extends StatelessWidget {
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: FadeInImage(
-                        placeholder: AssetImage("assets/placeholder.gif"),
-                        placeholderFit: BoxFit.cover,
-                        fit: BoxFit.cover,
-                        image: NetworkImage(item["imageUrl"],)
-                      ),
+                          placeholder: AssetImage("assets/placeholder.gif"),
+                          placeholderFit: BoxFit.cover,
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            item["imageUrl"],
+                          )),
                     ),
                     title: Text(
                       item["name"],
