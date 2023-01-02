@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../helper/constant_style.dart';
 
-
 // ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
   final IconData prefixIcon;
+  IconButton? suffixIcon;
   final TextEditingController controller;
   final String? Function(String? value) validator;
   final FocusNode? focusNode;
@@ -24,6 +24,7 @@ class CustomTextField extends StatelessWidget {
     required this.validator,
     this.obscureText,
     this.focusNode,
+    this.suffixIcon,
     this.textInputAction,
     this.onEditingComplete,
   }) : super(key: key);
@@ -69,6 +70,7 @@ class CustomTextField extends StatelessWidget {
             color: MyColors.titleFieldsColor,
           ),
         ),
+        suffixIcon: suffixIcon,
         prefixIcon: Icon(
           prefixIcon,
           color: MyColors.titleFieldsColor,

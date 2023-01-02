@@ -22,6 +22,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var provider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(size.height * 0.46),
@@ -94,8 +95,15 @@ class LoginScreen extends StatelessWidget {
                         }
                         return null;
                       },
-                      obscureText: true,
+                      obscureText: provider.obscureTextLogin,
                       prefixIcon: Icons.lock_outline,
+                      suffixIcon: IconButton(
+                        onPressed: (){
+                          provider.changeVisibilityLogin();
+                        },
+                        color: MyColors.titleFieldsColor,
+                        icon: Icon(provider.iconLogin),
+                      ),
                       hintText: "Enter your password",
                       keyboardType: TextInputType.visiblePassword,
                     ),

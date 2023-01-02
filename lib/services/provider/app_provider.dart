@@ -1080,4 +1080,29 @@ class AppProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  /*
+  visibility password
+   */
+  bool obscureTextSignUp = true;
+  IconData iconSignUp = Icons.visibility_off;
+
+  void changeVisibilitySignUp() {
+    obscureTextSignUp = !obscureTextSignUp;
+    obscureTextSignUp
+        ? iconSignUp = Icons.visibility_off
+        : iconSignUp = Icons.visibility;
+    notifyListeners();
+  }
+
+  bool obscureTextLogin = true;
+  IconData iconLogin = Icons.visibility_off;
+
+  void changeVisibilityLogin() {
+    obscureTextLogin = !obscureTextLogin;
+    obscureTextLogin
+        ? iconLogin = Icons.visibility_off
+        : iconLogin = Icons.visibility;
+    notifyListeners();
+  }
 }

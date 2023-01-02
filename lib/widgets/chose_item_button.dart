@@ -52,15 +52,20 @@ class ChoseItemButton extends StatelessWidget {
                       height: 100,
                       width: 100,
                       child: ClipRRect(
-                        child: Image.network(
-                          imageUrl,
+                        child: FadeInImage(
+                          placeholder: AssetImage("assets/placeholder.gif"),
+                          image: NetworkImage(imageUrl),
                           fit: BoxFit.cover,
+                          placeholderFit: BoxFit.cover,
                         ),
                       ),
                     ),
                     Text(
                       label,
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
                     ),
                   ],
                 ),
@@ -178,17 +183,18 @@ class ChoseItemButton extends StatelessWidget {
                                     model.changeCount(val!, type, index);
                                   }),
                               RadioListTile<int>(
-                                  activeColor: Colors.red,
-                                  title: Text(
-                                    '${model.carbItems[index]['quantity'] * 3}G',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  value: 3,
-                                  groupValue: model.proteinsItems[index]
-                                      ['groupValue'],
-                                  onChanged: (int? val) {
-                                    model.changeCount(val!, type, index);
-                                  })
+                                activeColor: Colors.red,
+                                title: Text(
+                                  '${model.carbItems[index]['quantity'] * 3}G',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                value: 3,
+                                groupValue: model.proteinsItems[index]
+                                    ['groupValue'],
+                                onChanged: (int? val) {
+                                  model.changeCount(val!, type, index);
+                                },
+                              ),
                             ],
                 ),
               ),

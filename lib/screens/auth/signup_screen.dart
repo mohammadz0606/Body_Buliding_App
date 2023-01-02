@@ -28,6 +28,7 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var provider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(size.height * 0.46),
@@ -36,8 +37,7 @@ class SignupScreen extends StatelessWidget {
           elevation: 0,
           flexibleSpace: BulidBacgroundImage(
             size: size,
-            suptitle:
-            "Train and live new experience of\nexercising at home",
+            suptitle: "Train and live new experience of\nexercising at home",
             title: "Sign Up",
             image: "assets/signup_image.png",
           ),
@@ -98,7 +98,8 @@ class SignupScreen extends StatelessWidget {
                         if (text!.isEmpty) {
                           return "you must not empty";
                         }
-                        if (!text.contains("@")) {
+                        if (!text.contains("@") || !text.contains("gmail.com") ||
+                            !text.contains("yahoo.com")) {
                           return "The email is incorrect";
                         }
                         return null;
@@ -128,7 +129,14 @@ class SignupScreen extends StatelessWidget {
                       },
                       prefixIcon: Icons.lock_outline,
                       hintText: "Enter your password",
-                      obscureText: true,
+                      obscureText: provider.obscureTextSignUp,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          provider.changeVisibilitySignUp();
+                        },
+                        color: MyColors.titleFieldsColor,
+                        icon: Icon(provider.iconSignUp),
+                      ),
                       keyboardType: TextInputType.visiblePassword,
                     ),
                     const SizedBox(height: 15),
