@@ -1084,18 +1084,93 @@ class AppProvider extends ChangeNotifier {
           finalProteinsItems: finalProteinsItems,
           finalFatsItems: finalFatsItems,
           finalCarbItems: finalCarbItems,
+          afterCarbPercentage: carbPercentage!,
+          afterFatPercentage: fatPercentage!,
+          afterProteinPercentage: proteinPercentage!,
         ),
       );
       getCaloriesAndScheduleInDatabase();
       _isLoadingSchedule = false;
       Navigator.of(context).pop();
       ConstantWidget.massage(
-          context: context,
-          text: "The schedule has been selected successfully");
+        context: context,
+        text: "The schedule has been selected successfully",
+      );
       notifyListeners();
     } catch (e) {
       notifyListeners();
     }
+  }
+
+  void deleteScheduleInDatabase({
+    required BuildContext context,
+  }) {
+    ConstantWidget.dialog(
+      context: context,
+      title: Text(
+        "Warning",
+        style: TextStyle(
+          color: MyColors.primaryColor,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      content: Text(
+        "Are you sure you want to delete your schedule?",
+        style: const TextStyle(
+          fontSize: 16,
+        ),
+      ),
+      action: [
+        TextButton(
+          onPressed: () async {
+            ConstantWidget.massage(context: context, text: "Wait tell me...");
+            Navigator.of(context).pop();
+            await _database.setScheduleInDatabase(
+              resuelt: ResueltOfSheduleModel(
+                userId: _resueltOfSheduleModel!.userId,
+                calories: _resueltOfSheduleModel!.calories,
+                height: _resueltOfSheduleModel!.height,
+                weight: _resueltOfSheduleModel!.weight,
+                gender: _resueltOfSheduleModel!.gender,
+                muscular: _resueltOfSheduleModel!.muscular,
+                activity: _resueltOfSheduleModel!.activity,
+                proteinPercentage: _resueltOfSheduleModel!.proteinPercentage,
+                carbPercentage: _resueltOfSheduleModel!.carbPercentage,
+                fatPercentage: _resueltOfSheduleModel!.fatPercentage,
+                finalProteinsItems: [],
+                finalFatsItems: [],
+                finalCarbItems: [],
+              ),
+            );
+            Navigator.of(context).pop();
+            getCaloriesAndScheduleInDatabase();
+            ConstantWidget.massage(
+              context: context,
+              text: "The schedule has been deleted successfully",
+            );
+            notifyListeners();
+          },
+          child: Text(
+            "Yes",
+            style: TextStyle(
+              color: MyColors.primaryColor,
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            notifyListeners();
+          },
+          child: Text(
+            "No",
+            style: TextStyle(
+              color: Colors.red,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   /*

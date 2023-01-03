@@ -192,6 +192,9 @@ class Database {
         proteinPercentage: resuelt.proteinPercentage,
         carbPercentage: resuelt.carbPercentage,
         fatPercentage: resuelt.fatPercentage,
+        afterFatPercentage: resuelt.afterFatPercentage,
+        afterCarbPercentage: resuelt.afterCarbPercentage,
+        afterProteinPercentage: resuelt.afterProteinPercentage,
         finalProteinsItems: resuelt.finalProteinsItems,
         finalCarbItems: resuelt.finalCarbItems,
         finalFatsItems: resuelt.finalFatsItems,
@@ -257,6 +260,4 @@ class Database {
       throw Exception(e.toString());
     }
   }
-
-
 }

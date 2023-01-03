@@ -6,6 +6,9 @@ class ResueltOfSheduleModel {
   double proteinPercentage;
   double carbPercentage;
   double fatPercentage;
+  double afterProteinPercentage;
+  double afterCarbPercentage;
+  double afterFatPercentage;
   final double height;
   final double weight;
   final String gender;
@@ -21,6 +24,9 @@ class ResueltOfSheduleModel {
     this.proteinPercentage = 0,
     this.carbPercentage = 0,
     this.fatPercentage = 0,
+    this.afterProteinPercentage = 0,
+    this.afterCarbPercentage = 0,
+    this.afterFatPercentage = 0,
     required this.height,
     required this.weight,
     required this.gender,
@@ -35,6 +41,9 @@ class ResueltOfSheduleModel {
     return ResueltOfSheduleModel(
       userId: json["userID"],
       calories: json["calories"],
+      afterProteinPercentage: json["afterProteinPercentage"],
+      afterCarbPercentage: json["afterCarbPercentage"],
+      afterFatPercentage: json["afterFatPercentage"],
       proteinPercentage: json["proteinPercentage"],
       carbPercentage: json["carbPercentage"],
       fatPercentage: json["fatPercentage"],
@@ -68,6 +77,9 @@ class ResueltOfSheduleModel {
       "muscular":this.muscular,
       "gender":this.gender,
       "activity": this.activity,
+      "afterProteinPercentage":this.afterProteinPercentage,
+      "afterCarbPercentage":this.afterCarbPercentage,
+      "afterFatPercentage":this.afterFatPercentage,
       "proteinPercentage": this.proteinPercentage,
       "carbPercentage": this.carbPercentage,
       "fatPercentage": this.fatPercentage,

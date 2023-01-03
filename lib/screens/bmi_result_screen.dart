@@ -160,7 +160,12 @@ class BMIResultScreen extends StatelessWidget {
               FloatingActionButton(
                 heroTag: null,
                 backgroundColor: Color(0xffFF0000),
-                onPressed: () {},
+                onPressed: () {
+                  model.deleteScheduleInDatabase(
+                    context: context,
+                  );
+
+                },
                 child: Icon(Icons.delete),
               ),
             ],
@@ -277,7 +282,11 @@ class BMIResultScreen extends StatelessWidget {
       lineWidth: 8.0,
       animation: true,
       animationDuration: 700,
-      percent: number > 1130? 0.82:number>100? 0.64 : 0.45,
+      percent: number > 1130
+          ? 0.82
+          : number > 100
+              ? 0.64
+              : 0.45,
       center: Text(
         "${number.toString()}\nCalorie",
         style: TextStyle(
