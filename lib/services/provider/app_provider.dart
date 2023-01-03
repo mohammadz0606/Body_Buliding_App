@@ -345,9 +345,7 @@ class AppProvider extends ChangeNotifier {
       }
     } else if (typeCat == 1) {
       fatsItems[index]['visible'] = value;
-
       fatsItems[index]['value'] = value ? 1 : 0;
-
       if (value) {
         changeFinalList(
             cal: fatsItems[index]['calories'],
@@ -362,7 +360,6 @@ class AppProvider extends ChangeNotifier {
     } else {
       proteinsItems[index]['visible'] = value;
       proteinsItems[index]['value'] = value ? 1 : 0;
-
       if (value) {
         changeFinalList(
             cal: proteinsItems[index]['calories'],
@@ -503,7 +500,7 @@ class AppProvider extends ChangeNotifier {
 
   final ImagePicker _picker = ImagePicker();
   File? profileImage;
-  bool _loadingImage = false;
+  bool loadingImage = false;
   bool _isLast = false;
 
   bool get isLast => _isLast;
@@ -547,7 +544,7 @@ class AppProvider extends ChangeNotifier {
       source: source,
     );
     if (image != null) {
-      _loadingImage = true;
+      loadingImage = true;
       profileImage = File(image.path);
       ConstantWidget.massage(
         context: context,
@@ -561,7 +558,7 @@ class AppProvider extends ChangeNotifier {
       );
       await _database.updateData(userModel: _userModel!, newImage: url);
       getDataForeFireStore();
-      _loadingImage = false;
+      loadingImage = false;
       notifyListeners();
       ConstantWidget.massage(
         context: context,
@@ -676,8 +673,19 @@ class AppProvider extends ChangeNotifier {
     profileImage = null;
     //cancelMeals(context);
     isMuscular = 0;
+    dryingOfFatColor = Colors.grey;
+    muscularColor = Colors.grey;
     activity = 0;
+    numberOfDay = [
+      {'value': 1.2, 'submit': false},
+      {'value': 1.3, 'submit': false},
+      {'value': 1.5, 'submit': false},
+      {'value': 1.7, 'submit': false},
+      {'value': 1.9, 'submit': false}
+    ];
     isMale = 0;
+    maleColor = const Color.fromRGBO(105, 104, 104, 1);
+    femaleColor = const Color.fromRGBO(105, 104, 104, 1);
     weight = 70;
     height = 175;
     notifyListeners();
@@ -960,7 +968,7 @@ class AppProvider extends ChangeNotifier {
 
   bool get isLoadingCalories => _isLoadingCalories;
 
-  bool _isLoadingSchedule = false;
+  bool isLoadingSchedule = false;
 
   ResueltOfSheduleModel? _resueltOfSheduleModel;
 
@@ -1066,7 +1074,7 @@ class AppProvider extends ChangeNotifier {
     required BuildContext context,
   }) async {
     try {
-      _isLoadingSchedule = true;
+      isLoadingSchedule = true;
       ConstantWidget.massage(context: context, text: "Wait tell me...");
       notifyListeners();
       await _database.setScheduleInDatabase(
@@ -1090,7 +1098,7 @@ class AppProvider extends ChangeNotifier {
         ),
       );
       getCaloriesAndScheduleInDatabase();
-      _isLoadingSchedule = false;
+      isLoadingSchedule = false;
       Navigator.of(context).pop();
       ConstantWidget.massage(
         context: context,

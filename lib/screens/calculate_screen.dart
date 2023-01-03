@@ -195,40 +195,45 @@ class _CalculateScreenState extends State<CalculateScreen> {
                               height: 10,
                             ),
                             costumeButton(
-                                0,
-                                "Don't do sport",
-                                size,
-                                model.numberOfDay[0]['submit'] == true
-                                    ? Colors.white
-                                    : Colors.grey),
+                              0,
+                              "Don't do sport",
+                              size,
+                              model.numberOfDay[0]['submit'] == true
+                                  ? Colors.white
+                                  : Colors.grey,
+                            ),
                             costumeButton(
-                                1,
-                                "1 to 3 days per week",
-                                size,
-                                model.numberOfDay[1]['submit'] == true
-                                    ? Colors.white
-                                    : Colors.grey),
+                              1,
+                              "1 to 3 days per week",
+                              size,
+                              model.numberOfDay[1]['submit'] == true
+                                  ? Colors.white
+                                  : Colors.grey,
+                            ),
                             costumeButton(
-                                2,
-                                "4 to 5 days per week",
-                                size,
-                                model.numberOfDay[2]['submit'] == true
-                                    ? Colors.white
-                                    : Colors.grey),
+                              2,
+                              "4 to 5 days per week",
+                              size,
+                              model.numberOfDay[2]['submit'] == true
+                                  ? Colors.white
+                                  : Colors.grey,
+                            ),
                             costumeButton(
-                                3,
-                                "6 to 7 days per week",
-                                size,
-                                model.numberOfDay[3]['submit'] == true
-                                    ? Colors.white
-                                    : Colors.grey),
+                              3,
+                              "6 to 7 days per week",
+                              size,
+                              model.numberOfDay[3]['submit'] == true
+                                  ? Colors.white
+                                  : Colors.grey,
+                            ),
                             costumeButton(
-                                4,
-                                "6 to 7 days but twice a day",
-                                size,
-                                model.numberOfDay[4]['submit'] == true
-                                    ? Colors.white
-                                    : Colors.grey)
+                              4,
+                              "6 to 7 days but twice a day",
+                              size,
+                              model.numberOfDay[4]['submit'] == true
+                                  ? Colors.white
+                                  : Colors.grey,
+                            )
                           ],
                         ),
                       ),
