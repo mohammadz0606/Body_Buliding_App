@@ -1195,6 +1195,17 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool obscureTextSignUpCon = true;
+  IconData iconSignUpCon = Icons.visibility_off;
+
+  void changeVisibilitySignUpCon() {
+    obscureTextSignUpCon = !obscureTextSignUpCon;
+    obscureTextSignUpCon
+        ? iconSignUpCon = Icons.visibility_off
+        : iconSignUpCon = Icons.visibility;
+    notifyListeners();
+  }
+
   bool obscureTextLogin = true;
   IconData iconLogin = Icons.visibility_off;
 

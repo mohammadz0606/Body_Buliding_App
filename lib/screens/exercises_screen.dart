@@ -65,7 +65,8 @@ class ExercisesScreen extends StatelessWidget {
                                   style: GoogleFonts.gelasio(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 22,
+                                    letterSpacing: 1.3,
+                                    fontSize: 23,
                                   ),
                                 ),
                               ),

@@ -10,14 +10,33 @@ import '../../widgets/custom_text_filed.dart';
 import '../../widgets/title_fields.dart';
 import 'signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
   static const String route = "login_screen";
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
+
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   final FocusNode _focusNodeEmail = FocusNode();
+
   final FocusNode _focusNodePassword = FocusNode();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _focusNodeEmail.dispose();
+    _focusNodePassword.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +51,7 @@ class LoginScreen extends StatelessWidget {
           flexibleSpace: BulidBacgroundImage(
             size: size,
             title: "Sign in",
-            suptitle:
-            "Train and live new experience of\nexercising at home",
+            suptitle: "Train and live new experience of\nexercising at home",
             image: "assets/login_image.jpg",
           ),
         ),
@@ -98,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                       obscureText: provider.obscureTextLogin,
                       prefixIcon: Icons.lock_outline,
                       suffixIcon: IconButton(
-                        onPressed: (){
+                        onPressed: () {
                           provider.changeVisibilityLogin();
                         },
                         color: MyColors.titleFieldsColor,
@@ -172,4 +190,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-

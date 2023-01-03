@@ -11,20 +11,46 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_button.dart';
 import '../../widgets/custom_text_filed.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   SignupScreen({Key? key}) : super(key: key);
   static const String route = "signup_screen";
+
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _nameController = TextEditingController();
+
   final TextEditingController _emailController = TextEditingController();
+
   final TextEditingController _passwordController = TextEditingController();
+
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   final FocusNode _focusNodeEmail = FocusNode();
+
   final FocusNode _focusNodePassword = FocusNode();
+
   final FocusNode _focusNodeName = FocusNode();
+
   final FocusNode _focusNodeConfirmPassword = FocusNode();
 
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _focusNodeEmail.dispose();
+    _focusNodePassword.dispose();
+    _focusNodeConfirmPassword.dispose();
+    _focusNodeName.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -159,7 +185,14 @@ class SignupScreen extends StatelessWidget {
                       },
                       prefixIcon: Icons.lock_outline,
                       hintText: "Confirm your password",
-                      obscureText: true,
+                      obscureText: provider.obscureTextSignUpCon,
+                      suffixIcon: IconButton(
+                        onPressed: (){
+                          provider.changeVisibilitySignUpCon();
+                        },
+                        color: MyColors.titleFieldsColor,
+                        icon: Icon(provider.iconSignUpCon),
+                      ),
                       keyboardType: TextInputType.visiblePassword,
                     ),
                     SizedBox(height: size.height * 0.042),

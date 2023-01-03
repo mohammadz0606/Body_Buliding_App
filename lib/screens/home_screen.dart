@@ -6,6 +6,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -85,7 +86,144 @@ class HomeScreen extends StatelessWidget {
                     : Padding(
                         padding:
                             const EdgeInsets.only(top: 8, bottom: 8, left: 5),
-                        child: ListView.separated(
+                        child: AnimationLimiter(
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: model.trainers.length,
+                            separatorBuilder: (context, index) {
+                              return SizedBox(height: size.height * 0.030);
+                            },
+                            itemBuilder: (context, index) {
+                              var trainer = model.trainers[index];
+                              return AnimationConfiguration.staggeredList(
+                                position: index,
+                                duration: const Duration(seconds: 3),
+                                child: SlideAnimation(
+                                  horizontalOffset: 115.0,
+                                  child: FadeInAnimation(
+                                    child: Row(
+                                      children: [
+                                        Card(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(17),
+                                            side: const BorderSide(
+                                              width: 2,
+                                              color: MyColors.primaryColor,
+                                            ),
+                                          ),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(17),
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(17),
+                                              child: FadeInImage(
+                                                fit: BoxFit.cover,
+                                                height: size.height / 3.1,
+                                                width: size.width / 2.55,
+                                                placeholder: const AssetImage(
+                                                  "assets/placeholder.gif",
+                                                ),
+                                                image: NetworkImage(
+                                                  trainer.image,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                              side: const BorderSide(
+                                                width: 2,
+                                                color: MyColors.primaryColor,
+                                              ),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                    top: 10,
+                                                    left: 10,
+                                                    right: 10,
+                                                    bottom: 5,
+                                                  ),
+                                                  child: Text(
+                                                    trainer.name,
+                                                    style: GoogleFonts.lato(
+                                                      fontSize: 20,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                                CustomDivider(),
+                                                CustomListTitle(
+                                                  onTap: () async {
+                                                    await model.openInstagram(
+                                                      instagram: trainer.instgram,
+                                                      context: context,
+                                                    );
+                                                  },
+                                                  size: size,
+                                                  icon:
+                                                  "assets/social_icons/instagram_logo.png",
+                                                  title: "Instagram",
+                                                ),
+                                                CustomDivider(),
+                                                CustomListTitle(
+                                                  onTap: () async {
+                                                    await model.openTiktok(
+                                                      tiktok: trainer.tiktok,
+                                                      context: context,
+                                                    );
+                                                  },
+                                                  size: size,
+                                                  icon:
+                                                  "assets/social_icons/tiktok_logo.png",
+                                                  title: "Tiktok",
+                                                ),
+                                                CustomDivider(),
+                                                CustomListTitle(
+                                                  onTap: () async {
+                                                    await model.openWhatsAppChat(
+                                                      phone: trainer.whats,
+                                                      context: context,
+                                                    );
+                                                  },
+                                                  size: size,
+                                                  icon:
+                                                  "assets/social_icons/social_whats_new.png",
+                                                  title: "Whats",
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+/*
+ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: model.trainers.length,
@@ -201,16 +339,7 @@ class HomeScreen extends StatelessWidget {
                             );
                           },
                         ),
-                      ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-// ignore: non_constant_identifier_names
+ */
   Widget CustomDivider() {
     return const Divider(
       thickness: 1.1,
