@@ -62,7 +62,7 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       backgroundColor: MyColors.thridColor,
       extendBodyBehindAppBar: true,
- /*     appBar: PreferredSize(
+      /*     appBar: PreferredSize(
         preferredSize: Size.fromHeight(size.height * 0.46),
         child: SingleChildScrollView(
           padding: EdgeInsets.zero,
@@ -95,18 +95,23 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
            */
-      body:
-         Form(
-          key: _key,
+      body: Form(
+        key: _key,
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (OverscrollIndicatorNotification overscroll) {
+             overscroll.disallowIndicator();
+             return true;
+          },
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
+            physics: AlwaysScrollableScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //SizedBox(height: size.height * 0.55),
                 BulidBacgroundImage(
                   size: size,
-                  suptitle: "Train and live new experience of\nexercising at home",
+                  suptitle:
+                      "Train and live new experience of\nexercising at home",
                   title: "Sign Up",
                   image: "assets/signup_image.png",
                 ),
@@ -148,8 +153,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         controller: _emailController,
                         focusNode: _focusNodeEmail,
                         onEditingComplete: () {
-                          FocusScope.of(context)
-                              .requestFocus(_focusNodePassword);
+                          FocusScope.of(context).requestFocus(_focusNodePassword);
                         },
                         textInputAction: TextInputAction.next,
                         validator: (String? text) {
@@ -157,9 +161,9 @@ class _SignupScreenState extends State<SignupScreen> {
                             return "you must not empty";
                           }
                           /*
-                            !text.contains("gmail.com") ||
-                                !text.contains("yahoo.com")
-                             */
+                              !text.contains("gmail.com") ||
+                                  !text.contains("yahoo.com")
+                               */
                           if (!text.contains("@")) {
                             return "The email is incorrect";
                           }
@@ -299,6 +303,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
           ),
         ),
+      ),
     );
   }
 }
