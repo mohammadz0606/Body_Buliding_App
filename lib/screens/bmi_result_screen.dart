@@ -147,7 +147,7 @@ class BMIResultScreen extends StatelessWidget {
                 SizedBox(height: size.height * 0.1),
               ],
             ),
-          ), //var resuelt = model.resueltOfSheduleModel!;
+          ),
           floatingActionButton: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
