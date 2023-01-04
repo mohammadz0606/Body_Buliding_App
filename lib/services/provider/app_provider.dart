@@ -901,9 +901,9 @@ class AppProvider extends ChangeNotifier {
 
   void changeCalories() {
     calories1 = calories == null ? _resueltOfSheduleModel!.calories : calories;
-    fatPercentage = _resueltOfSheduleModel!.fatPercentage;
-    carbPercentage = _resueltOfSheduleModel!.carbPercentage;
-    proteinPercentage = _resueltOfSheduleModel!.proteinPercentage;
+    fatPercentage = fatPercentage == null? _resueltOfSheduleModel!.fatPercentage : fatPercentage;
+    carbPercentage = carbPercentage == null? _resueltOfSheduleModel!.carbPercentage : carbPercentage;
+    proteinPercentage = proteinPercentage == null? _resueltOfSheduleModel!.proteinPercentage : proteinPercentage;
     finalFatsItems.forEach((element) {
       fatPercentage = (fatPercentage! - element['calories']);
       calories1 = (calories1! - element['calories']) as int?;
