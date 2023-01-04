@@ -879,6 +879,7 @@ class AppProvider extends ChangeNotifier {
         ),
         context: context,
       );
+      getCaloriesAndScheduleInDatabase();
     }
 
     notifyListeners();
