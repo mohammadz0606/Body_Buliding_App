@@ -62,39 +62,6 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       backgroundColor: MyColors.thridColor,
       extendBodyBehindAppBar: true,
-      /*     appBar: PreferredSize(
-        preferredSize: Size.fromHeight(size.height * 0.46),
-        child: SingleChildScrollView(
-          padding: EdgeInsets.zero,
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          physics: BouncingScrollPhysics(),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            flexibleSpace: BulidBacgroundImage(
-              size: size,
-              suptitle: "Train and live new experience of\nexercising at home",
-              title: "Sign Up",
-              image: "assets/signup_image.png",
-            ),
-          ),
-        ),
-      ),*/
-/*
-      PreferredSize(
-        preferredSize: Size.fromHeight(size.height * 0.46),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          flexibleSpace: BulidBacgroundImage(
-            size: size,
-            suptitle: "Train and live new experience of\nexercising at home",
-            title: "Sign Up",
-            image: "assets/signup_image.png",
-          ),
-        ),
-      ),
-           */
       body: Form(
         key: _key,
         child: NotificationListener<OverscrollIndicatorNotification>(

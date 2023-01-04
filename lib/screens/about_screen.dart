@@ -9,74 +9,78 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text("About App"),
       ),
       body: Padding(
         padding: EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset(
-                "assets/about_app/ezgif-2-7f75d65483.jpg",
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(height: 20),
-              Text(
-                "The application aims to spread the idea of bodybuilding and living a healthy life free from diseases, as it provides the user with many options according to his goal, such as muscle mass or getting rid of fat, so that it provides the user with the nutritional schedule, exercise and appropriate calories for him according to his goal.",
-                style: GoogleFonts.tenaliRamakrishna(
-                  color: Colors.white,
-                  fontSize: 19.5,
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (OverscrollIndicatorNotification overscroll) {
+            overscroll.disallowIndicator();
+            return true;
+          },
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset(
+                  "assets/about_app/ezgif-2-7f75d65483.jpg",
+                  fit: BoxFit.cover,
                 ),
-              ),
-              const SizedBox(height: 20),
-              buildTitle(
-                text: "This app works on",
-              ),
-              buildListTile(
-                text: "Decide to build muscle or loss fat",
-              ),
-              buildListTile(
-                text: "Calculate Calories",
-              ),
-              buildListTile(
-                text: "Providing free exercises techniques for everyone",
-              ),
-              const SizedBox(height: 25),
-              buildTitle(
-                text: "Objectives",
-              ),
-              const SizedBox(height: 20),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildObjectiveText(
-                    text:
-                    "To spread awareness among people\nAbout the importance of healthy habits and sport in life",
+                const SizedBox(height: 20),
+                Text(
+                  "The application aims to spread the idea of bodybuilding and living a healthy life free from diseases, as it provides the user with many options according to his goal, such as muscle mass or getting rid of fat, so that it provides the user with the nutritional schedule, exercise and appropriate calories for him according to his goal.",
+                  style: GoogleFonts.tenaliRamakrishna(
+                    color: Colors.white,
+                    fontSize: 19.5,
                   ),
-                  const SizedBox(width: 15),
-                  buildObjectiveImage(size:size,image: "assets/about_app/obj01.jpg"),
-                ],
-              ),
-              const SizedBox(height: 18.5),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildObjectiveImage(size:size,image: "assets/about_app/objective02.jpg"),
-                  const SizedBox(width: 15),
-                  buildObjectiveText(
-                    text:
-                    "To emphasize impotence, Body Building\nTo be able to exercise at any time and in what condition",
-                  ),
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(height: 20),
+                buildTitle(
+                  text: "This app works on",
+                ),
+                buildListTile(
+                  text: "Decide to build muscle or loss fat",
+                ),
+                buildListTile(
+                  text: "Calculate Calories",
+                ),
+                buildListTile(
+                  text: "Providing free exercises techniques for everyone",
+                ),
+                const SizedBox(height: 25),
+                buildTitle(
+                  text: "Objectives",
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildObjectiveText(
+                      text:
+                      "To spread awareness among people\nAbout the importance of healthy habits and sport in life",
+                    ),
+                    const SizedBox(width: 15),
+                    buildObjectiveImage(size:size,image: "assets/about_app/obj01.jpg"),
+                  ],
+                ),
+                const SizedBox(height: 18.5),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildObjectiveImage(size:size,image: "assets/about_app/objective02.jpg"),
+                    const SizedBox(width: 15),
+                    buildObjectiveText(
+                      text:
+                      "To emphasize impotence, Body Building\nTo be able to exercise at any time and in what condition",
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
