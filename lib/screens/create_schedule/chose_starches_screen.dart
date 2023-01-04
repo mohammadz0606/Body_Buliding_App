@@ -152,7 +152,7 @@ class ChoseStarchesScreen extends StatelessWidget {
                                 model.typeCat == 0
                                     ? model.carbPercentage == null
                                         ? model.resueltOfSheduleModel!
-                                            .carbPercentage!
+                                            .carbPercentage
                                             .round()
                                             .toString()
                                         : model.carbPercentage!
