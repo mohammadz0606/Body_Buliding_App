@@ -122,80 +122,80 @@ class ChoseStarchesScreen extends StatelessWidget {
                 bottom: 0,
                 left: 0,
                 child: Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black,
-                          spreadRadius: 1,
-                          blurRadius: 10,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                      color: MyColors.secondaryColor,
-                    ),
-                    width: size.width,
-                    height: size.height * 0.2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'You have ',
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.white,
-                              ),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        spreadRadius: 1,
+                        blurRadius: 10,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                    color: MyColors.secondaryColor,
+                  ),
+                  width: size.width,
+                  height: size.height * 0.2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'You have ',
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
                             ),
-                            Text(
-                              model.typeCat == 0
-                                  ? model.carbPercentage == null
-                                      ? model
-                                          .resueltOfSheduleModel!.carbPercentage
-                                          .round()
-                                          .toString()
-                                      : model.carbPercentage!.round().toString()
-                                  : model.typeCat == 1
-                                      ? model.fatPercentage == null
-                                          ? model.resueltOfSheduleModel!
-                                              .fatPercentage
-                                              .round()
-                                              .toString()
-                                          : model.fatPercentage!
-                                              .round()
-                                              .toString()
-                                      : model.proteinPercentage == null
-                                          ? model.resueltOfSheduleModel!
-                                              .proteinPercentage
-                                              .round()
-                                              .toString()
-                                          : model.proteinPercentage!
-                                              .round()
-                                              .toString(),
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          ),
+                          Text(
+                            model.typeCat == 0
+                                ? model.carbPercentage == null
+                                    ? model
+                                        .resueltOfSheduleModel!.carbPercentage
+                                        .round()
+                                        .toString()
+                                    : model.carbPercentage!.round().toString()
+                                : model.typeCat == 1
+                                    ? model.fatPercentage == null
+                                        ? model.resueltOfSheduleModel!
+                                            .fatPercentage
+                                            .round()
+                                            .toString()
+                                        : model.fatPercentage!
+                                            .round()
+                                            .toString()
+                                    : model.proteinPercentage == null
+                                        ? model.resueltOfSheduleModel!
+                                            .proteinPercentage
+                                            .round()
+                                            .toString()
+                                        : model.proteinPercentage!
+                                            .round()
+                                            .toString(),
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
                             ),
-                            Text(
-                              ' calories ',
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.white,
-                              ),
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            SubmitItemButton(
-                              size: size,
-                              label: 'Discard',
-                              onTap: () {
-                                /* if (model.typeCat == 1) {
+                          ),
+                          Text(
+                            ' calories ',
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SubmitItemButton(
+                            size: size,
+                            label: 'Discard',
+                            onTap: () {
+                              /* if (model.typeCat == 1) {
                                     model.cancelCarbMeals(context);
                                   } else if (model.typeCat == 2) {
                                     model.cancelProteinMeals(context);
@@ -203,24 +203,25 @@ class ChoseStarchesScreen extends StatelessWidget {
                                     model.cancelFatMeals(context);
                                   }*/
 
-                                Navigator.of(context).pop();
-                              },
-                              backgroundColor: MyColors.secondaryColor,
-                              labelColor: Colors.red,
-                            ),
-                            SubmitItemButton(
-                              size: size,
-                              label: 'Apply',
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              backgroundColor: Colors.red,
-                              labelColor: Colors.white,
-                            )
-                          ],
-                        ),
-                      ],
-                    )),
+                              Navigator.of(context).pop();
+                            },
+                            backgroundColor: MyColors.secondaryColor,
+                            labelColor: Colors.red,
+                          ),
+                          SubmitItemButton(
+                            size: size,
+                            label: 'Apply',
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            backgroundColor: Colors.red,
+                            labelColor: Colors.white,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               )
             ],
           );

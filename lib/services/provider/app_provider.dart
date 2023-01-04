@@ -327,10 +327,10 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void choseStarchesItem(bool value, int index, BuildContext context,[int type = 0]) {
+  void choseStarchesItem(bool value, int index, BuildContext context,
+      [int? type]) {
     if (typeCat == 0 || type == 0) {
       carbItems[index]['visible'] = value;
-
       carbItems[index]['value'] = value ? 1 : 0;
       if (value) {
         changeFinalList(
@@ -355,7 +355,8 @@ class AppProvider extends ChangeNotifier {
             type: 2);
       } else {
         finalFatsItems.removeWhere(
-            (element) => fatsItems[index]['name'] == element['name']);
+          (element) => fatsItems[index]['name'] == element['name'],
+        );
       }
     } else {
       proteinsItems[index]['visible'] = value;
@@ -373,7 +374,6 @@ class AppProvider extends ChangeNotifier {
             (element) => proteinsItems[index]['name'] == element['name']);
       }
     }
-
     changeCalories();
     notifyListeners();
   }
@@ -671,7 +671,7 @@ class AppProvider extends ChangeNotifier {
     _userModel = null;
     _selectedIndex = 0;
     profileImage = null;
-    //cancelMeals(context);
+    cancelMeals(context);
     isMuscular = 0;
     dryingOfFatColor = Colors.grey;
     muscularColor = Colors.grey;
@@ -890,8 +890,8 @@ class AppProvider extends ChangeNotifier {
           carbPercentage: carbPercentage!,
           fatPercentage: fatPercentage!,
         ),*/
-          setCaloriesInDatabase(
-            resuelt: _resueltOfSheduleModel!,
+      setCaloriesInDatabase(
+        resuelt: _resueltOfSheduleModel!,
         context: context,
       );
 
@@ -955,24 +955,66 @@ class AppProvider extends ChangeNotifier {
   }
 
   void cancelFatMeals(BuildContext context) {
-    for (int i = 0; i < fatsItems.length; i++) {
+/*    for (int i = 0; i < fatsItems.length; i++) {
       choseStarchesItem(false, i, context);
+    }
+    finalFatsItems = [];
+    notifyListeners();*/
+    if (finalFatsItems.isEmpty) {
+      return;
+    } else {
+      for (int i = 0; i < finalFatsItems.length; i++) {
+        for (int j = 0; j < fatsItems.length; j++) {
+          if (finalFatsItems[i]["name"] == fatsItems[j]["name"]) {
+            choseStarchesItem(false, i, context, 1);
+            //changeCount(1, 3, i);
+          }
+        }
+      }
     }
     finalFatsItems = [];
     notifyListeners();
   }
 
   void cancelProteinMeals(BuildContext context) {
-    for (int i = 0; i < proteinsItems.length; i++) {
+/*    for (int i = 0; i < proteinsItems.length; i++) {
       choseStarchesItem(false, i, context);
+    }
+    finalProteinsItems = [];
+    notifyListeners();*/
+    if (finalProteinsItems.isEmpty) {
+      return;
+    } else {
+      for (int i = 0; i < finalProteinsItems.length; i++) {
+        for (int j = 0; j < proteinsItems.length; j++) {
+          if (finalProteinsItems[i]["name"] == proteinsItems[j]["name"]) {
+            choseStarchesItem(false, i, context, 3);
+            //changeCount(1, 3, i);
+          }
+        }
+      }
     }
     finalProteinsItems = [];
     notifyListeners();
   }
 
   void cancelCarbMeals(BuildContext context) {
-    for (int i = 0; i < carbItems.length - 2; i++) {
+/*    for (int i = 0; i < carbItems.length - 2; i++) {
       choseStarchesItem(false, i, context);
+    }
+    finalCarbItems = [];
+    notifyListeners();*/
+    if (finalCarbItems.isEmpty) {
+      return;
+    } else {
+      for (int i = 0; i < finalCarbItems.length; i++) {
+        for (int j = 0; j < carbItems.length; j++) {
+          if (finalCarbItems[i]["name"] == carbItems[j]["name"]) {
+            choseStarchesItem(false, i, context, 0);
+            //changeCount(1, 3, i);
+          }
+        }
+      }
     }
     finalCarbItems = [];
     notifyListeners();
@@ -1030,7 +1072,7 @@ class AppProvider extends ChangeNotifier {
             TextButton(
               onPressed: () {
                 _isLoadingCalories = true;
-                //cancelMeals(context);
+                cancelMeals(context);
                 Navigator.of(context).pop();
                 ConstantWidget.massage(
                   context: context,
@@ -1127,7 +1169,7 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
-  void editScheduleInDatabase(BuildContext context){
+  void editScheduleInDatabase(BuildContext context) {
     finalProteinsItems = _resueltOfSheduleModel!.finalProteinsItems;
     finalCarbItems = _resueltOfSheduleModel!.finalCarbItems;
     finalFatsItems = _resueltOfSheduleModel!.finalFatsItems;
@@ -1140,34 +1182,35 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _editFatMeals(BuildContext context){
-    for(int i = 0; i < finalFatsItems.length; i++){
-      for(int j = 0; j < fatsItems.length; j++){
-        if(finalFatsItems[i]["name"] == fatsItems[j]["name"]){
-          choseStarchesItem(true, i, context,1);
+  void _editFatMeals(BuildContext context) {
+    for (int i = 0; i < finalFatsItems.length; i++) {
+      for (int j = 0; j < fatsItems.length; j++) {
+        if (finalFatsItems[i]["name"] == fatsItems[j]["name"]) {
+          choseStarchesItem(true, i, context, 1);
         }
       }
     }
     notifyListeners();
   }
 
-  void _editCarbMeals(BuildContext context){
-    for(int i = 0; i < finalCarbItems.length; i++){
-      for(int j = 0; j < carbItems.length; j++){
-        if(finalCarbItems[i]["name"] == carbItems[j]["name"]){
-          choseStarchesItem(true, i, context,0);
-          //changeCount(value, type, index);
+  void _editCarbMeals(BuildContext context) {
+    for (int i = 0; i < finalCarbItems.length; i++) {
+      for (int j = 0; j < carbItems.length; j++) {
+        if (finalCarbItems[i]["name"] == carbItems[j]["name"]) {
+          choseStarchesItem(true, i, context, 0);
+          //changeCount(1, 1, i);
         }
       }
     }
     notifyListeners();
   }
 
-  void _editProteinsMeals(BuildContext context){
-    for(int i = 0; i < finalProteinsItems.length; i++){
-      for(int j = 0; j < proteinsItems.length; j++){
-        if(finalProteinsItems[i]["name"] == proteinsItems[j]["name"]){
-          choseStarchesItem(true, i, context,3);
+  void _editProteinsMeals(BuildContext context) {
+    for (int i = 0; i < finalProteinsItems.length; i++) {
+      for (int j = 0; j < proteinsItems.length; j++) {
+        if (finalProteinsItems[i]["name"] == proteinsItems[j]["name"]) {
+          choseStarchesItem(true, i, context, 3);
+          //changeCount(1, 3, i);
         }
       }
     }
