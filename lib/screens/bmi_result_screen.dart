@@ -1,3 +1,4 @@
+import 'package:body_building/screens/create_schedule/chose_category.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/helper/constant_style.dart';
 import '/services/provider/app_provider.dart';
@@ -127,13 +128,13 @@ class BMIResultScreen extends StatelessWidget {
                 SizedBox(height: size.height * 0.02),
                 buildCard(
                   size: size,
-                  resuelt: resuelt.finalFatsItems,
+                  resuelt: resuelt.finalCarbItems,
                   image: "assets/chose_category/starches.jpg",
                   title: "Starches",
                 ),
                 buildCard(
                   size: size,
-                  resuelt: resuelt.finalCarbItems,
+                  resuelt: resuelt.finalFatsItems,
                   image: "assets/chose_category/fats.jpg",
                   title: "Carb",
                 ),
@@ -153,7 +154,10 @@ class BMIResultScreen extends StatelessWidget {
               FloatingActionButton.small(
                 heroTag: null,
                 backgroundColor: Color(0xff18DE0E),
-                onPressed: () {},
+                onPressed: () {
+                  model.editScheduleInDatabase(context);
+                  Navigator.of(context).pushReplacementNamed(ChoseCategory.route);
+                },
                 child: Icon(Icons.edit),
               ),
               SizedBox(height: size.height * 0.01),

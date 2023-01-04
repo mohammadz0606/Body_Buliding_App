@@ -327,8 +327,8 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void choseStarchesItem(bool value, int index, BuildContext context) {
-    if (typeCat == 0) {
+  void choseStarchesItem(bool value, int index, BuildContext context,[int type = 0]) {
+    if (typeCat == 0 || type == 0) {
       carbItems[index]['visible'] = value;
 
       carbItems[index]['value'] = value ? 1 : 0;
@@ -343,7 +343,7 @@ class AppProvider extends ChangeNotifier {
         finalCarbItems.removeWhere(
             (element) => carbItems[index]['name'] == element['name']);
       }
-    } else if (typeCat == 1) {
+    } else if (typeCat == 1 || type == 1) {
       fatsItems[index]['visible'] = value;
       fatsItems[index]['value'] = value ? 1 : 0;
       if (value) {
@@ -1125,6 +1125,53 @@ class AppProvider extends ChangeNotifier {
     } catch (e) {
       notifyListeners();
     }
+  }
+
+  void editScheduleInDatabase(BuildContext context){
+    finalProteinsItems = _resueltOfSheduleModel!.finalProteinsItems;
+    finalCarbItems = _resueltOfSheduleModel!.finalCarbItems;
+    finalFatsItems = _resueltOfSheduleModel!.finalFatsItems;
+    proteinPercentage = _resueltOfSheduleModel!.afterProteinPercentage;
+    carbPercentage = _resueltOfSheduleModel!.afterCarbPercentage;
+    fatPercentage = _resueltOfSheduleModel!.afterFatPercentage;
+    _editCarbMeals(context);
+    _editFatMeals(context);
+    _editProteinsMeals(context);
+    notifyListeners();
+  }
+
+  void _editFatMeals(BuildContext context){
+    for(int i = 0; i < finalFatsItems.length; i++){
+      for(int j = 0; j < fatsItems.length; j++){
+        if(finalFatsItems[i]["name"] == fatsItems[j]["name"]){
+          choseStarchesItem(true, i, context,1);
+        }
+      }
+    }
+    notifyListeners();
+  }
+
+  void _editCarbMeals(BuildContext context){
+    for(int i = 0; i < finalCarbItems.length; i++){
+      for(int j = 0; j < carbItems.length; j++){
+        if(finalCarbItems[i]["name"] == carbItems[j]["name"]){
+          choseStarchesItem(true, i, context,0);
+          //changeCount(value, type, index);
+        }
+      }
+    }
+    notifyListeners();
+  }
+
+  void _editProteinsMeals(BuildContext context){
+    for(int i = 0; i < finalProteinsItems.length; i++){
+      for(int j = 0; j < proteinsItems.length; j++){
+        if(finalProteinsItems[i]["name"] == proteinsItems[j]["name"]){
+          choseStarchesItem(true, i, context,3);
+        }
+      }
+    }
+    notifyListeners();
   }
 
   void deleteScheduleInDatabase({

@@ -119,7 +119,7 @@ class ChoseCategory extends StatelessWidget {
                             size: size,
                             label: 'Discard',
                             onTap: () {
-                              model.cancelMeals(context);
+                              //model.cancelMeals(context);
                               if (Navigator.of(context).canPop()) {
                                 Navigator.of(context).pop();
                               } else {
