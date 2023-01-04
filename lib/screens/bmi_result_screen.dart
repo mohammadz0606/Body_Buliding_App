@@ -155,8 +155,8 @@ class BMIResultScreen extends StatelessWidget {
                 heroTag: null,
                 backgroundColor: Color(0xff18DE0E),
                 onPressed: () {
-                  model.editScheduleInDatabase(context);
-                  Navigator.of(context).pushReplacementNamed(ChoseCategory.route);
+                  //model.editScheduleInDatabase(context);
+                  //Navigator.of(context).pushReplacementNamed(ChoseCategory.route);
                 },
                 child: Icon(Icons.edit),
               ),
