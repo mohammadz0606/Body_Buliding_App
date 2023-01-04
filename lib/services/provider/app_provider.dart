@@ -861,10 +861,23 @@ class AppProvider extends ChangeNotifier {
         calories = ((weight * 2.2 * 10) * activity - 500).toInt();
       }
 
-      calories1 = calories == null? _resueltOfSheduleModel!.calories : calories;
+      calories1 =
+          calories == null ? _resueltOfSheduleModel!.calories : calories;
       getTypePercentage(isMuscular == 1);
 
-      setCaloriesInDatabase(
+      _resueltOfSheduleModel = ResueltOfSheduleModel(
+        userId: userModel!.id!,
+        calories: calories!,
+        height: height,
+        weight: weight,
+        muscular: isMuscular == 1 ? "MUSCULAR" : "DRYING OF FAT",
+        gender: isMale == 1 ? "Male" : "Female",
+        activity: activity.toString(),
+        proteinPercentage: proteinPercentage!,
+        carbPercentage: carbPercentage!,
+        fatPercentage: fatPercentage!,
+      );
+      /*setCaloriesInDatabase(
         resuelt: ResueltOfSheduleModel(
           userId: userModel!.id!,
           calories: calories!,
@@ -876,10 +889,13 @@ class AppProvider extends ChangeNotifier {
           proteinPercentage: proteinPercentage!,
           carbPercentage: carbPercentage!,
           fatPercentage: fatPercentage!,
-        ),
+        ),*/
+          setCaloriesInDatabase(
+            resuelt: _resueltOfSheduleModel!,
         context: context,
       );
-      getCaloriesAndScheduleInDatabase();
+
+      //getCaloriesAndScheduleInDatabase();
     }
 
     notifyListeners();
@@ -900,10 +916,10 @@ class AppProvider extends ChangeNotifier {
   }
 
   void changeCalories() {
-    calories1 = calories == null ? _resueltOfSheduleModel!.calories : calories;
-    fatPercentage = fatPercentage == null? _resueltOfSheduleModel!.fatPercentage : fatPercentage;
-    carbPercentage = carbPercentage == null? _resueltOfSheduleModel!.carbPercentage : carbPercentage;
-    proteinPercentage = proteinPercentage == null? _resueltOfSheduleModel!.proteinPercentage : proteinPercentage;
+    calories1 = _resueltOfSheduleModel!.calories;
+    fatPercentage = _resueltOfSheduleModel!.fatPercentage;
+    carbPercentage = _resueltOfSheduleModel!.carbPercentage;
+    proteinPercentage = _resueltOfSheduleModel!.proteinPercentage;
     finalFatsItems.forEach((element) {
       fatPercentage = (fatPercentage! - element['calories']);
       calories1 = (calories1! - element['calories']) as int?;
