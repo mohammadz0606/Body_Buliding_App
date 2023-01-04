@@ -861,7 +861,7 @@ class AppProvider extends ChangeNotifier {
         calories = ((weight * 2.2 * 10) * activity - 500).toInt();
       }
 
-      calories1 = _resueltOfSheduleModel!.calories;
+      calories1 = calories == null? _resueltOfSheduleModel!.calories : calories;
       getTypePercentage(isMuscular == 1);
 
       setCaloriesInDatabase(
