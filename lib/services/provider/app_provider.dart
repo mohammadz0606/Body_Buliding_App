@@ -900,7 +900,7 @@ class AppProvider extends ChangeNotifier {
   }
 
   void changeCalories() {
-    calories1 = _resueltOfSheduleModel!.calories;
+    calories1 = calories == null ? _resueltOfSheduleModel!.calories : calories;
     fatPercentage = _resueltOfSheduleModel!.fatPercentage;
     carbPercentage = _resueltOfSheduleModel!.carbPercentage;
     proteinPercentage = _resueltOfSheduleModel!.proteinPercentage;
