@@ -15,7 +15,7 @@ import '../screens/no_internet_screen.dart';
 import '../screens/on_boarding_screen.dart';
 import '../screens/splash_screen.dart';
 
-class RoutesScreen{
+abstract class RoutesScreen{
   static Map<String, WidgetBuilder> routesScreens = {
     SplashScreen.route : (context) => const SplashScreen(),
     ChoseStarchesScreen.route:(context)=> ChoseStarchesScreen(),

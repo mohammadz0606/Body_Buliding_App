@@ -162,11 +162,12 @@ class _CalculateScreenState extends State<CalculateScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           typeMethode(
-                              size,
-                              'drying of fat'.toUpperCase(),
-                              Icons.sports_gymnastics_sharp,
-                              model.dryingOfFatColor,
-                              false),
+                            size,
+                            'drying of fat'.toUpperCase(),
+                            Icons.sports_gymnastics_sharp,
+                            model.dryingOfFatColor,
+                            false,
+                          ),
                           typeMethode(
                               size,
                               'muscular'.toUpperCase(),
@@ -383,7 +384,7 @@ class _CalculateScreenState extends State<CalculateScreen> {
       child: Container(
         margin: EdgeInsets.all(size.width * 0.01),
         width: size.width * 0.4,
-        height: size.height * 0.2,
+        height: size.height * 0.25,
         alignment: Alignment.center,
         color: MyColors.secondaryColor,
         child: Column(
@@ -440,7 +441,10 @@ class _CalculateScreenState extends State<CalculateScreen> {
               ),
               Text(
                 title,
-                style: TextStyle(fontSize: size.width * 0.05, color: color),
+                style: TextStyle(
+                  fontSize: size.width * 0.05,
+                  color: color,
+                ),
               )
             ],
           ),

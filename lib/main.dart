@@ -1,4 +1,5 @@
 import 'package:body_building/screens/splash_screen.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +29,13 @@ void main() async {
       statusBarColor: Colors.transparent,
     ),
   );
-  runApp(const BodyBulidingApp());
+  runApp(
+    /*DevicePreview(
+      enabled: true,
+      builder: (context) =>  // Wrap your app
+    ),*/
+    const BodyBulidingApp(),
+  );
 }
 
 class BodyBulidingApp extends StatelessWidget {
@@ -39,6 +46,9 @@ class BodyBulidingApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => AppProvider(),
       child: MaterialApp(
+       /* useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,*/
         debugShowCheckedModeBanner: false,
         theme: AppThemes.appTheme,
         initialRoute: SplashScreen.route,

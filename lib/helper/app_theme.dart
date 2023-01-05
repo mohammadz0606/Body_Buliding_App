@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'constant_style.dart';
 
-class AppThemes {
+abstract class AppThemes {
 
   static ThemeData appTheme = ThemeData(
     scaffoldBackgroundColor: MyColors.primaryColor,

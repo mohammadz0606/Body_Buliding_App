@@ -27,15 +27,21 @@ class BMIResultScreen extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                DatePicker(
-                  DateTime.now(),
-                  initialSelectedDate: DateTime.now(),
-                  selectionColor: MyColors.secondaryColor,
-                  selectedTextColor: Colors.white,
-                  dateTextStyle: TextStyle(color: Colors.white, fontSize: 17),
-                  dayTextStyle: TextStyle(color: Colors.white, fontSize: 11),
-                  monthTextStyle: TextStyle(color: Colors.white, fontSize: 11),
-                  daysCount: 15,
+                NotificationListener<OverscrollIndicatorNotification>(
+                  onNotification: (OverscrollIndicatorNotification overscroll) {
+                    overscroll.disallowIndicator();
+                    return true;
+                  },
+                  child: DatePicker(
+                    DateTime.now(),
+                    initialSelectedDate: DateTime.now(),
+                    selectionColor: MyColors.secondaryColor,
+                    selectedTextColor: Colors.white,
+                    dateTextStyle: TextStyle(color: Colors.white, fontSize: 17),
+                    dayTextStyle: TextStyle(color: Colors.white, fontSize: 11),
+                    monthTextStyle: TextStyle(color: Colors.white, fontSize: 11),
+                    daysCount: 15,
+                  ),
                 ),
                 SizedBox(height: size.height * 0.05),
                 Row(
