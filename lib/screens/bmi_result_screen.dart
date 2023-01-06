@@ -68,7 +68,31 @@ class BMIResultScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: size.height * 0.05),
+                Row(
+                  children: [
+                    buildExpanded(
+                      resuelt: Text(
+                        "Height:\n${resuelt.height.toStringAsFixed(1)}m",
+                        style: GoogleFonts.lato(
+                          fontSize: 15.1,
+                          color: Colors.white,
+                        ),
+                      ),
+                      icon: Icons.accessibility,
+                    ),
+                    buildExpanded(
+                      resuelt: Text(
+                      "Weight:\n${resuelt.weight.toStringAsFixed(0)}km",
+                        style: GoogleFonts.lato(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                      icon: Icons.balance,
+                    ),
+                  ],
+                ),
+                SizedBox(height: size.height * 0.04),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -292,9 +316,9 @@ class BMIResultScreen extends StatelessWidget {
       lineWidth: 8.0,
       animation: true,
       animationDuration: 700,
-      percent: number > 1130
-          ? 0.82
-          : number > 100
+      percent: number > 1000
+          ? 0.81
+          : number > 500
               ? 0.64
               : 0.45,
       center: Text(
