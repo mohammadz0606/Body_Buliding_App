@@ -72,7 +72,7 @@ class BMIResultScreen extends StatelessWidget {
                   children: [
                     buildExpanded(
                       resuelt: Text(
-                        "Height:\n${resuelt.height.toStringAsFixed(1)}m",
+                        "Height:\n${resuelt.height.toStringAsFixed(0)}m",
                         style: GoogleFonts.lato(
                           fontSize: 15.1,
                           color: Colors.white,
@@ -82,7 +82,7 @@ class BMIResultScreen extends StatelessWidget {
                     ),
                     buildExpanded(
                       resuelt: Text(
-                      "Weight:\n${resuelt.weight.toStringAsFixed(0)}km",
+                      "Weight:\n${resuelt.weight.toStringAsFixed(1)}km",
                         style: GoogleFonts.lato(
                           fontSize: 16,
                           color: Colors.white,
