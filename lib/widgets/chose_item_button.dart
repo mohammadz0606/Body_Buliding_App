@@ -90,7 +90,7 @@ class ChoseItemButton extends StatelessWidget {
                               value: 1,
                               groupValue: model.carbItems[index]['groupValue'],
                               onChanged: (int? val) {
-                                model.changeCount(val!, type, index);
+                                model.changeCount(val!, type, index,context);
                               }),
                           RadioListTile<int>(
                               activeColor: Colors.red,
@@ -101,7 +101,7 @@ class ChoseItemButton extends StatelessWidget {
                               value: 2,
                               groupValue: model.carbItems[index]['groupValue'],
                               onChanged: (int? val) {
-                                model.changeCount(val!, type, index);
+                                model.changeCount(val!, type, index,context);
                               }),
                           RadioListTile<int>(
                               activeColor: Colors.red,
@@ -112,7 +112,7 @@ class ChoseItemButton extends StatelessWidget {
                               value: 3,
                               groupValue: model.carbItems[index]['groupValue'],
                               onChanged: (int? val) {
-                                model.changeCount(val!, type, index);
+                                model.changeCount(val!, type, index,context);
                               })
                         ]
                       : type == 2
@@ -127,7 +127,7 @@ class ChoseItemButton extends StatelessWidget {
                                 groupValue: model.fatsItems[index]
                                     ['groupValue'],
                                 onChanged: (int? val) {
-                                  model.changeCount(val!, type, index);
+                                  model.changeCount(val!, type, index,context);
                                 },
                               ),
                               RadioListTile<int>(
@@ -140,7 +140,7 @@ class ChoseItemButton extends StatelessWidget {
                                 groupValue: model.fatsItems[index]
                                     ['groupValue'],
                                 onChanged: (int? val) {
-                                  model.changeCount(val!, type, index);
+                                  model.changeCount(val!, type, index,context);
                                 },
                               ),
                               RadioListTile<int>(
@@ -153,7 +153,7 @@ class ChoseItemButton extends StatelessWidget {
                                 groupValue: model.fatsItems[index]
                                     ['groupValue'],
                                 onChanged: (int? val) {
-                                  model.changeCount(val!, type, index);
+                                  model.changeCount(val!, type, index,context);
                                 },
                               )
                             ]
@@ -168,7 +168,7 @@ class ChoseItemButton extends StatelessWidget {
                                   groupValue: model.proteinsItems[index]
                                       ['groupValue'],
                                   onChanged: (int? val) {
-                                    model.changeCount(val!, type, index);
+                                    model.changeCount(val!, type, index,context);
                                   }),
                               RadioListTile<int>(
                                   activeColor: Colors.red,
@@ -180,7 +180,7 @@ class ChoseItemButton extends StatelessWidget {
                                   groupValue: model.proteinsItems[index]
                                       ['groupValue'],
                                   onChanged: (int? val) {
-                                    model.changeCount(val!, type, index);
+                                    model.changeCount(val!, type, index,context);
                                   }),
                               RadioListTile<int>(
                                 activeColor: Colors.red,
@@ -192,7 +192,7 @@ class ChoseItemButton extends StatelessWidget {
                                 groupValue: model.proteinsItems[index]
                                     ['groupValue'],
                                 onChanged: (int? val) {
-                                  model.changeCount(val!, type, index);
+                                  model.changeCount(val!, type, index,context);
                                 },
                               ),
                             ],

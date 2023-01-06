@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:body_building/screens/bmi_result_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
@@ -293,85 +294,125 @@ class AppProvider extends ChangeNotifier {
 
   int portion = 1;
 
-  void changeCount(int val, int type, int index) {
+  void changeCount(int val, int type, int index,BuildContext context) {
     if (type == 1) {
-      carbItems[index]['groupValue'] = val;
-      carbItems[index]['value'] = val;
+      if(carbPercentage!-carbItems[index]['calories']>0|| val<carbItems[index]['value']){
+        carbItems[index]['groupValue'] = val;
+        carbItems[index]['value'] = val;
 
-      changeFinalList(
-          cal: carbItems[index]['calories'] * val,
-          quantity: carbItems[index]['quantity'] * val,
-          name: carbItems[index]['name'],
-          imageUrl: carbItems[index]['imageUrl'],
-          type: type);
+        changeFinalList(
+            cal: carbItems[index]['calories'] * val,
+            quantity: carbItems[index]['quantity'] * val,
+            name: carbItems[index]['name'],
+            imageUrl: carbItems[index]['imageUrl'],
+            type: type);
+      }else{
+        ConstantWidget.massage(context: context, text: 'You cannot add more than that');
+
+      }
     } else if (type == 2) {
-      fatsItems[index]['groupValue'] = val;
-      fatsItems[index]['value'] = val;
-      changeFinalList(
-          cal: fatsItems[index]['calories'] * val,
-          quantity: fatsItems[index]['quantity'] * val,
-          name: fatsItems[index]['name'],
-          imageUrl: fatsItems[index]['imageUrl'],
-          type: type);
+
+      if(fatPercentage!-fatsItems[index]['calories']>0|| val<fatsItems[index]['value']) {
+        fatsItems[index]['groupValue'] = val;
+        fatsItems[index]['value'] = val;
+        changeFinalList(
+            cal: fatsItems[index]['calories'] * val,
+            quantity: fatsItems[index]['quantity'] * val,
+            name: fatsItems[index]['name'],
+            imageUrl: fatsItems[index]['imageUrl'],
+            type: type);
+      }else{
+        ConstantWidget.massage(context: context, text: 'You cannot add more than that');
+
+      }
     } else {
-      proteinsItems[index]['groupValue'] = val;
-      proteinsItems[index]['value'] = val;
-      changeFinalList(
-          cal: proteinsItems[index]['calories'] * val,
-          quantity: proteinsItems[index]['quantity'] * val,
-          name: proteinsItems[index]['name'],
-          imageUrl: proteinsItems[index]['imageUrl'],
-          type: type);
+      if(proteinPercentage!-proteinsItems[index]['calories']>0|| val<proteinsItems[index]['value']) {
+        proteinsItems[index]['groupValue'] = val;
+        proteinsItems[index]['value'] = val;
+        changeFinalList(
+            cal: proteinsItems[index]['calories'] * val,
+            quantity: proteinsItems[index]['quantity'] * val,
+            name: proteinsItems[index]['name'],
+            imageUrl: proteinsItems[index]['imageUrl'],
+            type: type);
+      }else{
+        ConstantWidget.massage(context: context, text: 'You cannot add more than that');
+
+      }
     }
     changeCalories();
     notifyListeners();
   }
 
-  void choseStarchesItem(bool value, int index, BuildContext context,
-      [int? type]) {
+  void choseStarchesItem(bool value, int index, BuildContext context, [int? type]) {
     if (typeCat == 0 || type == 0) {
-      carbItems[index]['visible'] = value;
-      carbItems[index]['value'] = value ? 1 : 0;
-      if (value) {
-        changeFinalList(
-            cal: carbItems[index]['calories'],
-            quantity: carbItems[index]['quantity'] * carbItems[index]['value'],
-            name: carbItems[index]['name'],
-            imageUrl: carbItems[index]['imageUrl'],
-            type: 1);
-      } else {
-        finalCarbItems.removeWhere(
-            (element) => carbItems[index]['name'] == element['name']);
+      if(carbPercentage!-carbItems[index]['calories']>0|| value == false) {
+        carbItems[index]['visible'] = value;
+        carbItems[index]['value'] = value ? 1 : 0;
+        if (value) {
+          changeFinalList(
+              cal: carbItems[index]['calories'],
+              quantity:
+                  carbItems[index]['quantity'] * carbItems[index]['value'],
+              name: carbItems[index]['name'],
+              imageUrl: carbItems[index]['imageUrl'],
+              type: 1);
+        } else {
+          finalCarbItems.removeWhere(
+              (element) => carbItems[index]['name'] == element['name']);
+        }
+      }else{
+
+
+        ConstantWidget.massage(context: context, text: 'No other items can be added');
+
+
       }
     } else if (typeCat == 1 || type == 1) {
-      fatsItems[index]['visible'] = value;
-      fatsItems[index]['value'] = value ? 1 : 0;
-      if (value) {
-        changeFinalList(
-            cal: fatsItems[index]['calories'],
-            quantity: fatsItems[index]['quantity'] * fatsItems[index]['value'],
-            name: fatsItems[index]['name'],
-            imageUrl: fatsItems[index]['imageUrl'],
-            type: 2);
-      } else {
-        finalFatsItems.removeWhere(
-          (element) => fatsItems[index]['name'] == element['name'],
-        );
+
+      if(fatPercentage!-fatsItems[index]['calories']>0|| value == false) {
+        fatsItems[index]['visible'] = value;
+        fatsItems[index]['value'] = value ? 1 : 0;
+        if (value) {
+          changeFinalList(
+              cal: fatsItems[index]['calories'],
+              quantity:
+                  fatsItems[index]['quantity'] * fatsItems[index]['value'],
+              name: fatsItems[index]['name'],
+              imageUrl: fatsItems[index]['imageUrl'],
+              type: 2);
+        } else {
+          finalFatsItems.removeWhere(
+            (element) => fatsItems[index]['name'] == element['name'],
+          );
+        }
+      }else{
+
+        ConstantWidget.massage(context: context, text: 'No other items can be added');
+
+
+
       }
     } else {
-      proteinsItems[index]['visible'] = value;
-      proteinsItems[index]['value'] = value ? 1 : 0;
-      if (value) {
-        changeFinalList(
-            cal: proteinsItems[index]['calories'],
-            quantity: proteinsItems[index]['quantity'] *
-                proteinsItems[index]['value'],
-            name: proteinsItems[index]['name'],
-            imageUrl: proteinsItems[index]['imageUrl'],
-            type: 3);
-      } else {
-        finalProteinsItems.removeWhere(
-            (element) => proteinsItems[index]['name'] == element['name']);
+
+      if(proteinPercentage!-proteinsItems[index]['calories']>0|| value == false) {
+        proteinsItems[index]['visible'] = value;
+        proteinsItems[index]['value'] = value ? 1 : 0;
+        if (value) {
+          changeFinalList(
+              cal: proteinsItems[index]['calories'],
+              quantity: proteinsItems[index]['quantity'] *
+                  proteinsItems[index]['value'],
+              name: proteinsItems[index]['name'],
+              imageUrl: proteinsItems[index]['imageUrl'],
+              type: 3);
+        } else {
+          finalProteinsItems.removeWhere(
+              (element) => proteinsItems[index]['name'] == element['name']);
+        }
+      }else{
+        
+        ConstantWidget.massage(context: context, text: 'No other items can be added');
       }
     }
     changeCalories();
@@ -1158,7 +1199,7 @@ class AppProvider extends ChangeNotifier {
       );
       getCaloriesAndScheduleInDatabase();
       isLoadingSchedule = false;
-      Navigator.of(context).pop();
+      Navigator.of(context).pushReplacementNamed(BMIResultScreen.route);
       ConstantWidget.massage(
         context: context,
         text: "The schedule has been selected successfully",

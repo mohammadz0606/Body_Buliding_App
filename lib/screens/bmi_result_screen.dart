@@ -1,4 +1,3 @@
-import 'package:body_building/screens/create_schedule/chose_category.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/helper/constant_style.dart';
 import '/services/provider/app_provider.dart';
