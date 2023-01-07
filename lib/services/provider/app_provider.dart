@@ -1347,4 +1347,10 @@ class AppProvider extends ChangeNotifier {
         : iconLogin = Icons.visibility;
     notifyListeners();
   }
+
+  bool removeError = false;
+  void changeRemoveError(){
+    removeError = !removeError;
+    notifyListeners();
+  }
 }
