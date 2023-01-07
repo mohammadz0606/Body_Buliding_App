@@ -8,7 +8,7 @@ import '../screens/auth/login_screen.dart';
 import '../screens/auth/signup_screen.dart';
 import '../screens/bmi_result_screen.dart';
 import '../screens/create_schedule/chose_category.dart';
-import '../screens/create_schedule/chose_starches_screen.dart';
+import '../screens/create_schedule/chose_item_screen.dart';
 import '../screens/exercises_video_screen.dart';
 import '../screens/nav_screen.dart';
 import '../screens/no_internet_screen.dart';
@@ -18,7 +18,7 @@ import '../screens/splash_screen.dart';
 abstract class RoutesScreen{
   static Map<String, WidgetBuilder> routesScreens = {
     SplashScreen.route : (context) => const SplashScreen(),
-    ChoseStarchesScreen.route:(context)=> ChoseStarchesScreen(),
+    ChooseItemScreen.route:(context)=> ChooseItemScreen(),
     ChoseCategory.route:(context)=> ChoseCategory(),
     LoginScreen.route: (context) => LoginScreen(),
     SignupScreen.route: (context) => SignupScreen(),

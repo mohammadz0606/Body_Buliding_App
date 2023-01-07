@@ -1048,9 +1048,6 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /*
-      calculate and schedule
-   */
   bool _isLoadingCalories = false;
 
   bool get isLoadingCalories => _isLoadingCalories;

@@ -6,16 +6,16 @@ import '../../services/provider/app_provider.dart';
 import '../../widgets/chose_item_button.dart';
 import '../../widgets/submit_item_button.dart';
 
-class ChoseStarchesScreen extends StatelessWidget {
-  const ChoseStarchesScreen({Key? key}) : super(key: key);
-  static const String route = 'chose_starches';
+class ChooseItemScreen extends StatelessWidget {
+  const ChooseItemScreen({Key? key}) : super(key: key);
+  static const String route = 'choose_item';
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chose item'),
+        title: Text('Choose item'),
       ),
       body: Consumer<AppProvider>(
         builder: (context, model, child) {
