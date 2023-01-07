@@ -906,7 +906,6 @@ class AppProvider extends ChangeNotifier {
       );
     } else {
       getBestWeight();
-
       if (isMuscular == 1) {
         calories = ((weight * 2.2 * 10) * activity + 500).toInt();
       } else {
