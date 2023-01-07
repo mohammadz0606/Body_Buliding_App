@@ -17,7 +17,6 @@ class ResueltOfSheduleModel {
   List<Map<String, dynamic>> finalProteinsItems;
   List<Map<String, dynamic>> finalFatsItems;
   List<Map<String, dynamic>> finalCarbItems;
-
   ResueltOfSheduleModel({
     required this.userId,
     required this.calories,

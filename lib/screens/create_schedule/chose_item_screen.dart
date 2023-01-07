@@ -15,6 +15,7 @@ class ChooseItemScreen extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Choose item'),
       ),
       body: Consumer<AppProvider>(
