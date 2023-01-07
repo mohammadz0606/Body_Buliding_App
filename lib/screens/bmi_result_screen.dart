@@ -40,7 +40,8 @@ class BMIResultScreen extends StatelessWidget {
                     selectedTextColor: Colors.white,
                     dateTextStyle: TextStyle(color: Colors.white, fontSize: 17),
                     dayTextStyle: TextStyle(color: Colors.white, fontSize: 11),
-                    monthTextStyle: TextStyle(color: Colors.white, fontSize: 11),
+                    monthTextStyle:
+                        TextStyle(color: Colors.white, fontSize: 11),
                     daysCount: 15,
                   ),
                 ),
@@ -83,7 +84,7 @@ class BMIResultScreen extends StatelessWidget {
                     ),
                     buildExpanded(
                       resuelt: Text(
-                      "Weight:\n${resuelt.weight.toStringAsFixed(1)}km",
+                        "Weight:\n${resuelt.weight.toStringAsFixed(1)}km",
                         style: GoogleFonts.lato(
                           fontSize: 16,
                           color: Colors.white,
@@ -187,7 +188,8 @@ class BMIResultScreen extends StatelessWidget {
                 backgroundColor: Color(0xff18DE0E),
                 onPressed: () {
                   model.editScheduleInDatabase(context);
-                  Navigator.of(context).pushReplacementNamed(ChoseCategory.route);
+                  Navigator.of(context)
+                      .pushReplacementNamed(ChoseCategory.route);
                 },
                 child: Icon(Icons.edit),
               ),
@@ -199,7 +201,6 @@ class BMIResultScreen extends StatelessWidget {
                   model.deleteScheduleInDatabase(
                     context: context,
                   );
-
                 },
                 child: Icon(Icons.delete),
               ),
@@ -261,15 +262,20 @@ class BMIResultScreen extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: ListTile(
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: FadeInImage(
+                    leading: SizedBox(
+                      width: size.width * 0.22,
+                      height: size.height * 0.7,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: FadeInImage(
                           placeholder: AssetImage("assets/placeholder.gif"),
                           placeholderFit: BoxFit.cover,
                           fit: BoxFit.cover,
                           image: NetworkImage(
                             item["imageUrl"],
-                          )),
+                          ),
+                        ),
+                      ),
                     ),
                     title: Text(
                       item["name"],
