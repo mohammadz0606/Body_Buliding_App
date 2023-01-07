@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final VoidCallback? onEditingComplete;
   bool? obscureText;
+  bool removeError = false;
 
   CustomTextField({
     Key? key,
@@ -25,6 +26,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText,
     this.focusNode,
     this.suffixIcon,
+    this.removeError = false,
     this.textInputAction,
     this.onEditingComplete,
   }) : super(key: key);
@@ -44,6 +46,31 @@ class CustomTextField extends StatelessWidget {
       textInputAction: textInputAction,
       onEditingComplete: onEditingComplete,
       decoration: InputDecoration(
+        errorStyle: removeError
+            ? TextStyle(color: Colors.transparent, fontSize: 0)
+            : TextStyle(color: Colors.red),
+        errorBorder: removeError
+            ? const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: MyColors.titleFieldsColor,
+                ),
+              )
+            : const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red,
+                ),
+              ),
+        focusedErrorBorder: removeError
+            ? const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: MyColors.titleFieldsColor,
+                ),
+              )
+            : const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red,
+                ),
+              ),
         hintTextDirection: TextDirection.ltr,
         hintText: hintText,
         hintStyle: const TextStyle(

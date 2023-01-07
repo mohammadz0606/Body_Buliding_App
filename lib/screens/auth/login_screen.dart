@@ -73,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const TitleFields(text: "Email"),
                       CustomTextField(
+                        removeError: provider.removeError,
                         focusNode: _focusNodeEmail,
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () {
@@ -95,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 15),
                       const TitleFields(text: "Password"),
                       CustomTextField(
+                        removeError: provider.removeError,
                         focusNode: _focusNodePassword,
                         controller: _passwordController,
                         onEditingComplete: () {
@@ -134,6 +136,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Center(
                                   child: CustomButton(
                                     onTap: () {
+                                      if(provider.removeError){
+                                        provider.changeRemoveError();
+                                      }
                                       if (_key.currentState!.validate()) {
                                         FocusScope.of(context).unfocus();
                                         model.signInApp(
@@ -159,6 +164,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       Navigator.of(context)
                                           .pushNamed(SignupScreen.route);
                                       FocusScope.of(context).unfocus();
+                                      if(!provider.removeError){
+                                        provider.changeRemoveError();
+                                      }
                                     },
                                     text: "Sign Up",
                                     size: size,
