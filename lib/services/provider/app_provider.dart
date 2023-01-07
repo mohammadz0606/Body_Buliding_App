@@ -296,7 +296,7 @@ class AppProvider extends ChangeNotifier {
 
   void changeCount(int val, int type, int index,BuildContext context) {
     if (type == 1) {
-      if(carbPercentage!-carbItems[index]['calories']>0|| val<carbItems[index]['value']){
+      if(_resueltOfSheduleModel!.carbPercentage-carbItems[index]['calories']>0|| val<carbItems[index]['value']){
         carbItems[index]['groupValue'] = val;
         carbItems[index]['value'] = val;
 
@@ -312,7 +312,7 @@ class AppProvider extends ChangeNotifier {
       }
     } else if (type == 2) {
 
-      if(fatPercentage!-fatsItems[index]['calories']>0|| val<fatsItems[index]['value']) {
+      if(_resueltOfSheduleModel!.fatPercentage-fatsItems[index]['calories']>0|| val<fatsItems[index]['value']) {
         fatsItems[index]['groupValue'] = val;
         fatsItems[index]['value'] = val;
         changeFinalList(
@@ -326,7 +326,7 @@ class AppProvider extends ChangeNotifier {
 
       }
     } else {
-      if(proteinPercentage!-proteinsItems[index]['calories']>0|| val<proteinsItems[index]['value']) {
+      if(_resueltOfSheduleModel!.proteinPercentage-proteinsItems[index]['calories']>0|| val<proteinsItems[index]['value']) {
         proteinsItems[index]['groupValue'] = val;
         proteinsItems[index]['value'] = val;
         changeFinalList(
@@ -346,7 +346,7 @@ class AppProvider extends ChangeNotifier {
 
   void choseStarchesItem(bool value, int index, BuildContext context, [int? type]) {
     if (typeCat == 0 || type == 0) {
-      if(carbPercentage!-carbItems[index]['calories']>0|| value == false) {
+      if(_resueltOfSheduleModel!.carbPercentage-carbItems[index]['calories']>0|| value == false) {
         carbItems[index]['visible'] = value;
         carbItems[index]['value'] = value ? 1 : 0;
         if (value) {
@@ -370,7 +370,7 @@ class AppProvider extends ChangeNotifier {
       }
     } else if (typeCat == 1 || type == 1) {
 
-      if(fatPercentage!-fatsItems[index]['calories']>0|| value == false) {
+      if(_resueltOfSheduleModel!.fatPercentage-fatsItems[index]['calories']>0|| value == false) {
         fatsItems[index]['visible'] = value;
         fatsItems[index]['value'] = value ? 1 : 0;
         if (value) {
@@ -395,7 +395,7 @@ class AppProvider extends ChangeNotifier {
       }
     } else {
 
-      if(proteinPercentage!-proteinsItems[index]['calories']>0|| value == false) {
+      if(_resueltOfSheduleModel!.proteinPercentage!-proteinsItems[index]['calories']>0|| value == false) {
         proteinsItems[index]['visible'] = value;
         proteinsItems[index]['value'] = value ? 1 : 0;
         if (value) {
@@ -1145,7 +1145,6 @@ class AppProvider extends ChangeNotifier {
         _isLoadingCalories = false;
         ConstantWidget.massage(context: context, text: "Done");
         onTabChange(0);
-
         Navigator.of(context).pushNamed(
           ChoseCategory.route,
         );
@@ -1226,7 +1225,6 @@ class AppProvider extends ChangeNotifier {
       for (int j = 0; j < carbItems.length; j++) {
         if (finalCarbItems[i]["name"] == carbItems[j]["name"]) {
           choseStarchesItem(true, i, context, 0);
-          //changeCount(1, 1, i);
         }
       }
     }
@@ -1238,7 +1236,6 @@ class AppProvider extends ChangeNotifier {
       for (int j = 0; j < proteinsItems.length; j++) {
         if (finalProteinsItems[i]["name"] == proteinsItems[j]["name"]) {
           choseStarchesItem(true, i, context, 3);
-          //changeCount(1, 3, i);
         }
       }
     }
