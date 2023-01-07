@@ -127,7 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           if (text!.isEmpty) {
                             return "you must not empty";
                           }
-                          if (!text.contains("@")) {
+                          if (!text.contains("@") || !text.contains('.') || !text.endsWith('.com')) {
                             return "The email is incorrect";
                           }
                           return null;

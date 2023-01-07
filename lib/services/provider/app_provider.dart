@@ -324,7 +324,9 @@ class AppProvider extends ChangeNotifier {
             type: type);
       } else {
         ConstantWidget.massage(
-            context: context, text: 'You cannot add more than that');
+          context: context,
+          text: 'You cannot add more than that',
+        );
       }
     } else {
       if (proteinPercentage! - proteinsItems[index]['calories'] > 0 ||
@@ -348,9 +350,7 @@ class AppProvider extends ChangeNotifier {
 
   void chooseItem(bool value, int index, BuildContext context, [int? type]) {
     if (typeCat == 0 || type == 0) {
-      if (carbPercentage! -
-                  carbItems[index]['calories'] >
-              0 ||
+      if (carbPercentage! - carbItems[index]['calories'] > 0 ||
           value == false) {
         carbItems[index]['visible'] = value;
         carbItems[index]['value'] = value ? 1 : 0;
@@ -371,9 +371,7 @@ class AppProvider extends ChangeNotifier {
             context: context, text: 'No other items can be added');
       }
     } else if (typeCat == 1 || type == 1) {
-      if (fatPercentage! - fatsItems[index]['calories'] >
-              0 ||
-          value == false) {
+      if (fatPercentage! - fatsItems[index]['calories'] > 0 || value == false) {
         fatsItems[index]['visible'] = value;
         fatsItems[index]['value'] = value ? 1 : 0;
         if (value) {
@@ -394,9 +392,7 @@ class AppProvider extends ChangeNotifier {
             context: context, text: 'No other items can be added');
       }
     } else {
-      if (proteinPercentage! -
-                  proteinsItems[index]['calories'] >
-              0 ||
+      if (proteinPercentage! - proteinsItems[index]['calories'] > 0 ||
           value == false) {
         proteinsItems[index]['visible'] = value;
         proteinsItems[index]['value'] = value ? 1 : 0;
