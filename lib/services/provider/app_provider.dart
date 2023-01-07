@@ -254,7 +254,8 @@ class AppProvider extends ChangeNotifier {
       required int quantity,
       required String name,
       required String imageUrl,
-      required int type}) {
+      required int type,
+      required int groupValue}) {
     if (type == 1) {
       if (!finalCarbItems.isEmpty) {
         finalCarbItems.removeWhere((element) => name == element['name']);
@@ -264,7 +265,8 @@ class AppProvider extends ChangeNotifier {
         'name': name,
         'calories': cal,
         'quantity': quantity,
-        'imageUrl': imageUrl
+        'imageUrl': imageUrl,
+        'groupValue': groupValue
       });
     } else if (type == 2) {
       if (!finalFatsItems.isEmpty) {
@@ -275,7 +277,8 @@ class AppProvider extends ChangeNotifier {
         'name': name,
         'calories': cal,
         'quantity': quantity,
-        'imageUrl': imageUrl
+        'imageUrl': imageUrl,
+        'groupValue': groupValue
       });
     } else {
       if (!finalProteinsItems.isEmpty) {
@@ -285,7 +288,8 @@ class AppProvider extends ChangeNotifier {
         'name': name,
         'calories': cal,
         'quantity': quantity,
-        'imageUrl': imageUrl
+        'imageUrl': imageUrl,
+        'groupValue': groupValue
       });
     }
 
@@ -306,6 +310,7 @@ class AppProvider extends ChangeNotifier {
             quantity: carbItems[index]['quantity'] * val,
             name: carbItems[index]['name'],
             imageUrl: carbItems[index]['imageUrl'],
+            groupValue: carbItems[index]['groupValue'],
             type: type);
       } else {
         ConstantWidget.massage(
@@ -321,6 +326,7 @@ class AppProvider extends ChangeNotifier {
             quantity: fatsItems[index]['quantity'] * val,
             name: fatsItems[index]['name'],
             imageUrl: fatsItems[index]['imageUrl'],
+            groupValue: fatsItems[index]['groupValue'],
             type: type);
       } else {
         ConstantWidget.massage(
@@ -336,6 +342,7 @@ class AppProvider extends ChangeNotifier {
             quantity: proteinsItems[index]['quantity'] * val,
             name: proteinsItems[index]['name'],
             imageUrl: proteinsItems[index]['imageUrl'],
+            groupValue: proteinsItems[index]['groupValue'],
             type: type);
       } else {
         ConstantWidget.massage(
@@ -348,20 +355,19 @@ class AppProvider extends ChangeNotifier {
 
   void chooseItem(bool value, int index, BuildContext context, [int? type]) {
     if (typeCat == 0 || type == 0) {
-      if (carbPercentage! -
-                  carbItems[index]['calories'] >
-              0 ||
+      if (carbPercentage! - carbItems[index]['calories'] > 0 ||
           value == false) {
         carbItems[index]['visible'] = value;
         carbItems[index]['value'] = value ? 1 : 0;
         if (value) {
           changeFinalList(
-              cal: carbItems[index]['calories'],
-              quantity:
-                  carbItems[index]['quantity'] * carbItems[index]['value'],
-              name: carbItems[index]['name'],
-              imageUrl: carbItems[index]['imageUrl'],
-              type: 1);
+            cal: carbItems[index]['calories'],
+            quantity: carbItems[index]['quantity'] * carbItems[index]['value'],
+            name: carbItems[index]['name'],
+            imageUrl: carbItems[index]['imageUrl'],
+            type: 1,
+            groupValue: carbItems[index]['groupValue'],
+          );
         } else {
           finalCarbItems.removeWhere(
               (element) => carbItems[index]['name'] == element['name']);
@@ -371,9 +377,7 @@ class AppProvider extends ChangeNotifier {
             context: context, text: 'No other items can be added');
       }
     } else if (typeCat == 1 || type == 1) {
-      if (fatPercentage! - fatsItems[index]['calories'] >
-              0 ||
-          value == false) {
+      if (fatPercentage! - fatsItems[index]['calories'] > 0 || value == false) {
         fatsItems[index]['visible'] = value;
         fatsItems[index]['value'] = value ? 1 : 0;
         if (value) {
@@ -383,6 +387,7 @@ class AppProvider extends ChangeNotifier {
                   fatsItems[index]['quantity'] * fatsItems[index]['value'],
               name: fatsItems[index]['name'],
               imageUrl: fatsItems[index]['imageUrl'],
+              groupValue: fatsItems[index]['groupValue'],
               type: 2);
         } else {
           finalFatsItems.removeWhere(
@@ -394,9 +399,7 @@ class AppProvider extends ChangeNotifier {
             context: context, text: 'No other items can be added');
       }
     } else {
-      if (proteinPercentage! -
-                  proteinsItems[index]['calories'] >
-              0 ||
+      if (proteinPercentage! - proteinsItems[index]['calories'] > 0 ||
           value == false) {
         proteinsItems[index]['visible'] = value;
         proteinsItems[index]['value'] = value ? 1 : 0;
@@ -407,6 +410,7 @@ class AppProvider extends ChangeNotifier {
                   proteinsItems[index]['value'],
               name: proteinsItems[index]['name'],
               imageUrl: proteinsItems[index]['imageUrl'],
+              groupValue: proteinsItems[index]['groupValue'],
               type: 3);
         } else {
           finalProteinsItems.removeWhere(
@@ -1214,39 +1218,53 @@ class AppProvider extends ChangeNotifier {
     _editCarbMeals(context);
     _editFatMeals(context);
     _editProteinsMeals(context);
+
+    changeCalories();
     notifyListeners();
   }
 
   void _editFatMeals(BuildContext context) {
-    for (int i = 0; i < finalFatsItems.length; i++) {
-      for (int j = 0; j < fatsItems.length; j++) {
-        if (finalFatsItems[i]["name"] == fatsItems[j]["name"]) {
-          chooseItem(true, i, context, 1);
+    fatsItems.forEach((element) {
+      finalFatsItems.forEach((e) {
+        if (element['name'] == e['name']) {
+          element['value'] = e['value'];
+          element['visible'] = true;
+          element['groupValue'] = e['groupValue'];
+          element['quantity'] = e['quantity'];
         }
-      }
-    }
+      });
+    });
+
     notifyListeners();
   }
 
   void _editCarbMeals(BuildContext context) {
-    for (int i = 0; i < finalCarbItems.length; i++) {
-      for (int j = 0; j < carbItems.length; j++) {
-        if (finalCarbItems[i]["name"] == carbItems[j]["name"]) {
-          chooseItem(true, i, context, 0);
+    carbItems.forEach((element) {
+      finalCarbItems.forEach((e) {
+        if (element['name'] == e['name']) {
+          element['value'] = e['value'];
+          element['visible'] = true;
+          element['groupValue'] = e['groupValue'];
+          element['quantity'] = e['quantity'];
         }
-      }
-    }
+      });
+    });
+
     notifyListeners();
   }
 
   void _editProteinsMeals(BuildContext context) {
-    for (int i = 0; i < finalProteinsItems.length; i++) {
-      for (int j = 0; j < proteinsItems.length; j++) {
-        if (finalProteinsItems[i]["name"] == proteinsItems[j]["name"]) {
-          chooseItem(true, i, context, 3);
+    proteinsItems.forEach((element) {
+      finalProteinsItems.forEach((e) {
+        if (element['name'] == e['name']) {
+          element['value'] = e['value'];
+          element['visible'] = true;
+          element['groupValue'] = e['groupValue'];
+          element['quantity'] = e['quantity'];
         }
-      }
-    }
+      });
+    });
+
     notifyListeners();
   }
 
