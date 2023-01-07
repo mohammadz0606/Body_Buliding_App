@@ -894,20 +894,17 @@ class AppProvider extends ChangeNotifier {
         context: context,
         text: 'Pleas choose Your Gender ',
       );
-    }
-    else if (isMuscular == 0) {
+    } else if (isMuscular == 0) {
       ConstantWidget.massage(
         context: context,
         text: 'Please select a schedule type ',
       );
-    }
-    else if (activity == 0) {
+    } else if (activity == 0) {
       ConstantWidget.massage(
         context: context,
         text: 'Please select your activity rate ',
       );
-    }
-    else {
+    } else {
       getBestWeight();
 
       if (isMuscular == 1) {
@@ -1001,9 +998,9 @@ class AppProvider extends ChangeNotifier {
     if (finalFatsItems.isEmpty) {
       return;
     } else {
-    for(int i = 0;i<fatsItems.length;i++){
-      chooseItem(false, i, context);
-    }
+      for (int i = 0; i < fatsItems.length; i++) {
+        chooseItem(false, i, context);
+      }
     }
     finalFatsItems = [];
     notifyListeners();
@@ -1013,7 +1010,7 @@ class AppProvider extends ChangeNotifier {
     if (finalProteinsItems.isEmpty) {
       return;
     } else {
-      for(int i = 0;i<proteinsItems.length;i++){
+      for (int i = 0; i < proteinsItems.length; i++) {
         chooseItem(false, i, context);
       }
     }
@@ -1025,7 +1022,7 @@ class AppProvider extends ChangeNotifier {
     if (finalCarbItems.isEmpty) {
       return;
     } else {
-      for(int i = 0;i<fatsItems.length;i++){
+      for (int i = 0; i < fatsItems.length; i++) {
         chooseItem(false, i, context);
       }
     }
