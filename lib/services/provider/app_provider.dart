@@ -252,6 +252,7 @@ class AppProvider extends ChangeNotifier {
   changeFinalList(
       {required int cal,
       required int quantity,
+        required int value,
       required String name,
       required String imageUrl,
       required int type,
@@ -300,10 +301,7 @@ class AppProvider extends ChangeNotifier {
 
   void changeCount(int val, int type, int index, BuildContext context) {
     if (type == 1) {
-      if (carbPercentage! - carbItems[index]['calories'] > 0 ||
-          val < carbItems[index]['value']) {
-        carbItems[index]['groupValue'] = val;
-        carbItems[index]['value'] = val;
+      if (carbPercentage! - carbItems[index]['calories'] > 0 || val < carbItems[index]['value']) {carbItems[index]['groupValue'] = val;carbItems[index]['value'] = val;
 
         changeFinalList(
             cal: carbItems[index]['calories'] * val,
@@ -311,7 +309,7 @@ class AppProvider extends ChangeNotifier {
             name: carbItems[index]['name'],
             imageUrl: carbItems[index]['imageUrl'],
             groupValue: carbItems[index]['groupValue'],
-            type: type);
+            type: type,value: carbItems[index]['value']);
       } else {
         ConstantWidget.massage(
             context: context, text: 'You cannot add more than that');
@@ -326,7 +324,7 @@ class AppProvider extends ChangeNotifier {
             quantity: fatsItems[index]['quantity'] * val,
             name: fatsItems[index]['name'],
             imageUrl: fatsItems[index]['imageUrl'],
-            groupValue: fatsItems[index]['groupValue'],
+            groupValue: fatsItems[index]['groupValue'],value: fatsItems[index]['value'],
             type: type);
       } else {
         ConstantWidget.massage(
@@ -342,7 +340,7 @@ class AppProvider extends ChangeNotifier {
         changeFinalList(
             cal: proteinsItems[index]['calories'] * val,
             quantity: proteinsItems[index]['quantity'] * val,
-            name: proteinsItems[index]['name'],
+            name: proteinsItems[index]['name'],value: proteinsItems[index]['value'],
             imageUrl: proteinsItems[index]['imageUrl'],
             groupValue: proteinsItems[index]['groupValue'],
             type: type);
@@ -365,7 +363,7 @@ class AppProvider extends ChangeNotifier {
           changeFinalList(
             cal: carbItems[index]['calories'],
             quantity: carbItems[index]['quantity'] * carbItems[index]['value'],
-            name: carbItems[index]['name'],
+            name: carbItems[index]['name'],value: carbItems[index]['value'],
             imageUrl: carbItems[index]['imageUrl'],
             type: 1,
             groupValue: carbItems[index]['groupValue'],
@@ -389,7 +387,7 @@ class AppProvider extends ChangeNotifier {
                   fatsItems[index]['quantity'] * fatsItems[index]['value'],
               name: fatsItems[index]['name'],
               imageUrl: fatsItems[index]['imageUrl'],
-              groupValue: fatsItems[index]['groupValue'],
+              groupValue: fatsItems[index]['groupValue'],value: fatsItems[index]['value'],
               type: 2);
         } else {
           finalFatsItems.removeWhere(
@@ -410,8 +408,8 @@ class AppProvider extends ChangeNotifier {
               cal: proteinsItems[index]['calories'],
               quantity: proteinsItems[index]['quantity'] *
                   proteinsItems[index]['value'],
-              name: proteinsItems[index]['name'],
-              imageUrl: proteinsItems[index]['imageUrl'],
+              name: proteinsItems[index]['name'],value: proteinsItems[index]['value']
+              ,imageUrl: proteinsItems[index]['imageUrl'],
               groupValue: proteinsItems[index]['groupValue'],
               type: 3);
         } else {
@@ -1196,6 +1194,9 @@ class AppProvider extends ChangeNotifier {
   }
 
   void _editFatMeals(BuildContext context) {
+
+
+
     fatsItems.forEach((element) {
       finalFatsItems.forEach((e) {
         if (element['name'] == e['name']) {
