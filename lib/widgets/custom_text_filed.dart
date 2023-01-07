@@ -47,9 +47,20 @@ class CustomTextField extends StatelessWidget {
       onEditingComplete: onEditingComplete,
       decoration: InputDecoration(
         errorStyle: removeError
-            ? TextStyle(color: Colors.transparent,fontSize: 0)
+            ? TextStyle(color: Colors.transparent, fontSize: 0)
             : TextStyle(color: Colors.red),
         errorBorder: removeError
+            ? const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: MyColors.titleFieldsColor,
+                ),
+              )
+            : const UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red,
+                ),
+              ),
+        focusedErrorBorder: removeError
             ? const UnderlineInputBorder(
                 borderSide: BorderSide(
                   color: MyColors.titleFieldsColor,
