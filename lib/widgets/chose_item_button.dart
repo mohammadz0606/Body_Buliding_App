@@ -42,7 +42,7 @@ class ChoseItemButton extends StatelessWidget {
                             ? false
                             : true,
                 onChanged: (value) {
-                  model.choseStarchesItem(value ?? false, index, context);
+                  model.chooseItem(value ?? false, index, context);
                 },
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.start,

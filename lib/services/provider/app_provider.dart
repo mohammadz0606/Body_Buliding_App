@@ -294,9 +294,12 @@ class AppProvider extends ChangeNotifier {
 
   int portion = 1;
 
-  void changeCount(int val, int type, int index,BuildContext context) {
+  void changeCount(int val, int type, int index, BuildContext context) {
     if (type == 1) {
-      if(_resueltOfSheduleModel!.carbPercentage-carbItems[index]['calories']>0|| val<carbItems[index]['value']){
+      if (carbPercentage! -
+                  carbItems[index]['calories'] >
+              0 ||
+          val < carbItems[index]['value']) {
         carbItems[index]['groupValue'] = val;
         carbItems[index]['value'] = val;
 
@@ -306,13 +309,14 @@ class AppProvider extends ChangeNotifier {
             name: carbItems[index]['name'],
             imageUrl: carbItems[index]['imageUrl'],
             type: type);
-      }else{
-        ConstantWidget.massage(context: context, text: 'You cannot add more than that');
-
+      } else {
+        ConstantWidget.massage(
+            context: context, text: 'You cannot add more than that');
       }
     } else if (type == 2) {
-
-      if(_resueltOfSheduleModel!.fatPercentage-fatsItems[index]['calories']>0|| val<fatsItems[index]['value']) {
+      if (fatPercentage! - fatsItems[index]['calories'] >
+              0 ||
+          val < fatsItems[index]['value']) {
         fatsItems[index]['groupValue'] = val;
         fatsItems[index]['value'] = val;
         changeFinalList(
@@ -321,12 +325,15 @@ class AppProvider extends ChangeNotifier {
             name: fatsItems[index]['name'],
             imageUrl: fatsItems[index]['imageUrl'],
             type: type);
-      }else{
-        ConstantWidget.massage(context: context, text: 'You cannot add more than that');
-
+      } else {
+        ConstantWidget.massage(
+            context: context, text: 'You cannot add more than that');
       }
     } else {
-      if(_resueltOfSheduleModel!.proteinPercentage-proteinsItems[index]['calories']>0|| val<proteinsItems[index]['value']) {
+      if (proteinPercentage! -
+                  proteinsItems[index]['calories'] >
+              0 ||
+          val < proteinsItems[index]['value']) {
         proteinsItems[index]['groupValue'] = val;
         proteinsItems[index]['value'] = val;
         changeFinalList(
@@ -335,18 +342,22 @@ class AppProvider extends ChangeNotifier {
             name: proteinsItems[index]['name'],
             imageUrl: proteinsItems[index]['imageUrl'],
             type: type);
-      }else{
-        ConstantWidget.massage(context: context, text: 'You cannot add more than that');
-
+      } else {
+        ConstantWidget.massage(
+            context: context, text: 'You cannot add more than that');
       }
     }
     changeCalories();
     notifyListeners();
   }
 
-  void choseStarchesItem(bool value, int index, BuildContext context, [int? type]) {
+  void chooseItem(bool value, int index, BuildContext context,
+      [int? type]) {
     if (typeCat == 0 || type == 0) {
-      if(_resueltOfSheduleModel!.carbPercentage-carbItems[index]['calories']>0|| value == false) {
+      if (carbPercentage! -
+                  carbItems[index]['calories'] >
+              0 ||
+          value == false) {
         carbItems[index]['visible'] = value;
         carbItems[index]['value'] = value ? 1 : 0;
         if (value) {
@@ -361,16 +372,14 @@ class AppProvider extends ChangeNotifier {
           finalCarbItems.removeWhere(
               (element) => carbItems[index]['name'] == element['name']);
         }
-      }else{
-
-
-        ConstantWidget.massage(context: context, text: 'No other items can be added');
-
-
+      } else {
+        ConstantWidget.massage(
+            context: context, text: 'No other items can be added');
       }
     } else if (typeCat == 1 || type == 1) {
-
-      if(_resueltOfSheduleModel!.fatPercentage-fatsItems[index]['calories']>0|| value == false) {
+      if (fatPercentage! - fatsItems[index]['calories'] >
+              0 ||
+          value == false) {
         fatsItems[index]['visible'] = value;
         fatsItems[index]['value'] = value ? 1 : 0;
         if (value) {
@@ -386,16 +395,15 @@ class AppProvider extends ChangeNotifier {
             (element) => fatsItems[index]['name'] == element['name'],
           );
         }
-      }else{
-
-        ConstantWidget.massage(context: context, text: 'No other items can be added');
-
-
-
+      } else {
+        ConstantWidget.massage(
+            context: context, text: 'No other items can be added');
       }
     } else {
-
-      if(_resueltOfSheduleModel!.proteinPercentage!-proteinsItems[index]['calories']>0|| value == false) {
+      if (proteinPercentage! -
+                  proteinsItems[index]['calories'] >
+              0 ||
+          value == false) {
         proteinsItems[index]['visible'] = value;
         proteinsItems[index]['value'] = value ? 1 : 0;
         if (value) {
@@ -410,9 +418,9 @@ class AppProvider extends ChangeNotifier {
           finalProteinsItems.removeWhere(
               (element) => proteinsItems[index]['name'] == element['name']);
         }
-      }else{
-        
-        ConstantWidget.massage(context: context, text: 'No other items can be added');
+      } else {
+        ConstantWidget.massage(
+            context: context, text: 'No other items can be added');
       }
     }
     changeCalories();
@@ -994,7 +1002,7 @@ class AppProvider extends ChangeNotifier {
       for (int i = 0; i < finalFatsItems.length; i++) {
         for (int j = 0; j < fatsItems.length; j++) {
           if (finalFatsItems[i]["name"] == fatsItems[j]["name"]) {
-            choseStarchesItem(false, i, context, 1);
+            chooseItem(false, i, context, 1);
             //changeCount(1, 3, i);
           }
         }
@@ -1016,7 +1024,7 @@ class AppProvider extends ChangeNotifier {
       for (int i = 0; i < finalProteinsItems.length; i++) {
         for (int j = 0; j < proteinsItems.length; j++) {
           if (finalProteinsItems[i]["name"] == proteinsItems[j]["name"]) {
-            choseStarchesItem(false, i, context, 3);
+            chooseItem(false, i, context, 3);
             //changeCount(1, 3, i);
           }
         }
@@ -1038,7 +1046,7 @@ class AppProvider extends ChangeNotifier {
       for (int i = 0; i < finalCarbItems.length; i++) {
         for (int j = 0; j < carbItems.length; j++) {
           if (finalCarbItems[i]["name"] == carbItems[j]["name"]) {
-            choseStarchesItem(false, i, context, 0);
+            chooseItem(false, i, context, 0);
             //changeCount(1, 3, i);
           }
         }
@@ -1213,7 +1221,7 @@ class AppProvider extends ChangeNotifier {
     for (int i = 0; i < finalFatsItems.length; i++) {
       for (int j = 0; j < fatsItems.length; j++) {
         if (finalFatsItems[i]["name"] == fatsItems[j]["name"]) {
-          choseStarchesItem(true, i, context, 1);
+          chooseItem(true, i, context, 1);
         }
       }
     }
@@ -1224,7 +1232,7 @@ class AppProvider extends ChangeNotifier {
     for (int i = 0; i < finalCarbItems.length; i++) {
       for (int j = 0; j < carbItems.length; j++) {
         if (finalCarbItems[i]["name"] == carbItems[j]["name"]) {
-          choseStarchesItem(true, i, context, 0);
+          chooseItem(true, i, context, 0);
         }
       }
     }
@@ -1235,7 +1243,7 @@ class AppProvider extends ChangeNotifier {
     for (int i = 0; i < finalProteinsItems.length; i++) {
       for (int j = 0; j < proteinsItems.length; j++) {
         if (finalProteinsItems[i]["name"] == proteinsItems[j]["name"]) {
-          choseStarchesItem(true, i, context, 3);
+          chooseItem(true, i, context, 3);
         }
       }
     }
