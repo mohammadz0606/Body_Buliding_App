@@ -918,19 +918,6 @@ class AppProvider extends ChangeNotifier {
         carbPercentage: carbPercentage!,
         fatPercentage: fatPercentage!,
       );
-      /*setCaloriesInDatabase(
-        resuelt: ResueltOfSheduleModel(
-          userId: userModel!.id!,
-          calories: calories!,
-          height: height,
-          weight: weight,
-          muscular: isMuscular == 1 ? "MUSCULAR" : "DRYING OF FAT",
-          gender: isMale == 1 ? "Male" : "Female",
-          activity: activity.toString(),
-          proteinPercentage: proteinPercentage!,
-          carbPercentage: carbPercentage!,
-          fatPercentage: fatPercentage!,
-        ),*/
       setCaloriesInDatabase(
         resuelt: _resueltOfSheduleModel!,
         context: context,

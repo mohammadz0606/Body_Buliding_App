@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import 'create_schedule/chose_category.dart';
+
 class BMIResultScreen extends StatelessWidget {
   static const String route = "result_screen";
 
@@ -184,8 +186,8 @@ class BMIResultScreen extends StatelessWidget {
                 heroTag: null,
                 backgroundColor: Color(0xff18DE0E),
                 onPressed: () {
-                  //model.editScheduleInDatabase(context);
-                  //Navigator.of(context).pushReplacementNamed(ChoseCategory.route);
+                  model.editScheduleInDatabase(context);
+                  Navigator.of(context).pushReplacementNamed(ChoseCategory.route);
                 },
                 child: Icon(Icons.edit),
               ),
