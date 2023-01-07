@@ -252,7 +252,7 @@ class AppProvider extends ChangeNotifier {
   changeFinalList(
       {required int cal,
       required int quantity,
-        required int value,
+      required int value,
       required String name,
       required String imageUrl,
       required int type,
@@ -301,7 +301,13 @@ class AppProvider extends ChangeNotifier {
 
   void changeCount(int val, int type, int index, BuildContext context) {
     if (type == 1) {
-      if (carbPercentage! - carbItems[index]['calories'] > 0 || val < carbItems[index]['value']) {carbItems[index]['groupValue'] = val;carbItems[index]['value'] = val;
+      if (carbPercentage! -
+                  carbItems[index]['calories'] *
+                      (val - carbItems[index]['value']) >
+              0 ||
+          val < carbItems[index]['value']) {
+        carbItems[index]['groupValue'] = val;
+        carbItems[index]['value'] = val;
 
         changeFinalList(
             cal: carbItems[index]['calories'] * val,
@@ -309,13 +315,17 @@ class AppProvider extends ChangeNotifier {
             name: carbItems[index]['name'],
             imageUrl: carbItems[index]['imageUrl'],
             groupValue: carbItems[index]['groupValue'],
-            type: type,value: carbItems[index]['value']);
+            type: type,
+            value: carbItems[index]['value']);
       } else {
         ConstantWidget.massage(
             context: context, text: 'You cannot add more than that');
       }
     } else if (type == 2) {
-      if (fatPercentage! - fatsItems[index]['calories'] > 0 ||
+      if (fatPercentage! -
+                  fatsItems[index]['calories'] *
+                      (val - fatsItems[index]['value']) >
+              0 ||
           val < fatsItems[index]['value']) {
         fatsItems[index]['groupValue'] = val;
         fatsItems[index]['value'] = val;
@@ -324,7 +334,8 @@ class AppProvider extends ChangeNotifier {
             quantity: fatsItems[index]['quantity'] * val,
             name: fatsItems[index]['name'],
             imageUrl: fatsItems[index]['imageUrl'],
-            groupValue: fatsItems[index]['groupValue'],value: fatsItems[index]['value'],
+            groupValue: fatsItems[index]['groupValue'],
+            value: fatsItems[index]['value'],
             type: type);
       } else {
         ConstantWidget.massage(
@@ -333,14 +344,18 @@ class AppProvider extends ChangeNotifier {
         );
       }
     } else {
-      if (proteinPercentage! - proteinsItems[index]['calories'] > 0 ||
+      if (proteinPercentage! -
+                  proteinsItems[index]['calories'] *
+                      (val - proteinsItems[index]['value']) >
+              0 ||
           val < proteinsItems[index]['value']) {
         proteinsItems[index]['groupValue'] = val;
         proteinsItems[index]['value'] = val;
         changeFinalList(
             cal: proteinsItems[index]['calories'] * val,
             quantity: proteinsItems[index]['quantity'] * val,
-            name: proteinsItems[index]['name'],value: proteinsItems[index]['value'],
+            name: proteinsItems[index]['name'],
+            value: proteinsItems[index]['value'],
             imageUrl: proteinsItems[index]['imageUrl'],
             groupValue: proteinsItems[index]['groupValue'],
             type: type);
@@ -360,13 +375,15 @@ class AppProvider extends ChangeNotifier {
         carbItems[index]['visible'] = value;
         carbItems[index]['value'] = value ? 1 : 0;
         if (value) {
+          changeCount(1, 1, index, context);
           changeFinalList(
             cal: carbItems[index]['calories'],
             quantity: carbItems[index]['quantity'] * carbItems[index]['value'],
-            name: carbItems[index]['name'],value: carbItems[index]['value'],
+            name: carbItems[index]['name'],
+            value: carbItems[index]['value'],
             imageUrl: carbItems[index]['imageUrl'],
             type: 1,
-            groupValue: carbItems[index]['groupValue'],
+            groupValue: carbItems[index]['value'],
           );
         } else {
           finalCarbItems.removeWhere(
@@ -381,13 +398,16 @@ class AppProvider extends ChangeNotifier {
         fatsItems[index]['visible'] = value;
         fatsItems[index]['value'] = value ? 1 : 0;
         if (value) {
+          changeCount(1, 2, index, context);
+
           changeFinalList(
               cal: fatsItems[index]['calories'],
               quantity:
                   fatsItems[index]['quantity'] * fatsItems[index]['value'],
               name: fatsItems[index]['name'],
               imageUrl: fatsItems[index]['imageUrl'],
-              groupValue: fatsItems[index]['groupValue'],value: fatsItems[index]['value'],
+              groupValue: fatsItems[index]['value'],
+              value: fatsItems[index]['value'],
               type: 2);
         } else {
           finalFatsItems.removeWhere(
@@ -399,17 +419,23 @@ class AppProvider extends ChangeNotifier {
             context: context, text: 'No other items can be added');
       }
     } else {
-      if (proteinPercentage! - proteinsItems[index]['calories'] > 0 ||
+      if (proteinPercentage! -
+                  proteinsItems[index]['calories'] *
+                      proteinsItems[index]['value'] >
+              0 ||
           value == false) {
         proteinsItems[index]['visible'] = value;
         proteinsItems[index]['value'] = value ? 1 : 0;
         if (value) {
+          changeCount(1, 3, index, context);
+
           changeFinalList(
               cal: proteinsItems[index]['calories'],
               quantity: proteinsItems[index]['quantity'] *
                   proteinsItems[index]['value'],
-              name: proteinsItems[index]['name'],value: proteinsItems[index]['value']
-              ,imageUrl: proteinsItems[index]['imageUrl'],
+              name: proteinsItems[index]['name'],
+              value: proteinsItems[index]['value'],
+              imageUrl: proteinsItems[index]['imageUrl'],
               groupValue: proteinsItems[index]['groupValue'],
               type: 3);
         } else {
@@ -933,7 +959,6 @@ class AppProvider extends ChangeNotifier {
 
       //getCaloriesAndScheduleInDatabase();
     }
-
     notifyListeners();
   }
 
@@ -996,6 +1021,7 @@ class AppProvider extends ChangeNotifier {
       return;
     } else {
       for (int i = 0; i < fatsItems.length; i++) {
+        changeCount(1, 2, i, context);
         chooseItem(false, i, context);
       }
     }
@@ -1008,6 +1034,8 @@ class AppProvider extends ChangeNotifier {
       return;
     } else {
       for (int i = 0; i < proteinsItems.length; i++) {
+        changeCount(1, 3, i, context);
+
         chooseItem(false, i, context);
       }
     }
@@ -1020,6 +1048,8 @@ class AppProvider extends ChangeNotifier {
       return;
     } else {
       for (int i = 0; i < fatsItems.length; i++) {
+        changeCount(1, 1, i, context);
+
         chooseItem(false, i, context);
       }
     }
@@ -1092,10 +1122,13 @@ class AppProvider extends ChangeNotifier {
                   context: context,
                   text: "Done",
                 );
-                onTabChange(0);
-                Navigator.of(context).pushNamed(
+                Navigator.of(context)
+                    .pushNamed(
                   ChoseCategory.route,
-                );
+                )
+                    .then((value) {
+                  onTabChange(0);
+                });
                 notifyListeners();
               },
               child: Text(
@@ -1126,10 +1159,13 @@ class AppProvider extends ChangeNotifier {
         _database.setCaloriesInDatabase(resuelt: resuelt);
         _isLoadingCalories = false;
         ConstantWidget.massage(context: context, text: "Done");
-        onTabChange(0);
-        Navigator.of(context).pushNamed(
+        Navigator.of(context)
+            .pushNamed(
           ChoseCategory.route,
-        );
+        )
+            .then((value) {
+          onTabChange(0);
+        });
         notifyListeners();
       }
     } catch (e) {
@@ -1194,9 +1230,6 @@ class AppProvider extends ChangeNotifier {
   }
 
   void _editFatMeals(BuildContext context) {
-
-
-
     fatsItems.forEach((element) {
       finalFatsItems.forEach((e) {
         if (element['name'] == e['name']) {
