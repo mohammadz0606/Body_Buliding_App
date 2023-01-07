@@ -894,17 +894,20 @@ class AppProvider extends ChangeNotifier {
         context: context,
         text: 'Pleas choose Your Gender ',
       );
-    } else if (isMuscular == 0) {
+    }
+    else if (isMuscular == 0) {
       ConstantWidget.massage(
         context: context,
         text: 'Please select a schedule type ',
       );
-    } else if (activity == 0) {
+    }
+    else if (activity == 0) {
       ConstantWidget.massage(
         context: context,
         text: 'Please select your activity rate ',
       );
-    } else {
+    }
+    else {
       getBestWeight();
 
       if (isMuscular == 1) {
@@ -991,46 +994,27 @@ class AppProvider extends ChangeNotifier {
     cancelFatMeals(context);
     cancelProteinMeals(context);
     cancelCarbMeals(context);
+    notifyListeners();
   }
 
   void cancelFatMeals(BuildContext context) {
-/*    for (int i = 0; i < fatsItems.length; i++) {
-      choseStarchesItem(false, i, context);
-    }
-    finalFatsItems = [];
-    notifyListeners();*/
     if (finalFatsItems.isEmpty) {
       return;
     } else {
-      for (int i = 0; i < finalFatsItems.length; i++) {
-        for (int j = 0; j < fatsItems.length; j++) {
-          if (finalFatsItems[i]["name"] == fatsItems[j]["name"]) {
-            chooseItem(false, i, context, 1);
-            //changeCount(1, 3, i);
-          }
-        }
-      }
+    for(int i = 0;i<fatsItems.length;i++){
+      chooseItem(false, i, context);
+    }
     }
     finalFatsItems = [];
     notifyListeners();
   }
 
   void cancelProteinMeals(BuildContext context) {
-/*    for (int i = 0; i < proteinsItems.length; i++) {
-      choseStarchesItem(false, i, context);
-    }
-    finalProteinsItems = [];
-    notifyListeners();*/
     if (finalProteinsItems.isEmpty) {
       return;
     } else {
-      for (int i = 0; i < finalProteinsItems.length; i++) {
-        for (int j = 0; j < proteinsItems.length; j++) {
-          if (finalProteinsItems[i]["name"] == proteinsItems[j]["name"]) {
-            chooseItem(false, i, context, 3);
-            //changeCount(1, 3, i);
-          }
-        }
+      for(int i = 0;i<proteinsItems.length;i++){
+        chooseItem(false, i, context);
       }
     }
     finalProteinsItems = [];
@@ -1038,21 +1022,11 @@ class AppProvider extends ChangeNotifier {
   }
 
   void cancelCarbMeals(BuildContext context) {
-/*    for (int i = 0; i < carbItems.length - 2; i++) {
-      choseStarchesItem(false, i, context);
-    }
-    finalCarbItems = [];
-    notifyListeners();*/
     if (finalCarbItems.isEmpty) {
       return;
     } else {
-      for (int i = 0; i < finalCarbItems.length; i++) {
-        for (int j = 0; j < carbItems.length; j++) {
-          if (finalCarbItems[i]["name"] == carbItems[j]["name"]) {
-            chooseItem(false, i, context, 0);
-            //changeCount(1, 3, i);
-          }
-        }
+      for(int i = 0;i<fatsItems.length;i++){
+        chooseItem(false, i, context);
       }
     }
     finalCarbItems = [];

@@ -195,13 +195,13 @@ class ChooseItemScreen extends StatelessWidget {
                             size: size,
                             label: 'Discard',
                             onTap: () {
-                              /* if (model.typeCat == 1) {
+                              if (model.typeCat == 0) {
                                     model.cancelCarbMeals(context);
-                                  } else if (model.typeCat == 2) {
-                                    model.cancelProteinMeals(context);
-                                  } else {
+                                  } else if (model.typeCat == 1) {
                                     model.cancelFatMeals(context);
-                                  }*/
+                                  } else {
+                                    model.cancelProteinMeals(context);
+                                  }
 
                               Navigator.of(context).pop();
                             },
