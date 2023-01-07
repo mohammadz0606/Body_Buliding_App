@@ -147,10 +147,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         textInputAction: TextInputAction.next,
                         validator: (String? text) {
                           if (text!.isEmpty) {
-                            return "you must not empty";
-                          }
-                          if (text.length < 7) {
-                            return "password must be more 7 char";
+                            return "Please enter your password";
                           }
                           return null;
                         },
