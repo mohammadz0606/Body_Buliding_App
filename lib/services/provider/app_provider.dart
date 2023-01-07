@@ -296,9 +296,7 @@ class AppProvider extends ChangeNotifier {
 
   void changeCount(int val, int type, int index, BuildContext context) {
     if (type == 1) {
-      if (carbPercentage! -
-                  carbItems[index]['calories'] >
-              0 ||
+      if (carbPercentage! - carbItems[index]['calories'] > 0 ||
           val < carbItems[index]['value']) {
         carbItems[index]['groupValue'] = val;
         carbItems[index]['value'] = val;
@@ -314,8 +312,7 @@ class AppProvider extends ChangeNotifier {
             context: context, text: 'You cannot add more than that');
       }
     } else if (type == 2) {
-      if (fatPercentage! - fatsItems[index]['calories'] >
-              0 ||
+      if (fatPercentage! - fatsItems[index]['calories'] > 0 ||
           val < fatsItems[index]['value']) {
         fatsItems[index]['groupValue'] = val;
         fatsItems[index]['value'] = val;
@@ -330,9 +327,7 @@ class AppProvider extends ChangeNotifier {
             context: context, text: 'You cannot add more than that');
       }
     } else {
-      if (proteinPercentage! -
-                  proteinsItems[index]['calories'] >
-              0 ||
+      if (proteinPercentage! - proteinsItems[index]['calories'] > 0 ||
           val < proteinsItems[index]['value']) {
         proteinsItems[index]['groupValue'] = val;
         proteinsItems[index]['value'] = val;
@@ -351,8 +346,7 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void chooseItem(bool value, int index, BuildContext context,
-      [int? type]) {
+  void chooseItem(bool value, int index, BuildContext context, [int? type]) {
     if (typeCat == 0 || type == 0) {
       if (carbPercentage! -
                   carbItems[index]['calories'] >
@@ -416,11 +410,14 @@ class AppProvider extends ChangeNotifier {
               type: 3);
         } else {
           finalProteinsItems.removeWhere(
-              (element) => proteinsItems[index]['name'] == element['name']);
+            (element) => proteinsItems[index]['name'] == element['name'],
+          );
         }
       } else {
         ConstantWidget.massage(
-            context: context, text: 'No other items can be added');
+          context: context,
+          text: 'No other items can be added',
+        );
       }
     }
     changeCalories();
@@ -1076,6 +1073,9 @@ class AppProvider extends ChangeNotifier {
       _resueltOfSheduleModel = ResueltOfSheduleModel.fromJson(
         await _database.getCaloriesAndScheduleInDatabase(userID: userID),
       );
+      carbPercentage = _resueltOfSheduleModel!.carbPercentage;
+      fatPercentage = _resueltOfSheduleModel!.fatPercentage;
+      proteinPercentage = _resueltOfSheduleModel!.proteinPercentage;
       notifyListeners();
     }
   }
