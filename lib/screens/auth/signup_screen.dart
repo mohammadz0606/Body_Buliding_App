@@ -1,7 +1,6 @@
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:body_building/widgets/background_image_widget.dart';
 import 'package:body_building/widgets/title_fields.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -127,7 +126,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           if (text!.isEmpty) {
                             return "you must not empty";
                           }
-                          if (!text.contains("@")) {
+                          if (!text.contains("@") || !text.contains('.') || !text.endsWith('.com')) {
                             return "The email is incorrect";
                           }
                           return null;

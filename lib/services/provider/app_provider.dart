@@ -330,7 +330,9 @@ class AppProvider extends ChangeNotifier {
             type: type);
       } else {
         ConstantWidget.massage(
-            context: context, text: 'You cannot add more than that');
+          context: context,
+          text: 'You cannot add more than that',
+        );
       }
     } else {
       if (proteinPercentage! - proteinsItems[index]['calories'] > 0 ||
