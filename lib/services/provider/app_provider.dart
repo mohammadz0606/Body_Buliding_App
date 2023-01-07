@@ -1126,6 +1126,7 @@ class AppProvider extends ChangeNotifier {
                   context: context,
                   text: "Done",
                 );
+                onTabChange(0);
                 Navigator.of(context).pushNamed(
                   ChoseCategory.route,
                 );
@@ -1159,6 +1160,8 @@ class AppProvider extends ChangeNotifier {
         _database.setCaloriesInDatabase(resuelt: resuelt);
         _isLoadingCalories = false;
         ConstantWidget.massage(context: context, text: "Done");
+        onTabChange(0);
+
         Navigator.of(context).pushNamed(
           ChoseCategory.route,
         );
