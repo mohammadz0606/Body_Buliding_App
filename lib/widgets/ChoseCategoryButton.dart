@@ -1,4 +1,4 @@
-import 'package:body_building/screens/create_schedule/chose_starches_screen.dart';
+import 'package:body_building/screens/create_schedule/chose_item_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +34,7 @@ class TypeFoodButton extends StatelessWidget {
         onTap: () {
           Provider.of<AppProvider>(context, listen: false).choseCategory(type);
 
-          Navigator.of(context).pushNamed(ChoseStarchesScreen.route);
+          Navigator.of(context).pushNamed(ChooseItemScreen.route);
         },
         child: Row(
           children: [
