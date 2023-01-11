@@ -53,7 +53,7 @@ class BulidBacgroundImage extends StatelessWidget {
               SizedBox(height: size.height * 0.03),
               RichText(
                 text: TextSpan(
-                  text: "body\t",
+                  text: "Body\t",
                   style: GoogleFonts.bebasNeue(
                     fontSize: 30,
                     letterSpacing: 5,

@@ -19,7 +19,7 @@ class ChoseCategory extends StatelessWidget {
     var provider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        leading: Container(),
+        automaticallyImplyLeading: false,
         title: Text('CREATE SCHEDULE'),
       ),
       body: Stack(
