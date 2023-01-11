@@ -487,6 +487,20 @@ class AppProvider extends ChangeNotifier {
     {'value': 1.9, 'submit': false}
   ];
 
+  String get activityString{
+    if(activity == 1.2){
+      return "Don't do sport";
+    }else if(activity == 1.3){
+      return "2 to 3 day";
+    }else if(activity == 1.5){
+      return "4 to 5 day";
+    }else if(activity == 1.7){
+      return "6 to 7 day";
+    }else{
+      return "6 to 7 day twice";
+    }
+  }
+
   void setNumberOfDay(int value) {
     for (var element in numberOfDay) {
       element['submit'] = false;
@@ -582,7 +596,7 @@ class AppProvider extends ChangeNotifier {
   bool get isLast => _isLast;
 
   void shareApp() async {
-    await Share.share("com.example.body_building");
+    await Share.share("https://docs.google.com/document/d/143l30_X8qj2jQXOAOQEPhU0QHw_HVcfK/edit#heading=h.gjdgxs");
     notifyListeners();
   }
 
@@ -930,6 +944,9 @@ class AppProvider extends ChangeNotifier {
       );
     } else {
       getBestWeight();
+      getBodyFatPercentage();
+      rateOfDrinkingWater();
+      CalculateNumberOfSteps();
       if (isMuscular == 1) {
         calories = ((weight * 2.2 * 10) * activity + 500).toInt();
       } else {
@@ -945,9 +962,13 @@ class AppProvider extends ChangeNotifier {
         calories: calories!,
         height: height,
         weight: weight,
+        bestWeight: bestWeight,
+        bodyFatPercentage: bodyFatPercentage!,
+        drinkingWater: drinkingWater!,
+        numberOfSteps: numberOfSteps!,
         muscular: isMuscular == 1 ? "MUSCULAR" : "DRYING OF FAT",
         gender: isMale == 1 ? "Male" : "Female",
-        activity: activity.toString(),
+        activity: activityString,
         proteinPercentage: proteinPercentage!,
         carbPercentage: carbPercentage!,
         fatPercentage: fatPercentage!,
@@ -956,8 +977,6 @@ class AppProvider extends ChangeNotifier {
         resuelt: _resueltOfSheduleModel!,
         context: context,
       );
-
-      //getCaloriesAndScheduleInDatabase();
     }
     notifyListeners();
   }
@@ -970,9 +989,37 @@ class AppProvider extends ChangeNotifier {
     }
   }
 
+  double? bodyFatPercentage;
+  void getBodyFatPercentage(){
+    if(isMale == 1){
+      bodyFatPercentage = ((weight * 1.1) + 40) / 6;
+    }else{
+      bodyFatPercentage = ((weight * 1.1) + 40) / 3;
+    }
+  }
+
+  String? drinkingWater;
+  void rateOfDrinkingWater(){
+    if(weight <= 80.0){
+      drinkingWater = "2 Liters";
+    }else if(weight > 80.0 && weight <= 150.0){
+      drinkingWater = "3 Liters";
+    }else{
+      drinkingWater = "4 Liters";
+    }
+  }
+
+  String? numberOfSteps;
+  void CalculateNumberOfSteps(){
+    if(weight <= 80){
+      numberOfSteps = "10000 Step";
+    }else{
+      numberOfSteps = "15000 Step";
+    }
+  }
+
   void choseCategory(int type) {
     typeCat = type;
-
     notifyListeners();
   }
 
@@ -1190,7 +1237,11 @@ class AppProvider extends ChangeNotifier {
           gender: _resueltOfSheduleModel!.gender,
           muscular: _resueltOfSheduleModel!.muscular,
           activity: _resueltOfSheduleModel!.activity,
+          numberOfSteps: _resueltOfSheduleModel!.numberOfSteps,
+          drinkingWater: _resueltOfSheduleModel!.drinkingWater,
           proteinPercentage: _resueltOfSheduleModel!.proteinPercentage,
+          bodyFatPercentage: _resueltOfSheduleModel!.bodyFatPercentage,
+          bestWeight: _resueltOfSheduleModel!.bestWeight,
           carbPercentage: _resueltOfSheduleModel!.carbPercentage,
           fatPercentage: _resueltOfSheduleModel!.fatPercentage,
           finalProteinsItems: finalProteinsItems,
@@ -1306,9 +1357,13 @@ class AppProvider extends ChangeNotifier {
                 gender: _resueltOfSheduleModel!.gender,
                 muscular: _resueltOfSheduleModel!.muscular,
                 activity: _resueltOfSheduleModel!.activity,
+                drinkingWater: _resueltOfSheduleModel!.drinkingWater,
+                numberOfSteps: _resueltOfSheduleModel!.numberOfSteps,
                 proteinPercentage: _resueltOfSheduleModel!.proteinPercentage,
                 carbPercentage: _resueltOfSheduleModel!.carbPercentage,
                 fatPercentage: _resueltOfSheduleModel!.fatPercentage,
+                bestWeight: _resueltOfSheduleModel!.bestWeight,
+                bodyFatPercentage: _resueltOfSheduleModel!.bodyFatPercentage,
                 finalProteinsItems: [],
                 finalFatsItems: [],
                 finalCarbItems: [],

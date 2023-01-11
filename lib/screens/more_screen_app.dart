@@ -2,6 +2,7 @@ import 'package:body_building/screens/about_screen.dart';
 import 'package:body_building/screens/create_schedule/chose_category.dart';
 import 'package:body_building/screens/go_to_calculate.dart';
 import 'package:body_building/screens/go_to_chose_food_screen.dart';
+import 'package:body_building/screens/statistics_screen.dart';
 import 'package:body_building/services/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -151,6 +152,19 @@ class MoreAppScreen extends StatelessWidget {
                         );
                       } else {
                         Navigator.of(context).pushNamed(BMIResultScreen.route);
+                      }
+                    },
+                  ),
+                  MoreScreenButton(
+                    label: 'Statistics',
+                    color: Colors.white,
+                    icon: Icons.monitor_heart,
+                    onTap: () async{
+                      if (!await model.isExistingCalories(
+                      userID: model.userModel!.id!)) {
+                      Navigator.of(context).pushNamed(GoToCalculatePage.rout);
+                      }else{
+                        Navigator.of(context).pushNamed(StatisticsScreen.route);
                       }
                     },
                   ),

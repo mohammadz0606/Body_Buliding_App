@@ -29,10 +29,6 @@ void main() async {
     ),
   );
   runApp(
-    /*DevicePreview(
-      enabled: true,
-      builder: (context) =>  // Wrap your app
-    ),*/
     const BodyBulidingApp(),
   );
 }

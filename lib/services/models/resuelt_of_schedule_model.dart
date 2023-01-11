@@ -12,14 +12,23 @@ class ResueltOfSheduleModel {
   final double height;
   final double weight;
   final String gender;
+  final String drinkingWater;
+  final String numberOfSteps;
   final String muscular;
   final String activity;
+  final double bestWeight;
+  final double bodyFatPercentage;
   List<Map<String, dynamic>> finalProteinsItems;
   List<Map<String, dynamic>> finalFatsItems;
   List<Map<String, dynamic>> finalCarbItems;
+
   ResueltOfSheduleModel({
     required this.userId,
     required this.calories,
+    required this.bestWeight,
+    required this.numberOfSteps,
+    required this.drinkingWater,
+    required this.bodyFatPercentage,
     this.proteinPercentage = 0,
     this.carbPercentage = 0,
     this.fatPercentage = 0,
@@ -48,6 +57,10 @@ class ResueltOfSheduleModel {
       fatPercentage: json["fatPercentage"],
       height: json["height"],
       weight: json["weight"],
+      bestWeight: json["bestWeight"],
+      bodyFatPercentage: json["bodyFatPercentage"],
+      drinkingWater: json["drinkingWater"],
+      numberOfSteps: json["numberOfSteps"],
       finalProteinsItems:
           List<Map<String, dynamic>>.from(json["finalProteinsItems"] as List)
               .map((e) {
@@ -73,12 +86,12 @@ class ResueltOfSheduleModel {
     return {
       "userID": this.userId,
       "calories": this.calories,
-      "muscular":this.muscular,
-      "gender":this.gender,
+      "muscular": this.muscular,
+      "gender": this.gender,
       "activity": this.activity,
-      "afterProteinPercentage":this.afterProteinPercentage,
-      "afterCarbPercentage":this.afterCarbPercentage,
-      "afterFatPercentage":this.afterFatPercentage,
+      "afterProteinPercentage": this.afterProteinPercentage,
+      "afterCarbPercentage": this.afterCarbPercentage,
+      "afterFatPercentage": this.afterFatPercentage,
       "proteinPercentage": this.proteinPercentage,
       "carbPercentage": this.carbPercentage,
       "fatPercentage": this.fatPercentage,
@@ -87,6 +100,10 @@ class ResueltOfSheduleModel {
       "finalProteinsItems": this.finalProteinsItems,
       "finalFatsItems": this.finalFatsItems,
       "finalCarbItems": this.finalCarbItems,
+      "bestWeight": this.bestWeight,
+      "bodyFatPercentage": this.bodyFatPercentage,
+      "numberOfSteps": this.numberOfSteps,
+      "drinkingWater": this.drinkingWater,
     };
   }
 }
